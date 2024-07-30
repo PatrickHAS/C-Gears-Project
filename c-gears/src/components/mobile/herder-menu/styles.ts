@@ -1,0 +1,81 @@
+import styled from "styled-components";
+
+export const StyledHeaderMenuList = styled.ul`
+  display: none;
+  align-items: flex-end;
+
+  position: fixed;
+
+  gap: 20px;
+  top: 100px;
+  right: 0;
+
+  padding: 0 20px;
+
+  height: fit-content;
+
+  @media (max-width: 1107px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    animation: cascadeAnimation 0.9s ease-in-out;
+  }
+
+  @keyframes cascadeAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .menu-item--mobile {
+    display: flex;
+    align-items: center;
+
+    width: fit-content;
+    height: 100%;
+
+    position: relative;
+
+    p {
+      font-family: "Orbitron";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+
+      padding-bottom: 15px;
+
+      color: var(--Gray-6);
+
+      position: relative;
+
+      @media (max-width: 1280px) {
+        font-size: 12px;
+      }
+    }
+
+    :hover {
+      cursor: pointer;
+      color: var(--Red-9);
+      transition: 0.9s;
+    }
+
+    p::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 10px;
+      height: 1px;
+      background-color: var(--Red-9);
+      transition: width 0.9s;
+    }
+  }
+  .menu-item--mobile:hover p::after {
+    width: 70%;
+  }
+`;
