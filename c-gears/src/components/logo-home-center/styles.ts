@@ -27,7 +27,7 @@ export const StyledLogoHomeCenter = styled.div`
       height: 250px;
     }
 
-    @media (max-height: 360px) {
+    @media (max-height: 440px) {
       width: 200px;
       height: 200px;
     }

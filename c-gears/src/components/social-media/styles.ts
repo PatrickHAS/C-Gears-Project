@@ -15,7 +15,7 @@ export const StyledSocialMedia = styled.div`
     margin-bottom: 0;
   }
 
-  @media (max-height: 360px) {
+  @media (max-height: 580px) {
     margin-bottom: 0;
   }
 
@@ -45,6 +45,10 @@ export const StyledSocialMedia = styled.div`
       padding: 10px;
 
       @media (max-width: 700px) {
+        font-size: 20px;
+      }
+
+      @media (max-height: 440px) {
         font-size: 20px;
       }
 
@@ -96,6 +100,10 @@ export const StyledSocialMedia = styled.div`
       height: 50px;
 
       @media (max-width: 700px) {
+        font-size: 20px;
+      }
+
+      @media (max-height: 440px) {
         font-size: 20px;
       }
 

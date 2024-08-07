@@ -14,56 +14,10 @@ export const StyledHeader = styled.div`
 
     gap: 10px;
 
-    width: 274px;
+    width: fit-content;
     height: 100%;
 
     margin-left: 20px;
-
-    /* .logo-name {
-      font-family: "Orbitron";
-      font-style: normal;
-      font-weight: 900;
-      font-size: 22px;
-      line-height: 28px;
-
-      color: var(--Red-9);
-
-      @media (max-width: 1764px) {
-        font-size: 16px;
-      }
-
-      @media (max-width: 1727px) {
-        font-size: 18px;
-      }
-
-      @media (max-width: 1482px) {
-        font-size: 15px;
-      }
-
-      @media (max-width: 1454px) {
-        font-size: 16px;
-      }
-
-      @media (max-width: 1306px) {
-        font-size: 15px;
-      }
-
-      @media (max-width: 1280px) {
-        font-size: 14px;
-      }
-
-      @media (max-width: 1131px) {
-        font-size: 13px;
-      }
-
-      @media (max-width: 400px) {
-        font-size: 12px;
-      }
-    } */
-
-    @media (max-width: 537px) {
-      width: 250px;
-    }
 
     .logo-image {
       width: 70px;
@@ -77,11 +31,6 @@ export const StyledHeader = styled.div`
       @media (max-width: 1454px) {
         width: 50px;
         height: 50px;
-      }
-
-      @media (max-width: 1280px) {
-        width: 40px;
-        height: 40px;
       }
 
       @media (max-width: 400px) {
@@ -155,12 +104,12 @@ export const StyledHeader = styled.div`
     width: 70%;
   }
 
-  .menu--search-login {
+  .menu--register-play-login {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    width: 356px;
+    width: 300px;
     height: 35px;
 
     margin-right: 20px;
@@ -169,6 +118,7 @@ export const StyledHeader = styled.div`
       justify-content: flex-end;
       gap: 90px;
       width: 300px;
+      margin-right: 0;
     }
 
     @media (max-width: 480px) {
@@ -181,33 +131,38 @@ export const StyledHeader = styled.div`
       gap: 20px;
     }
 
-    .icon-search--container {
+    .btn-register-play {
       display: flex;
       justify-content: center;
       align-items: center;
+      border-style: none;
 
-      width: 36px;
+      font-family: "Orbitron";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+
+      width: fit-content;
       height: 35px;
 
-      border-radius: 50%;
+      border-radius: 5px;
       background: var(--Gray-6);
+      color: var(--Red-9);
 
       @media (max-width: 1280px) {
-        width: 32px;
-        height: 31px;
-        font-size: 14px;
+        font-size: 12px;
       }
 
-      @media (max-width: 480px) {
-        width: 25px;
-        height: 24px;
-        font-size: 12px;
+      @media (max-width: 537px) {
+        font-size: 10px;
+        height: 30px;
       }
     }
 
-    .icon-search--container:hover {
+    .btn-register-play:hover {
       cursor: pointer;
-      color: var(--Gray-9);
+      color: var(--Gray-0);
       background: var(--Red-9);
       transition: 0.9s;
     }

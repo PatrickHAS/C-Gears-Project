@@ -20,6 +20,9 @@ const HeaderMenuListMobile = () => {
           <p>Communities</p>
         </li>
         <li className="menu-item--mobile">
+          <p>Support</p>
+        </li>
+        <li className="menu-item--mobile">
           <p>GearsClub BR</p>
         </li>
       </StyledHeaderMenuList>

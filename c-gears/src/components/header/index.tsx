@@ -1,5 +1,4 @@
 import { StyledHeader } from "./styles";
-import { GoSearch } from "react-icons/go";
 import { BsOption } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { useHeaderContext } from "../../contexts/header-context";
@@ -12,7 +11,6 @@ const Header = () => {
       {isMenuMobile && <HeaderMenuListMobile />}
       <StyledHeader className="StyledHeader">
         <div className="logo--container">
-          {/* <span className="logo-name">GEARS CLUB</span> */}
           <img className="logo-image" alt="" src="logo-gearsclub.png" />
         </div>
         <ul className="menu-list">
@@ -32,13 +30,14 @@ const Header = () => {
             <p>Communities</p>
           </li>
           <li className="menu-item">
+            <p>Support</p>
+          </li>
+          <li className="menu-item">
             <p>GearsClub BR</p>
           </li>
         </ul>
-        <div className="menu--search-login">
-          <div className="icon-search--container">
-            <GoSearch className="icon-search" />
-          </div>
+        <div className="menu--register-play-login">
+          <button className="btn-register-play">Register</button>
           <span className="login">Login</span>
         </div>
         <div className="icon-option--container">
