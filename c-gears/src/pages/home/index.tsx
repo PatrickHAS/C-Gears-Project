@@ -4,8 +4,12 @@ import { StyledHome } from "./styles";
 import SocialMedia from "../../components/social-media";
 import LogoHomeCenter from "../../components/logo-home-center";
 import { useEffect } from "react";
+import { useHeaderContext } from "../../contexts/header-context";
+import Login from "../../components/login";
 
 const Home = () => {
+  const { isLogin } = useHeaderContext();
+
   useEffect(() => {
     const handleResize = () => {
       const video = document.getElementById(
@@ -35,6 +39,7 @@ const Home = () => {
         <source src={backgroundVideo} type="video/mp4" />
       </video>
       <Header />
+      {isLogin && <Login />}
       <LogoHomeCenter />
       <SocialMedia />
     </StyledHome>

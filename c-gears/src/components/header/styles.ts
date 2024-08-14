@@ -117,8 +117,16 @@ export const StyledHeader = styled.div`
     @media (max-width: 1107px) {
       justify-content: flex-end;
       gap: 90px;
-      width: 300px;
+      width: 700px;
       margin-right: 0;
+    }
+
+    @media (max-width: 900px) {
+      width: 600px;
+    }
+
+    @media (max-width: 537px) {
+      gap: 50px;
     }
 
     @media (max-width: 480px) {
@@ -127,7 +135,7 @@ export const StyledHeader = styled.div`
     }
 
     @media (max-width: 400px) {
-      width: 100px;
+      width: 200px;
       gap: 20px;
     }
 

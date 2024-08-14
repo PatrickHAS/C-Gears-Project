@@ -5,7 +5,8 @@ import { useHeaderContext } from "../../contexts/header-context";
 import HeaderMenuListMobile from "../mobile/herder-menu";
 
 const Header = () => {
-  const { isMenuMobile, setIsMenuMobile } = useHeaderContext();
+  const { isMenuMobile, setIsMenuMobile, isLogin, setIsLogin } =
+    useHeaderContext();
   return (
     <>
       {isMenuMobile && <HeaderMenuListMobile />}
@@ -38,7 +39,9 @@ const Header = () => {
         </ul>
         <div className="menu--register-play-login">
           <button className="btn-register-play">Register</button>
-          <span className="login">Login</span>
+          <span className="login" onClick={() => setIsLogin(!isLogin)}>
+            Login
+          </span>
         </div>
         <div className="icon-option--container">
           {isMenuMobile ? (
