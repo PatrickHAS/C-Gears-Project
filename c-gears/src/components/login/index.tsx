@@ -4,6 +4,7 @@ import { IoCloseOutline } from "react-icons/io5";
 
 const Login = () => {
   const { setIsLogin, isLogin } = useHeaderContext();
+
   return (
     <StyledLogin>
       <div className="card-login">
@@ -18,6 +19,7 @@ const Login = () => {
             onClick={() => setIsLogin(!isLogin)}
           />
         </div>
+        <form className="form-login"></form>
       </div>
     </StyledLogin>
   );

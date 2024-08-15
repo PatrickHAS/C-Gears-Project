@@ -45,6 +45,16 @@ export const StyledLogin = styled.div`
         color: var(--Red-6);
       }
     }
+
+    .form-login {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: center;
+
+      width: 90%;
+      height: fit-content;
+    }
   }
 
   .card-login span:first-of-type {
