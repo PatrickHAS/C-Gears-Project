@@ -6,6 +6,8 @@ declare global {
       user: {
         id: string;
         isAdm: boolean;
+        isActive: boolean;
+        availability: boolean;
       };
       users: IUserToken;
     }

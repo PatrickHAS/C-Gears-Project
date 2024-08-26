@@ -7,6 +7,7 @@ export interface IUserCreate {
   ssn: string;
   email: string;
   password: string;
+  isAdm?: boolean;
   address: IUserAddress;
 }
 
@@ -24,4 +25,28 @@ export interface IAdminCreate {
   username: string;
   password: string;
   email: string;
+}
+
+export interface IUserLogin {
+  email: string;
+  password: string;
+}
+
+export interface IUserUpdate {
+  name?: string;
+  surname?: string;
+  username?: string;
+  email?: string;
+  cellphone?: string;
+  birthday?: Date;
+}
+
+export interface IAddressUpdate {
+  street?: string;
+  number?: string;
+  apt_unit?: string;
+  neighborhoods?: string;
+  city?: string;
+  state?: string;
+  zipcode?: string;
 }

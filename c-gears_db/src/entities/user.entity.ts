@@ -1,14 +1,18 @@
 import { Exclude } from "class-transformer";
+import { Address } from "./userAddress.entity";
+import { IUserAddress } from "../interfaces";
 import {
   PrimaryGeneratedColumn,
   Entity,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
+  OneToOne,
 } from "typeorm";
 
 @Entity("users")
-export class User {
+export class Users {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -24,7 +28,7 @@ export class User {
   @Column({ length: 75, unique: true })
   email: string;
 
-  @Column({ length: 14, unique: true })
+  @Column({ length: 120, unique: true })
   ssn: string;
 
   @Column({ length: 16, unique: true })
@@ -51,4 +55,11 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToOne(() => Address, () => Users, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  address: IUserAddress;
 }

@@ -1,0 +1,46 @@
+import AppDataSource from "../../data-source";
+import jwt from "jsonwebtoken";
+import { AppError } from "../../errors/appError";
+import "dotenv";
+import { IUserLogin } from "../../interfaces";
+import { Users } from "../../entities/user.entity";
+import { compare } from "bcrypt";
+
+const createSessionService = async ({
+  email,
+  password,
+}: IUserLogin): Promise<Object> => {
+  const userRepository = AppDataSource.getRepository(Users);
+  const users = await userRepository.find();
+  const account = users.find((user) => user.email === email);
+
+  if (!account) {
+    throw new AppError("Incorrect password or email", 401);
+  }
+
+  const passwordMatch = await compare(password, account.password);
+
+  if (!passwordMatch) {
+    throw new AppError("Incorrect password or email", 401);
+  }
+
+  const token = jwt.sign(
+    {
+      availability: account.availability,
+      isAdm: account.isAdm,
+      isActive: account.isActive,
+    },
+
+    process.env.SECRET_KEY as string,
+    {
+      expiresIn: "3h",
+      subject: account.id,
+    }
+  );
+
+  const userId = account.id;
+  const isAvailability = account.availability;
+
+  return { token, userId, isAvailability };
+};
+export default createSessionService;
