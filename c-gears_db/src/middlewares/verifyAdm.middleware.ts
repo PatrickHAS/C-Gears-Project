@@ -7,7 +7,8 @@ const verifyAdmMiddleware = async (
 ) => {
   if (!req.user.isAdm) {
     return res.status(403).json({
-      message: "User is not admin",
+      message:
+        "Access denied. You do not have permission to view this resource.",
     });
   }
 

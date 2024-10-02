@@ -57,7 +57,7 @@ program
 
     try {
       const adminUser = await userCreateService({ ...userData, isAdm: true });
-      console.log("Admin user successfully created:", adminUser);
+      console.log("Admin user successfully created");
       process.exit(0);
     } catch (error) {
       console.error("Error creating admin user:", (error as Error).message);

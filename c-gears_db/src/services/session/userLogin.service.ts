@@ -14,6 +14,13 @@ const createSessionService = async ({
   const users = await userRepository.find();
   const account = users.find((user) => user.email === email);
 
+  if (!account?.isActive) {
+    throw new AppError(
+      "Your account has been deactivated. Please contact support for more information.",
+      403
+    );
+  }
+
   if (!account) {
     throw new AppError("Incorrect password or email", 401);
   }
@@ -33,7 +40,7 @@ const createSessionService = async ({
 
     process.env.SECRET_KEY as string,
     {
-      expiresIn: "3h",
+      expiresIn: "24h",
       subject: account.id,
     }
   );

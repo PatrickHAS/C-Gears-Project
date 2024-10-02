@@ -50,6 +50,15 @@ export class Users {
   @Column({ type: "boolean", default: false })
   availability: boolean;
 
+  @Column({ nullable: true, type: "text", default: null })
+  updateToken: string | null;
+
+  @Column({ nullable: true, type: "text", default: null })
+  emailToUpdate: string | null;
+
+  @Column({ nullable: true, type: "text", default: null })
+  passwordToUpdate: string | null;
+
   @CreateDateColumn()
   createdAt: Date;
 
