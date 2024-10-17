@@ -7,19 +7,17 @@ const Login = () => {
 
   return (
     <StyledLogin>
-      <div className="card-login">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <div className="header-login">
-          <img className="logo-login" alt="" src="logo-gearsclub.png" />
-          <IoCloseOutline
-            className="icon-close-login"
-            onClick={() => setIsLogin(!isLogin)}
-          />
+      <div className="box-card-login">
+        <div className="card-login">
+          <div className="header-login">
+            <img className="logo-login" alt="" src="logo-gearsclub.png" />
+            <IoCloseOutline
+              className="icon-close-login"
+              onClick={() => setIsLogin(!isLogin)}
+            />
+          </div>
+          <form className="form-login"></form>
         </div>
-        <form className="form-login"></form>
       </div>
     </StyledLogin>
   );
