@@ -76,6 +76,7 @@ export const StyledSocialMedia = styled.div`
       position: relative;
       margin-right: 0;
       width: 100%;
+      z-index: -1;
 
       &::after {
         content: "";

@@ -3,14 +3,14 @@ import * as yup from "yup";
 export const LoginSchema = yup.object().shape({
   email: yup
     .string()
-    .email("Deve ser um E-mail valido!")
-    .required("E-mail obrigatório!"),
+    .email("Must be a valid email!!")
+    .required("Email address is required!"),
   password: yup
     .string()
-    .required("Senha obrigatória!")
-    .min(8, "No mínimo 8 digitos")
-    .matches(/[A-Z]/, "Deve conter ao menos 1 letra maiúscula")
-    .matches(/([a-z])/, "Deve conter ao menos 1 letra minúscula")
-    .matches(/(\d)/, "Deve conter ao menos 1 número")
-    .matches(/(\W)|_/, "Deve conter ao menos 1 caracter especial"),
+    .required("Password is required!")
+    .min(8, "Must contain at least 8 digits")
+    .matches(/[A-Z]/, "Must contain 1 capital letter")
+    .matches(/([a-z])/, "Must contain 1 lowercase letter")
+    .matches(/(\d)/, "Must contain at least 1 number")
+    .matches(/(\W)|_/, "Must contain at least 1 special character"),
 });
