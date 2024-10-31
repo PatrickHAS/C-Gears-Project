@@ -5,10 +5,13 @@ import SocialMedia from "../../components/social-media";
 import LogoHomeCenter from "../../components/logo-home-center";
 import { useEffect } from "react";
 import { useHeaderContext } from "../../contexts/header-context";
+import { useRegisterContext } from "../../contexts/register-context";
 import Login from "../../components/login";
+import Register from "../../components/register";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
+  const { isRegister } = useRegisterContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,6 +43,7 @@ const Home = () => {
       </video>
       <Header />
       {isLogin && <Login />}
+      {isRegister && <Register />}
       <LogoHomeCenter />
       <SocialMedia />
     </StyledHome>

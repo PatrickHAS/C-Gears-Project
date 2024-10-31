@@ -237,7 +237,7 @@ export const StyledLogin = styled.div`
           color: var(--Gray-0);
 
           box-sizing: border-box;
-          border-radius: 4px;
+          border-radius: 6px;
           border: none;
 
           font-family: "Orbitron";

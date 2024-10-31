@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHeaderContext } from "../../contexts/header-context";
@@ -5,6 +6,7 @@ import { StyledLogin } from "./styles";
 import { IoCloseOutline } from "react-icons/io5";
 import { LoginSchema } from "../../validators/schema";
 import { useLoginContext } from "../../contexts/login-context";
+import { useRegisterContext } from "../../contexts/register-context";
 
 interface Ilogin {
   email: string;
@@ -14,6 +16,7 @@ interface Ilogin {
 const Login = () => {
   const { setIsLogin, isLogin } = useHeaderContext();
   const { onSubmitLogin } = useLoginContext();
+  const { isRegister, setIsRegister } = useRegisterContext();
 
   const {
     register,
@@ -38,7 +41,14 @@ const Login = () => {
           <form className="form-login" onSubmit={handleSubmit(onSubmitLogin)}>
             <div className="register">
               <p>
-                New player? <span>Register</span>
+                New player?{" "}
+                <span
+                  onClick={() => (
+                    setIsRegister(!isRegister), setIsLogin(!isLogin)
+                  )}
+                >
+                  Register
+                </span>
               </p>
             </div>
             <input
