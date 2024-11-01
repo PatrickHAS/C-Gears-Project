@@ -32,6 +32,30 @@ export const StyledRegister = styled.div`
       height: 752px;
     }
 
+    @media (max-height: 750px) {
+      height: 602px;
+    }
+
+    @media (max-height: 640px) {
+      height: 552px;
+    }
+
+    @media (max-height: 590px) {
+      height: 452px;
+    }
+
+    @media (max-height: 490px) {
+      height: 402px;
+    }
+
+    @media (max-height: 450px) {
+      height: 352px;
+    }
+
+    @media (max-height: 360px) {
+      height: 322px;
+    }
+
     .card-register {
       display: flex;
       justify-content: space-between;
@@ -52,18 +76,39 @@ export const StyledRegister = styled.div`
       }
 
       @media (max-width: 574px) {
-        width: 99.6%;
-      }
-
-      @media (max-width: 540px) {
+        width: 99.2%;
       }
 
       @media (max-width: 360px) {
-        width: 99.5%;
+        width: 99%;
       }
 
       @media (max-height: 870px) {
         height: 750px;
+      }
+
+      @media (max-height: 750px) {
+        height: 600px;
+      }
+
+      @media (max-height: 640px) {
+        height: 550px;
+      }
+
+      @media (max-height: 590px) {
+        height: 450px;
+      }
+
+      @media (max-height: 490px) {
+        height: 400px;
+      }
+
+      @media (max-height: 450px) {
+        height: 350px;
+      }
+
+      @media (max-height: 360px) {
+        height: 320px;
       }
 
       .header-register {
@@ -108,6 +153,8 @@ export const StyledRegister = styled.div`
         width: 90%;
         height: fit-content;
 
+        margin-bottom: 10px;
+
         @media (max-width: 540px) {
           flex-direction: column;
           align-items: center;
@@ -117,6 +164,19 @@ export const StyledRegister = styled.div`
 
         @media (max-height: 870px) {
           height: 600px;
+          overflow-y: auto;
+        }
+
+        @media (max-height: 750px) {
+          height: 450px;
+        }
+
+        @media (max-height: 640px) {
+          height: 400px;
+        }
+
+        @media (max-height: 590px) {
+          margin-top: 20px;
         }
 
         .data-user {
@@ -124,6 +184,7 @@ export const StyledRegister = styled.div`
           flex-direction: column;
 
           width: 300px;
+          height: fit-content;
 
           gap: 10px;
 
@@ -149,10 +210,15 @@ export const StyledRegister = styled.div`
 
             background: var(--Gray-3);
             border: 2px solid transparent;
-            border-radius: 6px;
+            border-radius: 2px;
             box-sizing: border-box;
             text-indent: 10px;
             outline: none;
+            box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
+          }
+
+          .form-control {
+            box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
           }
 
           .label-errors {
@@ -249,15 +315,6 @@ export const StyledRegister = styled.div`
             box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
           }
 
-          .form-control {
-            @media (max-height: 870px) {
-              height: 36.5px;
-            }
-            @media (max-width: 540px) {
-              height: 48px;
-            }
-          }
-
           .form-control:hover {
             cursor: pointer;
             border: 2px solid var(--Indigo-9);
@@ -325,6 +382,7 @@ export const StyledRegister = styled.div`
           justify-content: flex-start;
 
           width: 300px;
+          height: fit-content;
 
           gap: 10px;
 
@@ -351,18 +409,11 @@ export const StyledRegister = styled.div`
 
             background: var(--Gray-3);
             border: 2px solid transparent;
-            border-radius: 6px;
+            border-radius: 2px;
             box-sizing: border-box;
             text-indent: 10px;
             outline: none;
-
-            @media (max-height: 870px) {
-              height: 36.5px;
-            }
-
-            @media (max-width: 540px) {
-              height: 48px;
-            }
+            box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
           }
 
           .label-errors {
@@ -396,7 +447,7 @@ export const StyledRegister = styled.div`
             color: var(--Gray-0);
 
             box-sizing: border-box;
-            border-radius: 6px;
+            border-radius: 2px;
             border: none;
 
             font-family: "Orbitron";
@@ -557,6 +608,14 @@ export const StyledRegister = styled.div`
     }
 
     @media (max-width: 350px) {
+      width: 250px;
+    }
+
+    @media (max-height: 750px) {
+      width: 400px;
+    }
+
+    @media (max-height: 600px) {
       width: 250px;
     }
   }

@@ -28,6 +28,11 @@ export const StyledLogin = styled.div`
       width: 90%;
     }
 
+    @media (max-height: 360px) {
+      width: 50%;
+      height: 70%;
+    }
+
     .card-login {
       display: flex;
       flex-direction: column;
@@ -44,6 +49,11 @@ export const StyledLogin = styled.div`
 
       @media (max-width: 430px) {
         width: 99%;
+      }
+
+      @media (max-height: 360px) {
+        width: 99.5%;
+        height: 99.5%;
       }
 
       .header-login {
@@ -80,6 +90,23 @@ export const StyledLogin = styled.div`
           color: var(--Red-6);
           transition: 0.9s;
         }
+
+        @media (max-height: 360px) {
+          height: 30px;
+
+          .logo-login {
+            width: 30px;
+            height: 30px;
+          }
+
+          .text-login {
+            font-size: 12px;
+          }
+
+          .icon-close-login {
+            font-size: 15px;
+          }
+        }
       }
 
       .form-login {
@@ -92,6 +119,12 @@ export const StyledLogin = styled.div`
         height: fit-content;
 
         margin-top: 15px;
+
+        @media (max-height: 360px) {
+          height: 300px;
+          margin-top: 0;
+          height: 200px;
+        }
 
         .register {
           display: flex;
@@ -126,6 +159,18 @@ export const StyledLogin = styled.div`
             color: var(--Indigo-9);
             transition: 0.9s;
           }
+
+          @media (max-height: 360px) {
+            margin-bottom: 0;
+
+            p {
+              font-size: 10px;
+            }
+
+            span {
+              font-size: 12px;
+            }
+          }
         }
 
         .label-errors {
@@ -145,6 +190,14 @@ export const StyledLogin = styled.div`
 
             color: var(--Gray-4);
           }
+
+          @media (max-height: 360px) {
+            height: 5px;
+
+            p {
+              font-size: 10px;
+            }
+          }
         }
 
         input {
@@ -159,10 +212,16 @@ export const StyledLogin = styled.div`
 
           background: var(--Gray-3);
           border: 2px solid transparent;
-          border-radius: 6px;
+          border-radius: 2px;
           box-sizing: border-box;
           text-indent: 10px;
           outline: none;
+          box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
+
+          @media (max-height: 360px) {
+            height: 28px;
+            margin: 5px;
+          }
         }
 
         .input-email:hover {
@@ -197,6 +256,10 @@ export const StyledLogin = styled.div`
           line-height: 0px;
 
           color: var(--Gray-8);
+
+          @media (max-height: 360px) {
+            font-size: 10px;
+          }
         }
 
         .forgot-password {
@@ -222,6 +285,13 @@ export const StyledLogin = styled.div`
             color: var(--Red-9);
             transition: 0.9s;
           }
+
+          @media (max-height: 360px) {
+            margin-top: 0;
+            p {
+              font-size: 10px;
+            }
+          }
         }
 
         .btn-enter {
@@ -237,7 +307,7 @@ export const StyledLogin = styled.div`
           color: var(--Gray-0);
 
           box-sizing: border-box;
-          border-radius: 6px;
+          border-radius: 2px;
           border: none;
 
           font-family: "Orbitron";
@@ -245,6 +315,12 @@ export const StyledLogin = styled.div`
           font-weight: 600;
           font-size: 14px;
           line-height: 0px;
+
+          @media (max-height: 360px) {
+            font-size: 12px;
+            height: 28px;
+            margin: 0;
+          }
         }
 
         .btn-enter:hover {
@@ -267,6 +343,18 @@ export const StyledLogin = styled.div`
 
           .logo-locust {
             width: 40px;
+          }
+
+          @media (max-height: 360px) {
+            margin-top: 20px;
+
+            .logo-cgo {
+              width: 35px;
+            }
+
+            .logo-locust {
+              width: 20px;
+            }
           }
         }
       }
@@ -294,6 +382,10 @@ export const StyledLogin = styled.div`
 
     @media (max-width: 350px) {
       width: 250px;
+    }
+
+    @media (max-height: 360px) {
+      width: 180px;
     }
   }
 
