@@ -13,7 +13,6 @@ const updateUserService = async (
     surname,
     username,
     email,
-    ssn,
     cellphone,
     birthday,
     password,
@@ -37,7 +36,6 @@ const updateUserService = async (
     surname: surname ? surname : findUser!.surname,
     username: username ? username : findUser!.username,
     email: email ? email : findUser!.email,
-    ssn: ssn ? ssn : findUser!.ssn,
     cellphone: cellphone ? cellphone : findUser!.cellphone,
     birthday: birthday ? birthday : findUser!.birthday,
   });

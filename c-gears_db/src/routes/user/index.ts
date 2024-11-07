@@ -6,19 +6,13 @@ import userListController from "../../controllers/user/userList.controller";
 import userDataController from "../../controllers/user/userData.controller";
 import userUpdateController from "../../controllers/user/userUpdate.controller";
 import userDisableController from "../../controllers/user/userDisable.controller";
-import validateSSNMiddleware from "../../middlewares/validateSSN.middleware";
 import validateCreateUserMiddleware from "../../middlewares/validateCreateUser.middleware";
 import confirmUpdateController from "../../controllers/user/confirmUpdate.controller";
 import userActivateController from "../../controllers/user/userActivate.controller";
 
 const userRoutes = Router();
 
-userRoutes.post(
-  "/register",
-  validateSSNMiddleware,
-  validateCreateUserMiddleware,
-  userCreateController
-);
+userRoutes.post("", validateCreateUserMiddleware, userCreateController);
 userRoutes.get(
   "",
   ensureAuthMiddleware,

@@ -216,7 +216,7 @@ export const StyledLogin = styled.div`
           box-sizing: border-box;
           text-indent: 10px;
           outline: none;
-          box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
+          box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.75);
 
           @media (max-height: 360px) {
             height: 28px;
@@ -251,7 +251,7 @@ export const StyledLogin = styled.div`
         input::placeholder {
           font-family: "Orbitron";
           font-style: normal;
-          font-weight: 400;
+          font-weight: bold;
           font-size: 12px;
           line-height: 0px;
 

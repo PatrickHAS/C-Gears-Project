@@ -28,10 +28,7 @@ export class Users {
   @Column({ length: 75, unique: true })
   email: string;
 
-  @Column({ length: 120, unique: true })
-  ssn: string;
-
-  @Column({ length: 16, unique: true })
+  @Column({ length: 25, unique: true })
   cellphone: string;
 
   @Column({ type: "date" })

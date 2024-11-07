@@ -146,6 +146,7 @@ export const StyledRegister = styled.div`
           transition: 0.9s;
         }
       }
+
       .form-register {
         display: flex;
         justify-content: space-around;
@@ -214,11 +215,35 @@ export const StyledRegister = styled.div`
             box-sizing: border-box;
             text-indent: 10px;
             outline: none;
-            box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
           }
 
-          .form-control {
-            box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
+          .password-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+          }
+
+          .input-password {
+            width: 100%;
+            height: 48px;
+            background: var(--Gray-3);
+            border: 2px solid transparent;
+            border-radius: 2px;
+            outline: none;
+            box-sizing: border-box;
+          }
+
+          .password-toggle-button {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--Gray-1);
           }
 
           .label-errors {
@@ -255,114 +280,10 @@ export const StyledRegister = styled.div`
             height: 30px;
           }
 
-          .input-name:hover {
-            cursor: pointer;
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-            transition: 0.9s;
-          }
-
-          .input-name:focus {
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-          }
-
-          .input-surname:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .input-surname:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
-          .input-username:hover {
-            cursor: pointer;
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-            transition: 0.9s;
-          }
-
-          .input-username:focus {
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-          }
-
-          .input-email:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .input-email:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
-          .input-emailConfirm:hover {
-            cursor: pointer;
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-            transition: 0.9s;
-          }
-
-          .input-emailConfirm:focus {
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-          }
-
-          .form-control:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .form-control:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
-          .selected-flag:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .selected-flag:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
-          .input-birthday:hover {
-            cursor: pointer;
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-            transition: 0.9s;
-          }
-
-          .input-birthday:focus {
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-          }
-
-          .input-password:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .input-password:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
+          .input-name:hover,
+          .input-username:hover,
+          .input-emailConfirm:hover,
+          .input-birthday:hover,
           .input-passwordConfirm:hover {
             cursor: pointer;
             border: 2px solid var(--Red-9);
@@ -370,9 +291,34 @@ export const StyledRegister = styled.div`
             transition: 0.9s;
           }
 
+          .input-name:focus,
+          .input-username:focus,
+          .input-emailConfirm:focus,
+          .input-birthday:focus,
+          .input-passwordConfirm:focus,
           .input-passwordConfirm:focus {
             border: 2px solid var(--Red-9);
             box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
+          }
+
+          .input-surname:hover,
+          .input-email:hover,
+          .form-control:hover,
+          .selected-flag:hover,
+          .input-password:hover {
+            cursor: pointer;
+            border: 2px solid var(--Indigo-9);
+            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
+            transition: 0.9s;
+          }
+
+          .input-surname:focus,
+          .input-email:focus,
+          .form-control:focus,
+          .selected-flag:focus,
+          .input-password:focus {
+            border: 2px solid var(--Indigo-9);
+            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
           }
         }
 
@@ -413,7 +359,6 @@ export const StyledRegister = styled.div`
             box-sizing: border-box;
             text-indent: 10px;
             outline: none;
-            box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
           }
 
           .label-errors {
@@ -425,6 +370,16 @@ export const StyledRegister = styled.div`
             height: 10px;
 
             p {
+              font-family: "Orbitron";
+              font-style: normal;
+              font-weight: 500;
+              font-size: 12px;
+              line-height: 17px;
+
+              color: var(--Gray-4);
+            }
+
+            label {
               font-family: "Orbitron";
               font-style: normal;
               font-weight: 500;
@@ -457,78 +412,9 @@ export const StyledRegister = styled.div`
             line-height: 0px;
           }
 
-          .input-street:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .input-street:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
-          .input-number:hover {
-            cursor: pointer;
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-            transition: 0.9s;
-          }
-
-          .input-number:focus {
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-          }
-
-          .input-apt_unit:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .input-apt_unit:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
-          .input-neighborhoods:hover {
-            cursor: pointer;
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-            transition: 0.9s;
-          }
-
-          .input-neighborhoods:focus {
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-          }
-
-          .input-city:hover {
-            cursor: pointer;
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-            transition: 0.9s;
-          }
-
-          .input-city:focus {
-            border: 2px solid var(--Indigo-9);
-            box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
-          }
-
-          .input-state:hover {
-            cursor: pointer;
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-            transition: 0.9s;
-          }
-
-          .input-state:focus {
-            border: 2px solid var(--Red-9);
-            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
-          }
-
+          .input-street:hover,
+          .input-apt_unit:hover,
+          .input-city:hover,
           .input-zipcode:hover {
             cursor: pointer;
             border: 2px solid var(--Indigo-9);
@@ -536,9 +422,28 @@ export const StyledRegister = styled.div`
             transition: 0.9s;
           }
 
+          .input-street:focus,
+          .input-apt_unit:focus,
+          .input-city:focus,
           .input-zipcode:focus {
             border: 2px solid var(--Indigo-9);
             box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
+          }
+
+          .input-number:hover,
+          .input-neighborhoods:hover,
+          .input-state:hover {
+            cursor: pointer;
+            border: 2px solid var(--Red-9);
+            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
+            transition: 0.9s;
+          }
+
+          .input-number:focus,
+          .input-neighborhoods:focus,
+          .input-state:focus {
+            border: 2px solid var(--Red-9);
+            box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
           }
 
           .btn-register:hover {
@@ -551,7 +456,7 @@ export const StyledRegister = styled.div`
         input::placeholder {
           font-family: "Orbitron";
           font-style: normal;
-          font-weight: 400;
+          font-weight: bold;
           font-size: 12px;
           line-height: 0px;
 

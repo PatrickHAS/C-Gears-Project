@@ -17,7 +17,6 @@ program
     "Cellphone of the admin user",
     "1234567890"
   )
-  .option("--ssn <ssn>", "SSN of the admin user", "123-45-6789")
   .option("--birthday <birthday>", "Birthday of the admin user", "2000-01-01")
   .option("--password <password>", "Password for the admin user", "admin1234")
   .option("--street <street>", "Street for the admin user", "123 Admin St")
@@ -40,7 +39,6 @@ program
       username: options.username,
       email: options.email,
       cellphone: options.cellphone,
-      ssn: options.ssn,
       birthday: options.birthday,
       password: options.password,
       address: {

@@ -29,7 +29,7 @@ export class Address {
   @Column({ length: 75 })
   state: string;
 
-  @Column({ length: 9 })
+  @Column({ length: 10 })
   zipcode: string;
 
   @CreateDateColumn()

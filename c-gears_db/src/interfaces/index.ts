@@ -4,7 +4,6 @@ export interface IUserCreate {
   username: string;
   cellphone: string;
   birthday: Date;
-  ssn: string;
   email: string;
   password: string;
   isAdm?: boolean;
@@ -37,7 +36,6 @@ export interface IUserUpdate {
   surname?: string;
   username?: string;
   email?: string;
-  ssn?: string;
   cellphone?: string;
   birthday?: Date;
   password?: string;

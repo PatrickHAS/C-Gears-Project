@@ -5,6 +5,7 @@ import { IUserCreate } from "../../interfaces/index";
 import { Users } from "../../entities/user.entity";
 import { Address } from "../../entities/userAddress.entity";
 import emailService from "./email.service";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 const userCreateService = async ({
   name,
@@ -12,7 +13,6 @@ const userCreateService = async ({
   username,
   email,
   cellphone,
-  ssn,
   birthday,
   password,
   isAdm,
@@ -22,7 +22,6 @@ const userCreateService = async ({
   const addressRepository = AppDataSource.getRepository(Address);
   const users = await userRepository.find();
 
-  const ssnAlreadyExists = users.find((user) => user.ssn === ssn);
   const cellphoneAlreadyExists = users.find(
     (user) => user.cellphone === cellphone
   );
@@ -30,10 +29,6 @@ const userCreateService = async ({
     (user) => user.username === username
   );
   const emailAlreadyExists = users.find((user) => user.email === email);
-
-  if (ssnAlreadyExists) {
-    throw new AppError("CPF/SSN already registered", 409);
-  }
 
   if (cellphoneAlreadyExists) {
     throw new AppError("cellphone already registered", 409);
@@ -47,6 +42,15 @@ const userCreateService = async ({
     throw new AppError("email already registered", 409);
   }
 
+  const formattedCellphoneInput = cellphone.startsWith("+")
+    ? cellphone
+    : `+${cellphone}`;
+
+  const phoneNumber = parsePhoneNumberFromString(formattedCellphoneInput);
+  const formattedCellphone = phoneNumber
+    ? phoneNumber.formatInternational()
+    : cellphone;
+
   const createdAddress = addressRepository.create({
     street,
     number,
@@ -59,15 +63,13 @@ const userCreateService = async ({
   await addressRepository.save(createdAddress);
 
   const hashedPassword = await hash(password, 10);
-  const hashedSsn = await hash(ssn, 10);
 
   const createdUser = userRepository.create({
     name,
     surname,
     username,
     email,
-    cellphone,
-    ssn: hashedSsn,
+    cellphone: formattedCellphone,
     birthday,
     password: hashedPassword,
     isAdm,

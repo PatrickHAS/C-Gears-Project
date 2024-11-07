@@ -6,18 +6,28 @@ import {
 } from "../../contexts/register-context";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { RegisterSchema } from "../../validators/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const Register = () => {
-  const { isRegister, setIsRegister, phone, setPhone, registerSubmit } =
-    useRegisterContext();
+  const {
+    isRegister,
+    setIsRegister,
+    phone,
+    setPhone,
+    registerSubmit,
+    showPassword,
+    togglePasswordVisibility,
+  } = useRegisterContext();
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
+    control,
   } = useForm<IRegisterData>({
     resolver: yupResolver(RegisterSchema),
   });
@@ -36,7 +46,9 @@ const Register = () => {
           </div>
           <form
             className="form-register"
-            onSubmit={handleSubmit(registerSubmit)}
+            onSubmit={handleSubmit((data) => {
+              registerSubmit({ ...data, cellphone: phone });
+            })}
           >
             <div className="data-user">
               <input
@@ -94,12 +106,21 @@ const Register = () => {
                 <label htmlFor="emailConfirm"></label>
                 <p>{errors.emailConfirm?.message}</p>
               </div>
-              <PhoneInput
-                country={"br"}
-                value={phone}
-                onChange={(phone) => setPhone(phone)}
-                enableSearch={true}
-                placeholder="Enter your phone number"
+              <Controller
+                control={control}
+                name="cellphone"
+                render={({ field }) => (
+                  <PhoneInput
+                    country={"br"}
+                    value={phone}
+                    onChange={(phone) => {
+                      setPhone(phone);
+                      setValue("cellphone", phone);
+                    }}
+                    enableSearch={true}
+                    placeholder="Enter your phone number"
+                  />
+                )}
               />
               <div className="label-errors">
                 <label htmlFor="cellphone"></label>
@@ -116,13 +137,23 @@ const Register = () => {
                 <label htmlFor="birthday"></label>
                 <p>{errors.birthday?.message}</p>
               </div>
-              <input
-                className="input-password"
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                {...register("password")}
-              />
+              <div className="password-input-container">
+                <input
+                  className="input-password"
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  {...register("password")}
+                />
+                <button
+                  type="button"
+                  className="password-toggle-button"
+                  onClick={togglePasswordVisibility}
+                  aria-label="Toggle password visibility"
+                >
+                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}{" "}
+                </button>
+              </div>
               <div className="label-errors">
                 <label htmlFor="password"></label>
                 <p>{errors.password?.message}</p>
@@ -130,7 +161,7 @@ const Register = () => {
               <input
                 className="input-passwordConfirm"
                 id="passwordConfirm"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Confirm your password"
                 {...register("passwordConfirm")}
               />
@@ -170,7 +201,7 @@ const Register = () => {
                 {...register("address.apt_unit")}
               />
               <div className="label-errors">
-                <label htmlFor="apt_unit"></label>
+                <label htmlFor="apt_unit">* Optional</label>
                 <p>{errors.address?.apt_unit?.message}</p>
               </div>
               <input
@@ -181,7 +212,7 @@ const Register = () => {
                 {...register("address.neighborhoods")}
               />
               <div className="label-errors">
-                <label htmlFor="neighborhoods"></label>
+                <label htmlFor="neighborhoods">* Optional</label>
                 <p>{errors.address?.neighborhoods?.message}</p>
               </div>
               <input

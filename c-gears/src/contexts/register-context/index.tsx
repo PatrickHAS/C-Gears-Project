@@ -33,6 +33,9 @@ interface IRegisterContext {
   registerSubmit: (data: IRegisterData) => Promise<void>;
   phone: string;
   setPhone: React.Dispatch<React.SetStateAction<string>>;
+  showPassword: boolean;
+  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  togglePasswordVisibility: () => void;
 }
 
 export const RegisterContext = createContext<IRegisterContext>(
@@ -42,6 +45,7 @@ export const RegisterContext = createContext<IRegisterContext>(
 export const RegisterProvider = ({ children }: IRegisterProvider) => {
   const [isRegister, setIsRegister] = useState(false);
   const [phone, setPhone] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const registerSubmit = async (data: IRegisterData) => {
     try {
@@ -52,6 +56,10 @@ export const RegisterProvider = ({ children }: IRegisterProvider) => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <RegisterContext.Provider
       value={{
@@ -60,6 +68,9 @@ export const RegisterProvider = ({ children }: IRegisterProvider) => {
         setIsRegister,
         phone,
         setPhone,
+        setShowPassword,
+        showPassword,
+        togglePasswordVisibility,
       }}
     >
       {children}
