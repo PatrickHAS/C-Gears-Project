@@ -216,7 +216,6 @@ export const StyledLogin = styled.div`
           box-sizing: border-box;
           text-indent: 10px;
           outline: none;
-          box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.75);
 
           @media (max-height: 360px) {
             height: 28px;

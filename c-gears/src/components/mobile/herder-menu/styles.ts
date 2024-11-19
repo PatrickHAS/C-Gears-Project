@@ -31,6 +31,7 @@ export const StyledHeaderMenuList = styled.ul`
       transform: translateY(0);
     }
   }
+
   .menu-item--mobile {
     display: flex;
     align-items: center;
@@ -53,8 +54,21 @@ export const StyledHeaderMenuList = styled.ul`
 
       position: relative;
 
-      @media (max-width: 1280px) {
+      @media (max-height: 1138px) {
+        font-size: 16px;
+      }
+
+      @media (max-height: 1024px) {
+        font-size: 15px;
+      }
+
+      @media (max-height: 740px) {
         font-size: 12px;
+      }
+
+      @media (max-height: 480px) {
+        font-size: 10px;
+        padding-bottom: 5px;
       }
     }
 
@@ -77,5 +91,13 @@ export const StyledHeaderMenuList = styled.ul`
   }
   .menu-item--mobile:hover p::after {
     width: 70%;
+  }
+
+  @media (max-height: 533px) {
+    gap: 10px;
+  }
+
+  @media (max-height: 360px) {
+    gap: 5px;
   }
 `;
