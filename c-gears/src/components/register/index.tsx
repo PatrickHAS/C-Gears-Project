@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 import { IoCloseOutline } from "react-icons/io5";
 import { StyledRegister } from "./styles";
 import {
@@ -10,8 +11,10 @@ import { Controller, useForm } from "react-hook-form";
 import { RegisterSchema } from "../../validators/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useHeaderContext } from "../../contexts/header-context";
 
 const Register = () => {
+  const { isLogin, setIsLogin } = useHeaderContext();
   const {
     isRegister,
     setIsRegister,
@@ -41,7 +44,7 @@ const Register = () => {
             <span className="text-register">Register</span>
             <IoCloseOutline
               className="icon-close-register"
-              onClick={() => setIsRegister(!isRegister)}
+              onClick={() => (setIsRegister(!isRegister), setIsLogin(!isLogin))}
             />
           </div>
           <form

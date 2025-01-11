@@ -7,6 +7,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { LoginSchema } from "../../validators/schema";
 import { useLoginContext } from "../../contexts/login-context";
 import { useRegisterContext } from "../../contexts/register-context";
+import { usePassresetContext } from "../../contexts/passreset-context";
 
 interface Ilogin {
   email: string;
@@ -17,6 +18,7 @@ const Login = () => {
   const { setIsLogin, isLogin } = useHeaderContext();
   const { onSubmitLogin } = useLoginContext();
   const { isRegister, setIsRegister } = useRegisterContext();
+  const { isPassreset, setIsPassreset } = usePassresetContext();
 
   const {
     register,
@@ -74,7 +76,13 @@ const Login = () => {
               <p>{errors.password?.message}</p>
             </div>
             <div className="forgot-password">
-              <p>Forgot your password?</p>
+              <p
+                onClick={() => (
+                  setIsPassreset(!isPassreset), setIsLogin(!isLogin)
+                )}
+              >
+                Forgot your password?
+              </p>
             </div>
             <button className="btn-enter" type="submit">
               Enter

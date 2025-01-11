@@ -9,9 +9,11 @@ import userDisableController from "../../controllers/user/userDisable.controller
 import validateCreateUserMiddleware from "../../middlewares/validateCreateUser.middleware";
 import confirmUpdateController from "../../controllers/user/confirmUpdate.controller";
 import userActivateController from "../../controllers/user/userActivate.controller";
+import userEmailDataController from "../../controllers/user/userEmailData.controller";
 
 const userRoutes = Router();
 
+userRoutes.post("/confirm-email", userEmailDataController);
 userRoutes.post("", validateCreateUserMiddleware, userCreateController);
 userRoutes.get(
   "",

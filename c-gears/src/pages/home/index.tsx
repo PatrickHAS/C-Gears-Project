@@ -8,10 +8,13 @@ import { useHeaderContext } from "../../contexts/header-context";
 import { useRegisterContext } from "../../contexts/register-context";
 import Login from "../../components/login";
 import Register from "../../components/register";
+import { usePassresetContext } from "../../contexts/passreset-context";
+import PasswwordReset from "../../components/password-reset";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
   const { isRegister } = useRegisterContext();
+  const { isPassreset } = usePassresetContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,12 +41,13 @@ const Home = () => {
 
   return (
     <StyledHome className="StyledHome">
-      <video autoPlay muted loop id="background-video">
+      <video muted autoPlay loop id="background-video">
         <source src={backgroundVideo} type="video/mp4" />
       </video>
       <Header />
       {isLogin && <Login />}
       {isRegister && <Register />}
+      {isPassreset && <PasswwordReset />}
       <LogoHomeCenter />
       <SocialMedia />
     </StyledHome>

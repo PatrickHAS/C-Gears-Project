@@ -1,5 +1,18 @@
 import * as yup from "yup";
 
+export const PassResetSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is requerid")
+    .max(75, "Email must be at most 75 characters"),
+  emailConfirm: yup
+    .string()
+    .required("Confirm your email")
+    .max(75, "Email must be at most 75 characters")
+    .oneOf([yup.ref("email")], "Must be the same as the email"),
+});
+
 export const LoginSchema = yup.object().shape({
   email: yup
     .string()

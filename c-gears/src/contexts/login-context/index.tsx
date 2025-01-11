@@ -77,7 +77,6 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
       });
   };
 
-  // Auto login
   useEffect(() => {
     async function loadLogin() {
       if (token) {
