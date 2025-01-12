@@ -4,7 +4,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { BsTwitch, BsYoutube } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
 import { AiOutlineTikTok } from "react-icons/ai";
-import { SiMicrosoftstore } from "react-icons/si";
+import { TfiMicrosoftAlt } from "react-icons/tfi";
 
 const SocialMedia = () => {
   return (
@@ -86,7 +86,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <SiMicrosoftstore title="Microsoft store" />
+            <TfiMicrosoftAlt title="Microsoft store" />
           </a>
         </div>
       </div>
