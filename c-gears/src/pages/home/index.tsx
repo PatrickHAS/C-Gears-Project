@@ -1,5 +1,5 @@
 import Header from "../../components/header";
-import backgroundVideo from "../../assets/goweday.mp4";
+import backgroundVideo from "../../assets/gowe-day.mp4";
 import { StyledHome } from "./styles";
 import SocialMedia from "../../components/social-media";
 import LogoHomeCenter from "../../components/logo-home-center";
