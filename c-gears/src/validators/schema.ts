@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const PassResetSchema = yup.object().shape({
+export const EmailConfirmSchema = yup.object().shape({
   email: yup
     .string()
     .email("Enter a valid email")

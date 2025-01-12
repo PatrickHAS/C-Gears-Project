@@ -8,13 +8,13 @@ import { useHeaderContext } from "../../contexts/header-context";
 import { useRegisterContext } from "../../contexts/register-context";
 import Login from "../../components/login";
 import Register from "../../components/register";
-import { usePassresetContext } from "../../contexts/passreset-context";
+import { useEmailConfirmContext } from "../../contexts/passreset-context";
 import PasswwordReset from "../../components/password-reset";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
   const { isRegister } = useRegisterContext();
-  const { isPassreset } = usePassresetContext();
+  const { isEmailConfirm } = useEmailConfirmContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,7 +47,7 @@ const Home = () => {
       <Header />
       {isLogin && <Login />}
       {isRegister && <Register />}
-      {isPassreset && <PasswwordReset />}
+      {isEmailConfirm && <PasswwordReset />}
       <LogoHomeCenter />
       <SocialMedia />
     </StyledHome>

@@ -1,7 +1,7 @@
 import { useContext, createContext, useState, ReactNode } from "react";
 import api from "../../services/Api";
 
-interface IPassresetProvider {
+interface IEmailConfirmProvider {
   children: ReactNode;
 }
 
@@ -10,23 +10,23 @@ interface IEmail {
   emailConfirm: string;
 }
 
-interface IPassresetContext {
-  setIsPassreset: React.Dispatch<React.SetStateAction<boolean>>;
+interface IEmailConfirmContext {
+  setIsEmailConfirm: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDbMenssage: React.Dispatch<React.SetStateAction<string[]>>;
-  passResetSubmit: (data: IEmail) => Promise<void>;
-  isPassreset: boolean;
+  emailConfirmSubmit: (data: IEmail) => Promise<void>;
+  isEmailConfirm: boolean;
   isDbMenssage: string[];
 }
 
-export const PassresetContext = createContext<IPassresetContext>(
-  {} as IPassresetContext
+export const EmailConfirmContext = createContext<IEmailConfirmContext>(
+  {} as IEmailConfirmContext
 );
 
-export const PassresetProvider = ({ children }: IPassresetProvider) => {
-  const [isPassreset, setIsPassreset] = useState(false);
+export const EmailConfirmProvider = ({ children }: IEmailConfirmProvider) => {
+  const [isEmailConfirm, setIsEmailConfirm] = useState(false);
   const [isDbMenssage, setIsDbMenssage] = useState([""]);
 
-  const passResetSubmit = async (data: IEmail) => {
+  const emailConfirmSubmit = async (data: IEmail) => {
     try {
       const dbMenssage = await api.post("/users/confirm-email", {
         email: data.email,
@@ -38,17 +38,17 @@ export const PassresetProvider = ({ children }: IPassresetProvider) => {
   };
 
   return (
-    <PassresetContext.Provider
+    <EmailConfirmContext.Provider
       value={{
-        isPassreset,
-        setIsPassreset,
+        isEmailConfirm,
+        setIsEmailConfirm,
         isDbMenssage,
-        passResetSubmit,
+        emailConfirmSubmit,
         setIsDbMenssage,
       }}
     >
       {children}
-    </PassresetContext.Provider>
+    </EmailConfirmContext.Provider>
   );
 };
-export const usePassresetContext = () => useContext(PassresetContext);
+export const useEmailConfirmContext = () => useContext(EmailConfirmContext);

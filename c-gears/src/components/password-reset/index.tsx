@@ -1,28 +1,28 @@
 /* eslint-disable no-sequences */
 import { useForm } from "react-hook-form";
 import { useHeaderContext } from "../../contexts/header-context";
-import { usePassresetContext } from "../../contexts/passreset-context";
+import { useEmailConfirmContext } from "../../contexts/passreset-context";
 import { StyledPasswordReset } from "./styles";
 import { IoCloseOutline } from "react-icons/io5";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PassResetSchema } from "../../validators/schema";
+import { EmailConfirmSchema } from "../../validators/schema";
 
 export interface IEmail {
   email: string;
   emailConfirm: string;
 }
 
-const PasswordReset = () => {
+const EmailConfirm = () => {
   const { isLogin, setIsLogin } = useHeaderContext();
-  const { isPassreset, setIsPassreset, passResetSubmit } =
-    usePassresetContext();
+  const { isEmailConfirm, setIsEmailConfirm, emailConfirmSubmit } =
+    useEmailConfirmContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IEmail>({
-    resolver: yupResolver(PassResetSchema),
+    resolver: yupResolver(EmailConfirmSchema),
   });
 
   return (
@@ -35,13 +35,13 @@ const PasswordReset = () => {
             <IoCloseOutline
               className="icon-close-passreset"
               onClick={() => (
-                setIsPassreset(!isPassreset), setIsLogin(!isLogin)
+                setIsEmailConfirm(!isEmailConfirm), setIsLogin(!isLogin)
               )}
             />
           </div>
           <form
             className="form-passreset"
-            onSubmit={handleSubmit(passResetSubmit)}
+            onSubmit={handleSubmit(emailConfirmSubmit)}
           >
             <input
               className="input-email"
@@ -78,4 +78,4 @@ const PasswordReset = () => {
     </StyledPasswordReset>
   );
 };
-export default PasswordReset;
+export default EmailConfirm;

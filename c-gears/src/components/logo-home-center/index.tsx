@@ -1,14 +1,14 @@
 import { useHeaderContext } from "../../contexts/header-context";
-import { usePassresetContext } from "../../contexts/passreset-context";
+import { useEmailConfirmContext } from "../../contexts/passreset-context";
 import { useRegisterContext } from "../../contexts/register-context";
 import { StyledLogoHomeCenter } from "./styles";
 
 const LogoHomeCenter = () => {
   const { isLogin } = useHeaderContext();
   const { isRegister } = useRegisterContext();
-  const { isPassreset } = usePassresetContext();
+  const { isEmailConfirm } = useEmailConfirmContext();
 
-  if (isLogin || isRegister || isPassreset) {
+  if (isLogin || isRegister || isEmailConfirm) {
     return null;
   }
 

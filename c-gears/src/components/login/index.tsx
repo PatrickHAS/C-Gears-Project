@@ -7,7 +7,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { LoginSchema } from "../../validators/schema";
 import { useLoginContext } from "../../contexts/login-context";
 import { useRegisterContext } from "../../contexts/register-context";
-import { usePassresetContext } from "../../contexts/passreset-context";
+import { useEmailConfirmContext } from "../../contexts/passreset-context";
 
 interface Ilogin {
   email: string;
@@ -18,7 +18,7 @@ const Login = () => {
   const { setIsLogin, isLogin } = useHeaderContext();
   const { onSubmitLogin } = useLoginContext();
   const { isRegister, setIsRegister } = useRegisterContext();
-  const { isPassreset, setIsPassreset } = usePassresetContext();
+  const { isEmailConfirm, setIsEmailConfirm } = useEmailConfirmContext();
 
   const {
     register,
@@ -78,7 +78,7 @@ const Login = () => {
             <div className="forgot-password">
               <p
                 onClick={() => (
-                  setIsPassreset(!isPassreset), setIsLogin(!isLogin)
+                  setIsEmailConfirm(!isEmailConfirm), setIsLogin(!isLogin)
                 )}
               >
                 Forgot your password?
