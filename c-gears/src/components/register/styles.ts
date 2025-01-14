@@ -154,8 +154,6 @@ export const StyledRegister = styled.div`
         width: 90%;
         height: fit-content;
 
-        margin-bottom: 10px;
-
         @media (max-width: 540px) {
           flex-direction: column;
           align-items: center;
@@ -473,7 +471,7 @@ export const StyledRegister = styled.div`
       height: 50px;
 
       gap: 15px;
-      margin-bottom: 5px;
+      margin-bottom: 15px;
 
       .logo-cgo {
         width: 55px;

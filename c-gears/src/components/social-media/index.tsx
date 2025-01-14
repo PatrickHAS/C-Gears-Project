@@ -16,7 +16,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaDiscord title="Discord" />
+            <FaDiscord xlinkTitle="Discord" />
           </a>
         </div>
         <div className="icon-twitter">
@@ -25,7 +25,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <RiTwitterXFill title="Twitter" />
+            <RiTwitterXFill xlinkTitle="Twitter" />
           </a>
         </div>
         <div className="icon-youtube">
@@ -34,7 +34,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BsYoutube title="YouTube" />
+            <BsYoutube xlinkTitle="YouTube" />
           </a>
         </div>
         <div className="icon-facebook">
@@ -43,7 +43,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BiLogoFacebook title="Facebook" />
+            <BiLogoFacebook xlinkTitle="Facebook" />
           </a>
         </div>
         <div className="icon-tiktok">
@@ -52,12 +52,12 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <AiOutlineTikTok title="Tiktok" />
+            <AiOutlineTikTok xlinkTitle="Tiktok" />
           </a>
         </div>
         <div className="icon-twitch">
           <a href="https://twitch.tv" target="_blank" rel="noopener noreferrer">
-            <BsTwitch title="Twitch" />
+            <BsTwitch xlinkTitle="Twitch" />
           </a>
         </div>
       </div>
@@ -68,7 +68,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaSteam title="Wishlist Steam" />
+            <FaSteam xlinkTitle="Wishlist Steam" />
           </a>
         </div>
         <div className="icon-xbox">
@@ -77,7 +77,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaXbox title="Gamepass" />
+            <FaXbox xlinkTitle="Gamepass" />
           </a>
         </div>
         <div className="icon-microsoft_store">
@@ -86,7 +86,7 @@ const SocialMedia = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <TfiMicrosoftAlt title="Microsoft store" />
+            <TfiMicrosoftAlt xlinkTitle="Microsoft store" />
           </a>
         </div>
       </div>

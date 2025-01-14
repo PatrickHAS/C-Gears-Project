@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledPasswordReset = styled.div`
+export const StyledEmailConfirm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,9 +9,9 @@ export const StyledPasswordReset = styled.div`
   width: 100%;
   height: 100%;
 
-  background: url("/goweday.jpg") no-repeat center center;
+  background: rgba(0, 0, 0, 0.2);
 
-  .box-card-passwordReset {
+  .box-card-emailConfirm {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@ export const StyledPasswordReset = styled.div`
     }
   }
 
-  .card-passwordReset {
+  .card-emailConfirm {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +71,7 @@ export const StyledPasswordReset = styled.div`
       width: 290px;
     }
 
-    .header-passwordReset {
+    .header-emailConfirm {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -80,12 +80,12 @@ export const StyledPasswordReset = styled.div`
       height: 50px;
       margin-top: 5px;
 
-      .logo-passwordReset {
+      .logo-emailConfirm {
         width: 40px;
         height: 40px;
       }
 
-      .title-passwordReset {
+      .title-emailConfirm {
         font-family: "Orbitron";
         font-style: normal;
         font-weight: 500;
@@ -95,19 +95,19 @@ export const StyledPasswordReset = styled.div`
         color: var(--Gray-0);
       }
 
-      .icon-close-passwordReset {
+      .icon-close-emailConfirm {
         font-size: 20px;
         color: var(--Gray-0);
       }
 
-      .icon-close-passwordReset:hover {
+      .icon-close-emailConfirm:hover {
         cursor: pointer;
         color: var(--Red-6);
         transition: 0.9s;
       }
     }
 
-    .form-passwordReset {
+    .form-emailConfirm {
       display: flex;
       justify-content: flex-start;
       flex-direction: column;
@@ -155,26 +155,26 @@ export const StyledPasswordReset = styled.div`
         outline: none;
       }
 
-      .input-password:hover {
+      .input-email:hover {
         cursor: pointer;
         border: 2px solid var(--Red-9);
         box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
         transition: 0.9s;
       }
 
-      .input-passwordConfirm:hover {
+      .input-emailConfirm:hover {
         cursor: pointer;
         border: 2px solid var(--Indigo-9);
         box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
         transition: 0.9s;
       }
 
-      .input-password:focus {
+      .input-email:focus {
         border: 2px solid var(--Red-9);
         box-shadow: 0px 0px 8px 3px rgba(201, 42, 42, 1);
       }
 
-      .input-passwordConfirm:focus {
+      .input-emailConfirm:focus {
         border: 2px solid var(--Indigo-9);
         box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
       }
@@ -189,7 +189,7 @@ export const StyledPasswordReset = styled.div`
         color: var(--Gray-8);
       }
 
-      .btn-passwordReset {
+      .btn-golink {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -217,7 +217,7 @@ export const StyledPasswordReset = styled.div`
       }
     }
 
-    .btn-passwordReset:hover {
+    .btn-golink:hover {
       cursor: pointer;
       background: var(--Red-9);
       transition: 0.9s;
@@ -253,7 +253,7 @@ export const StyledPasswordReset = styled.div`
     }
   }
 
-  .box-card-passwordReset::before {
+  .box-card-emailConfirm::before {
     content: "";
     width: 250px;
     height: 300%;
@@ -273,5 +273,9 @@ export const StyledPasswordReset = styled.div`
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .gradient-toast {
+    background: linear-gradient(to right, var(--Black-0), var(--Gray-8));
   }
 `;

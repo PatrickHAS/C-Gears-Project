@@ -1,81 +1,80 @@
 /* eslint-disable no-sequences */
-import { useForm } from "react-hook-form";
-import { useHeaderContext } from "../../contexts/header-context";
-import { useEmailConfirmContext } from "../../contexts/passreset-context";
-import { StyledPasswordReset } from "./styles";
 import { IoCloseOutline } from "react-icons/io5";
+import { StyledPasswordReset } from "./styles";
+import { useForm } from "react-hook-form";
+import { PasswordResetSchema } from "../../validators/schema";
+import { usePasswordResetContext } from "../../contexts/passwordReset.context";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { EmailConfirmSchema } from "../../validators/schema";
 
-export interface IEmail {
-  email: string;
-  emailConfirm: string;
+export interface IPasswordReset {
+  password: string;
+  passwordConfirm: string;
 }
 
-const EmailConfirm = () => {
-  const { isLogin, setIsLogin } = useHeaderContext();
-  const { isEmailConfirm, setIsEmailConfirm, emailConfirmSubmit } =
-    useEmailConfirmContext();
+const PasswordReset = () => {
+  const { passwordResetSubmit } = usePasswordResetContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IEmail>({
-    resolver: yupResolver(EmailConfirmSchema),
+  } = useForm<IPasswordReset>({
+    resolver: yupResolver(PasswordResetSchema),
   });
 
   return (
     <StyledPasswordReset>
-      <div className="box-card-passreset">
-        <div className="card-passreset">
-          <div className="header-passreset">
-            <img className="logo-passreset" alt="" src="logo-gearsclub.png" />
-            <h2 className="title-passreset">Reset Password</h2>
+      <div className="box-card-passwordReset">
+        <div className="card-passwordReset">
+          <div className="header-passwordReset">
+            <img
+              className="logo-passwordReset"
+              alt=""
+              src="/logo-gearsclub.png"
+            />
+            <h2 className="title-passwordReset">Password Reset</h2>
             <IoCloseOutline
-              className="icon-close-passreset"
-              onClick={() => (
-                setIsEmailConfirm(!isEmailConfirm), setIsLogin(!isLogin)
-              )}
+              className="icon-close-passwordReset"
+              onClick={() => window.close()}
             />
           </div>
           <form
-            className="form-passreset"
-            onSubmit={handleSubmit(emailConfirmSubmit)}
+            className="form-passwordReset"
+            onSubmit={handleSubmit(passwordResetSubmit)}
           >
             <input
-              className="input-email"
-              id="email"
-              type="text"
-              placeholder="Email address"
-              {...register("email")}
+              className="input-password"
+              id="password"
+              type="password"
+              placeholder="Password"
+              {...register("password")}
             />
             <div className="label-errors">
-              <label htmlFor="email"></label>
-              <p>{errors.email?.message}</p>
+              <label htmlFor="password"></label>
+              <p>{errors.password?.message}</p>
             </div>
             <input
-              className="input-emailConfirm"
-              id="emailConfirm"
-              type="text"
-              placeholder="Confirm your email"
-              {...register("emailConfirm")}
+              className="input-passwordConfirm"
+              id="passwordConfirm"
+              type="password"
+              placeholder="Confirm your new password"
+              {...register("passwordConfirm")}
             />
             <div className="label-errors">
-              <label htmlFor="emailConfirm"></label>
-              <p>{errors.emailConfirm?.message}</p>
+              <label htmlFor="passwordConfirm"></label>
+              <p>{errors.passwordConfirm?.message}</p>
             </div>
-            <button className="btn-golink" type="submit">
-              SEND RESET LINK
+            <button className="btn-passwordReset" type="submit">
+              CONFIRM YOUR NEW PASSWORD
             </button>
           </form>
           <footer>
-            <img className="logo-cgo" alt="" src="Cog-logo.png" />
-            <img className="logo-locust" alt="" src="Locust-logo.png" />
+            <img className="logo-cgo" alt="" src="/Cog-logo.png" />
+            <img className="logo-locust" alt="" src="/Locust-logo.png" />
           </footer>
         </div>
       </div>
     </StyledPasswordReset>
   );
 };
-export default EmailConfirm;
+export default PasswordReset;

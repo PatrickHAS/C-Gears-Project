@@ -7,7 +7,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { LoginSchema } from "../../validators/schema";
 import { useLoginContext } from "../../contexts/login-context";
 import { useRegisterContext } from "../../contexts/register-context";
-import { useEmailConfirmContext } from "../../contexts/passreset-context";
+import { useEmailConfirmContext } from "../../contexts/emailConfirm-context";
 
 interface Ilogin {
   email: string;

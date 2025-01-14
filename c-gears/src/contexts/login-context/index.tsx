@@ -7,6 +7,8 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "react-toastify";
+import { useEmailConfirmContext } from "../emailConfirm-context";
 
 interface ILoginProvider {
   children: ReactNode;
@@ -61,20 +63,42 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
   const id = localStorage.getItem("@UserId");
   const navigate = useNavigate();
 
+  const { isMobile } = useEmailConfirmContext();
+
   const onSubmitLogin = async (data: ILoginData) => {
-    await api
-      .post("/login", data)
-      .then(async (res) => {
+    try {
+      await api.post("/login", data).then(async (res) => {
         api.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
         const { data } = await api.get("/users");
         setUser(data);
         localStorage.setItem("@Token", res.data.token);
         localStorage.setItem("@UserId", res.data.userId);
         navigate("/", { replace: true });
-      })
-      .catch((err) => {
-        console.error(err);
       });
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Incorrect password or email!", {
+        position: isMobile ? "top-center" : "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        style: {
+          width: isMobile ? "90%" : "440px",
+          margin: isMobile ? "0 auto" : "default",
+          marginTop: isMobile ? "20px" : "default",
+          borderRadius: isMobile ? "5px" : "default",
+          fontSize: isMobile ? "12px" : "16px",
+          fontFamily: "Orbitron",
+          letterSpacing: "0.5px",
+          color: "black",
+        },
+      });
+    }
   };
 
   useEffect(() => {

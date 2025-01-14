@@ -1,5 +1,5 @@
 import { useHeaderContext } from "../../contexts/header-context";
-import { useEmailConfirmContext } from "../../contexts/passreset-context";
+import { useEmailConfirmContext } from "../../contexts/emailConfirm-context";
 import { useRegisterContext } from "../../contexts/register-context";
 import { StyledLogoHomeCenter } from "./styles";
 

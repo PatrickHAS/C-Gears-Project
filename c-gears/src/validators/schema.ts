@@ -1,5 +1,20 @@
 import * as yup from "yup";
 
+export const PasswordResetSchema = yup.object().shape({
+  password: yup
+    .string()
+    .required("Password is required!")
+    .matches(/[A-Z]/, "At least 1 capital letter")
+    .matches(/([a-z])/, "At least 1 lowercase letter")
+    .matches(/(\d)/, "At least 1 number")
+    .matches(/(\W)|_/, "At least 1 special character")
+    .min(8, "At least 8 digits"),
+  passwordConfirm: yup
+    .string()
+    .required("Confirm your password")
+    .oneOf([yup.ref("password")], "Must be the same as the password"),
+});
+
 export const EmailConfirmSchema = yup.object().shape({
   email: yup
     .string()

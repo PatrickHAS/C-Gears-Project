@@ -30,9 +30,7 @@ const userEmailDataService = async (
       <p>${process.env.DB_HOST}:3000/users/pass-reset/${emailUser.id}</p>`
     );
 
-    return [
-      "An email with a reset link has been sent to your current email address.",
-    ];
+    return ["A password reset link has been sent to your email."];
   } else {
     throw new AppError("Email not found", 404);
   }

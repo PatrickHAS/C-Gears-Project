@@ -8,8 +8,9 @@ import { useHeaderContext } from "../../contexts/header-context";
 import { useRegisterContext } from "../../contexts/register-context";
 import Login from "../../components/login";
 import Register from "../../components/register";
-import { useEmailConfirmContext } from "../../contexts/passreset-context";
-import PasswwordReset from "../../components/password-reset";
+import { useEmailConfirmContext } from "../../contexts/emailConfirm-context";
+import { ToastContainer } from "react-toastify";
+import EmailConfirm from "../../components/email-confirm";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
@@ -40,17 +41,20 @@ const Home = () => {
   }, []);
 
   return (
-    <StyledHome className="StyledHome">
-      <video muted autoPlay loop id="background-video">
-        <source src={backgroundVideo} type="video/mp4" />
-      </video>
-      <Header />
-      {isLogin && <Login />}
-      {isRegister && <Register />}
-      {isEmailConfirm && <PasswwordReset />}
-      <LogoHomeCenter />
-      <SocialMedia />
-    </StyledHome>
+    <>
+      <StyledHome className="StyledHome">
+        <video muted autoPlay loop id="background-video">
+          <source src={backgroundVideo} type="video/mp4" />
+        </video>
+        <Header />
+        {isLogin && <Login />}
+        {isRegister && <Register />}
+        {isEmailConfirm && <EmailConfirm />}
+        <LogoHomeCenter />
+        <SocialMedia />
+      </StyledHome>
+      <ToastContainer />
+    </>
   );
 };
 
