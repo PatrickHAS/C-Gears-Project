@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { instanceToPlain } from "class-transformer";
-import updateUserService from "../../services/users/updateUser.service";
+import userUpdateService from "../../services/users/user-update.service";
 import { IUserUpdate } from "../../interfaces";
-import { AppError } from "../../errors/appError";
+import { AppError } from "../../errors/app-error";
 
 const userUpdateController = async (req: Request, res: Response) => {
   const user: IUserUpdate = req.body;
@@ -15,7 +15,7 @@ const userUpdateController = async (req: Request, res: Response) => {
     throw new AppError("Unauthorized access", 401);
   }
 
-  const updatedUser = await updateUserService(user, id, token);
+  const updatedUser = await userUpdateService(user, id, token);
   return res.status(200).json(instanceToPlain(updatedUser));
 };
 export default userUpdateController;

@@ -1,6 +1,6 @@
 import AppDataSource from "../../data-source";
 import jwt from "jsonwebtoken";
-import { AppError } from "../../errors/appError";
+import { AppError } from "../../errors/app-error";
 import "dotenv";
 import { IUserLogin } from "../../interfaces";
 import { Users } from "../../entities/user.entity";

@@ -6,7 +6,7 @@ const RoutersMain = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="users/pass-reset/:id" element={<PasswordReset />} />
+      <Route path="users/pass-reset/:id/:token" element={<PasswordReset />} />
     </Routes>
   );
 };

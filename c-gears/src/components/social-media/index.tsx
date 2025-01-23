@@ -15,6 +15,7 @@ const SocialMedia = () => {
             href="https://discord.com"
             target="_blank"
             rel="noopener noreferrer"
+            title="Discord"
           >
             <FaDiscord xlinkTitle="Discord" />
           </a>
@@ -24,6 +25,7 @@ const SocialMedia = () => {
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
+            title="Twitter"
           >
             <RiTwitterXFill xlinkTitle="Twitter" />
           </a>
@@ -33,6 +35,7 @@ const SocialMedia = () => {
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
+            title="Youtube"
           >
             <BsYoutube xlinkTitle="YouTube" />
           </a>
@@ -42,6 +45,7 @@ const SocialMedia = () => {
             href="https://facebook.com"
             target="_blank"
             rel="noopener noreferrer"
+            title="Facebook"
           >
             <BiLogoFacebook xlinkTitle="Facebook" />
           </a>
@@ -51,12 +55,18 @@ const SocialMedia = () => {
             href="https://tiktok.com"
             target="_blank"
             rel="noopener noreferrer"
+            title="TikTok"
           >
             <AiOutlineTikTok xlinkTitle="Tiktok" />
           </a>
         </div>
         <div className="icon-twitch">
-          <a href="https://twitch.tv" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://twitch.tv"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Twitch"
+          >
             <BsTwitch xlinkTitle="Twitch" />
           </a>
         </div>
@@ -67,6 +77,7 @@ const SocialMedia = () => {
             href="https://store.steampowered.com/app/3010850/Gears_of_War_EDay/"
             target="_blank"
             rel="noopener noreferrer"
+            title="Steam"
           >
             <FaSteam xlinkTitle="Wishlist Steam" />
           </a>
@@ -76,6 +87,7 @@ const SocialMedia = () => {
             href="https://www.xbox.com/pt-BR/xbox-game-pass"
             target="_blank"
             rel="noopener noreferrer"
+            title="Game Pass"
           >
             <FaXbox xlinkTitle="Gamepass" />
           </a>
@@ -85,6 +97,7 @@ const SocialMedia = () => {
             href="https://www.microsoft.com/store/productId/C2KDNLT2H7DM?ocid=pdpshare"
             target="_blank"
             rel="noopener noreferrer"
+            title="Microsoft Store"
           >
             <TfiMicrosoftAlt xlinkTitle="Microsoft store" />
           </a>

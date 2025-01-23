@@ -1,5 +1,5 @@
 import AppDataSource from "../../data-source";
-import { AppError } from "../../errors/appError";
+import { AppError } from "../../errors/app-error";
 import { IUserUpdate } from "../../interfaces";
 import { Users } from "../../entities/user.entity";
 import { hash } from "bcrypt";
@@ -7,7 +7,7 @@ import emailService from "./email.service";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-const updateUserService = async (
+const userUpdateService = async (
   {
     name,
     surname,
@@ -93,4 +93,4 @@ const updateUserService = async (
   const user = await userRepository.findOneBy({ id });
   return user!;
 };
-export default updateUserService;
+export default userUpdateService;

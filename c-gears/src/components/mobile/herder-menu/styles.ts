@@ -21,6 +21,10 @@ export const StyledHeaderMenuList = styled.ul`
     animation: cascadeAnimation 0.9s ease-in-out;
   }
 
+  @media (max-height: 575px) {
+    margin-top: -20px;
+  }
+
   @keyframes cascadeAnimation {
     from {
       opacity: 0;

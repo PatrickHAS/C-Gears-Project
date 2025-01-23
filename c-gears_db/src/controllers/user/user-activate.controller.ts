@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import userActivateService from "../../services/users/userActivate.service";
+import userActivateService from "../../services/users/user-activate.service";
 
 const userActivateController = async (req: Request, res: Response) => {
   const id: string = req.params.id;

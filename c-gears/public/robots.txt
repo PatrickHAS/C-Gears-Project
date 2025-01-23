@@ -1,3 +1,25 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
+
+
+Rank           V/D        
+
+Mata-mata:     2.15
+Rei do pedaço: 3.35
+Execução:      2.17
+Escalada:      1.71
+
+K/D total: 1.58 
+
+
+Social                V/D        
+
+Mata-mata:            2.51
+Zona de Guerra:       6.50
+Rei do pedaço:        1.84
+Guardião:             2.00
+Queimada:             2.24
+Corrida Armamentista: 2.00
+
+K/D total: 2.02 

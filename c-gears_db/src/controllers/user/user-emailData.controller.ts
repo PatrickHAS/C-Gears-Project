@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import userEmailDataService from "../../services/users/userEmailData.service";
+import userEmailDataService from "../../services/users/user-email-data.service";
 
 const userEmailDataController = async (req: Request, res: Response) => {
   const { email } = req.body;

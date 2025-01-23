@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import userDisableService from "../../services/users/userDisable.service";
+import userDisableService from "../../services/users/user-disable.service";
 
 const userDisableController = async (req: Request, res: Response) => {
   const id: string = req.params.id;

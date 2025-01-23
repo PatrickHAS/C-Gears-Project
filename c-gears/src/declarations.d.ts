@@ -7,6 +7,9 @@ declare module "react-icons/io5" {
   export const IoCloseOutline: React.ComponentType<
     React.SVGProps<SVGSVGElement>
   >;
+  export const IoSettingsSharp: React.ComponentType<
+    React.SVGProps<SVGSVGElement>
+  >;
 }
 
 declare module "react-icons/ai" {
@@ -32,6 +35,8 @@ declare module "react-icons/fa" {
   export const FaDiscord: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export const FaSteam: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export const FaXbox: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  export const FaCaretUp: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  export const FaStar: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
 declare module "react-icons/ri" {
@@ -44,10 +49,19 @@ declare module "react-icons/bi" {
   export const BiLogoFacebook: React.ComponentType<
     React.SVGProps<SVGSVGElement>
   >;
+  export const BiSupport: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
 declare module "react-icons/tfi" {
   export const TfiMicrosoftAlt: React.ComponentType<
     React.SVGProps<SVGSVGElement>
   >;
+}
+
+declare module "react-icons/rx" {
+  export const RxExit: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}
+
+declare module "react-icons/im" {
+  export const ImExit: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }

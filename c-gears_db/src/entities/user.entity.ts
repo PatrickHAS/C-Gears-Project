@@ -1,5 +1,5 @@
 import { Exclude } from "class-transformer";
-import { Address } from "./userAddress.entity";
+import { Address } from "./user-address.entity";
 import { IUserAddress } from "../interfaces";
 import {
   PrimaryGeneratedColumn,

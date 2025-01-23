@@ -1,9 +1,9 @@
 import AppDataSource from "../../data-source";
-import { AppError } from "../../errors/appError";
+import { AppError } from "../../errors/app-error";
 import { hash } from "bcrypt";
 import { IUserCreate } from "../../interfaces/index";
 import { Users } from "../../entities/user.entity";
-import { Address } from "../../entities/userAddress.entity";
+import { Address } from "../../entities/user-address.entity";
 import emailService from "./email.service";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 

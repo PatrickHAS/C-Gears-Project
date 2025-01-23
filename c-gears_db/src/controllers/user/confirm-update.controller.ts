@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import AppDataSource from "../../data-source";
 import { Users } from "../../entities/user.entity";
-import { AppError } from "../../errors/appError";
+import { AppError } from "../../errors/app-error";
 
 const confirmUpdateController = async (req: Request, res: Response) => {
   const { token } = req.params;

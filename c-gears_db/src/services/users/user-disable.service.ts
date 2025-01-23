@@ -1,6 +1,6 @@
 import AppDataSource from "../../data-source";
 import { Users } from "../../entities/user.entity";
-import { AppError } from "../../errors/appError";
+import { AppError } from "../../errors/app-error";
 import emailService from "./email.service";
 
 const userDisableService = async (id: string): Promise<void> => {

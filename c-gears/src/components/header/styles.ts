@@ -8,6 +8,10 @@ export const StyledHeader = styled.div`
   width: 100%;
   height: 100px;
 
+  @media (max-height: 575px) {
+    height: 80px;
+  }
+
   .logo--container {
     display: flex;
     align-items: center;
@@ -32,12 +36,54 @@ export const StyledHeader = styled.div`
         width: 50px;
         height: 50px;
       }
-
-      @media (max-width: 400px) {
-        width: 30px;
-        height: 30px;
-      }
     }
+  }
+
+  .btn-playnow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: none;
+
+    font-family: "Orbitron";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+
+    width: fit-content;
+    height: 35px;
+
+    border-radius: 5px;
+    background: var(--Gray-6);
+    color: var(--Red-9);
+
+    @media (max-width: 1280px) {
+      font-size: 12px;
+      height: 30px;
+    }
+
+    @media (max-width: 1180px) {
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 537px) {
+      font-size: 10px;
+      height: 30px;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 8px;
+      height: 25px;
+    }
+  }
+
+  .btn-playnow:hover {
+    cursor: pointer;
+    color: var(--Gray-0);
+    background: var(--Red-9);
+    transition: 0.9s;
   }
 
   .menu-list {
@@ -45,7 +91,7 @@ export const StyledHeader = styled.div`
     justify-content: center;
     align-items: center;
 
-    width: 1270px;
+    width: fit-content;
     height: 100%;
 
     @media (max-width: 1107px) {
@@ -62,6 +108,10 @@ export const StyledHeader = styled.div`
       height: fit-content;
 
       position: relative;
+
+      @media (max-width: 1380px) {
+        padding: 0 10px;
+      }
 
       p {
         font-family: "Orbitron";
@@ -104,74 +154,117 @@ export const StyledHeader = styled.div`
     width: 70%;
   }
 
-  .menu--register-play-login {
+  .menu--username-login {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    width: 300px;
+    width: fit-content;
     height: 35px;
 
     margin-right: 20px;
 
+    gap: 100px;
+
     @media (max-width: 1107px) {
       justify-content: flex-end;
       gap: 90px;
-      width: 700px;
+      width: 500px;
       margin-right: 0;
     }
 
-    @media (max-width: 900px) {
-      width: 600px;
+    @media (max-width: 1280px) {
+      gap: 50px;
     }
 
-    @media (max-width: 537px) {
-      gap: 50px;
+    @media (max-width: 900px) {
+      width: 400px;
+    }
+
+    @media (max-width: 800px) {
+      width: 300px;
+      gap: 40px;
+    }
+
+    @media (max-width: 700px) {
+      width: 200px;
     }
 
     @media (max-width: 480px) {
-      width: 200px;
-      gap: 50px;
-    }
-
-    @media (max-width: 400px) {
-      width: 200px;
+      width: 150px;
       gap: 20px;
     }
 
-    .btn-register-play {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-style: none;
+    @media (max-width: 400px) {
+      width: 110px;
+    }
 
-      font-family: "Orbitron";
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 20px;
+    .container--username-icondown {
+      display: flex;
+      align-items: center;
 
       width: fit-content;
-      height: 35px;
+      position: relative;
 
-      border-radius: 5px;
-      background: var(--Gray-6);
-      color: var(--Red-9);
+      gap: 5px;
 
-      @media (max-width: 1280px) {
-        font-size: 12px;
+      .username {
+        font-family: "Orbitron";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+
+        color: var(--Gray-0);
+
+        @media (max-width: 1280px) {
+          font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 10px;
+        }
+
+        @media (max-width: 400px) {
+          font-size: 8px;
+        }
       }
 
-      @media (max-width: 537px) {
-        font-size: 10px;
-        height: 30px;
+      .icon-down {
+        font-size: 16px;
+        color: var(--Gray-0);
+        transition: transform 0.2s ease;
+        transform: rotate(0deg);
+        cursor: pointer;
+      }
+
+      .icon-down.rotate {
+        transform: rotate(180deg);
       }
     }
 
-    .btn-register-play:hover {
+    .container--icon-exit {
+      @media (max-width: 1107px) {
+        display: none;
+      }
+    }
+
+    .logout {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 20px;
+
+      color: var(--Red-9);
+
+      @media (max-width: 1280px) {
+        font-size: 16px;
+      }
+    }
+
+    .logout:hover {
       cursor: pointer;
-      color: var(--Gray-0);
-      background: var(--Red-9);
+      color: var(--Gray-6);
       transition: 0.9s;
     }
 
@@ -228,9 +321,16 @@ export const StyledHeader = styled.div`
       padding-left: 50px;
     }
 
+    @media (max-width: 700px) {
+      padding-left: 0;
+    }
+
     @media (max-width: 480px) {
-      padding-left: 30px;
       font-size: 16px;
+    }
+
+    @media (max-width: 400px) {
+      padding-left: 20px;
     }
   }
 `;

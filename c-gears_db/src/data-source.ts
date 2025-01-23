@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
 import { Users } from "./entities/user.entity";
-import { Address } from "./entities/userAddress.entity";
+import { Address } from "./entities/user-address.entity";
 import { InitialMigration1730565224108 } from "./migrations/1730565224108-initialMigration";
 import { CreateTables1730738540538 } from "./migrations/1730738540538-createTables";
 

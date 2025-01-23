@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import api from "../../services/Api";
 import { toast } from "react-toastify";
-import { useEmailConfirmContext } from "../emailConfirm-context";
+import { useMediaQuery } from "react-responsive";
 
 interface IRegisterProvider {
   children: ReactNode;
@@ -49,7 +49,7 @@ export const RegisterProvider = ({ children }: IRegisterProvider) => {
   const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const { isMobile } = useEmailConfirmContext();
+  const isMobile = useMediaQuery({ maxWidth: 480 });
 
   const registerSubmit = async (data: IRegisterData) => {
     try {
@@ -66,7 +66,7 @@ export const RegisterProvider = ({ children }: IRegisterProvider) => {
         progress: undefined,
         theme: "light",
         style: {
-          width: isMobile ? "90%" : "440px",
+          width: isMobile ? "90%" : "fit-content",
           margin: isMobile ? "0 auto" : "default",
           marginTop: isMobile ? "20px" : "default",
           borderRadius: isMobile ? "5px" : "default",
@@ -89,7 +89,7 @@ export const RegisterProvider = ({ children }: IRegisterProvider) => {
         progress: undefined,
         theme: "light",
         style: {
-          width: isMobile ? "90%" : "440px",
+          width: isMobile ? "90%" : "fit-content",
           margin: isMobile ? "0 auto" : "default",
           marginTop: isMobile ? "20px" : "default",
           borderRadius: isMobile ? "5px" : "default",

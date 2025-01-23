@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import { IUserCreate } from "../interfaces/index";
 import AppDataSource from "../data-source";
-import userCreateService from "../services/users/createUser.service";
+import userCreateService from "../services/users/create-user.service";
 
 const program = new Command();
 

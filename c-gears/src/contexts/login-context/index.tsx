@@ -8,7 +8,8 @@ import {
   useState,
 } from "react";
 import { toast } from "react-toastify";
-import { useEmailConfirmContext } from "../emailConfirm-context";
+import { useMediaQuery } from "react-responsive";
+import { useHeaderContext } from "../header-context";
 
 interface ILoginProvider {
   children: ReactNode;
@@ -63,17 +64,20 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
   const id = localStorage.getItem("@UserId");
   const navigate = useNavigate();
 
-  const { isMobile } = useEmailConfirmContext();
+  const { isLogin, setIsLogin } = useHeaderContext();
+
+  const isMobile = useMediaQuery({ maxWidth: 480 });
 
   const onSubmitLogin = async (data: ILoginData) => {
     try {
       await api.post("/login", data).then(async (res) => {
         api.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-        const { data } = await api.get("/users");
+        const { data } = await api.get(`/users/${res.data.id}`);
         setUser(data);
         localStorage.setItem("@Token", res.data.token);
         localStorage.setItem("@UserId", res.data.userId);
         navigate("/", { replace: true });
+        setIsLogin(!isLogin);
       });
     } catch (error) {
       console.error(error);
@@ -88,7 +92,7 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
         progress: undefined,
         theme: "light",
         style: {
-          width: isMobile ? "90%" : "440px",
+          width: isMobile ? "90%" : "fit-content",
           margin: isMobile ? "0 auto" : "default",
           marginTop: isMobile ? "20px" : "default",
           borderRadius: isMobile ? "5px" : "default",
@@ -106,7 +110,7 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
       if (token) {
         try {
           api.defaults.headers.common.Authorization = `Bearer ${token}`;
-          const { data } = await api.get("/users");
+          const { data } = await api.get(`/users/${id}`);
           setUser(data);
         } catch (error) {
           window.localStorage.clear();
@@ -115,6 +119,7 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
       setLoading(false);
     }
     loadLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const logout = () => {

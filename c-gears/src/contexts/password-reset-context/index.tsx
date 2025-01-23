@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import api from "../../services/Api";
-import { useEmailConfirmContext } from "../emailConfirm-context";
 import { toast } from "react-toastify";
+import { useMediaQuery } from "react-responsive";
 
 interface IPasswordResetProvider {
   children: ReactNode;
@@ -14,10 +14,12 @@ interface IPasswordReset {
 
 interface IPasswordResetContext {
   setIsPasswordReset: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsDbMenssageReset: React.Dispatch<React.SetStateAction<string[]>>;
-  passwordResetSubmit: (data: IPasswordReset) => Promise<void>;
+  passwordResetSubmit: (
+    data: IPasswordReset,
+    id: string,
+    token: string
+  ) => Promise<void>;
   isPasswordReset: boolean;
-  isDbMenssageReset: string[];
 }
 
 export const PasswordResetContext = createContext<IPasswordResetContext>(
@@ -26,16 +28,18 @@ export const PasswordResetContext = createContext<IPasswordResetContext>(
 
 export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
   const [isPasswordReset, setIsPasswordReset] = useState(false);
-  const [isDbMenssageReset, setIsDbMenssageReset] = useState([""]);
 
-  const { isMobile } = useEmailConfirmContext();
+  const isMobile = useMediaQuery({ maxWidth: 480 });
 
-  const passwordResetSubmit = async (data: IPasswordReset) => {
+  const passwordResetSubmit = async (
+    data: IPasswordReset,
+    id: string,
+    token: string
+  ) => {
     try {
-      const dbMenssageReset = await api.post("/users/password-reset", {
+      await api.patch(`/users/pass-reset/${id}/${token}`, {
         password: data.password,
       });
-      setIsDbMenssageReset(dbMenssageReset.data);
 
       toast.success("Password updated successfully!", {
         position: isMobile ? "top-center" : "top-right",
@@ -47,7 +51,7 @@ export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
         progress: undefined,
         theme: "light",
         style: {
-          width: isMobile ? "90%" : "440px",
+          width: isMobile ? "90%" : "fit-content",
           margin: isMobile ? "0 auto" : "default",
           marginTop: isMobile ? "20px" : "default",
           borderRadius: isMobile ? "5px" : "default",
@@ -60,7 +64,7 @@ export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
     } catch (error) {
       console.error(error);
 
-      toast.error("", {
+      toast.error("Link expired", {
         position: isMobile ? "top-center" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -70,7 +74,7 @@ export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
         progress: undefined,
         theme: "light",
         style: {
-          width: isMobile ? "90%" : "440px",
+          width: isMobile ? "90%" : "fit-content",
           margin: isMobile ? "0 auto" : "default",
           marginTop: isMobile ? "20px" : "default",
           borderRadius: isMobile ? "5px" : "default",
@@ -86,9 +90,7 @@ export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
   return (
     <PasswordResetContext.Provider
       value={{
-        isDbMenssageReset,
         isPasswordReset,
-        setIsDbMenssageReset,
         setIsPasswordReset,
         passwordResetSubmit,
       }}

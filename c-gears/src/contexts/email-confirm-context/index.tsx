@@ -14,11 +14,9 @@ interface IEmail {
 
 interface IEmailConfirmContext {
   setIsEmailConfirm: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsDbMenssage: React.Dispatch<React.SetStateAction<string[]>>;
   emailConfirmSubmit: (data: IEmail) => Promise<void>;
   isEmailConfirm: boolean;
   isMobile: boolean;
-  isDbMenssage: string[];
 }
 
 export const EmailConfirmContext = createContext<IEmailConfirmContext>(
@@ -27,17 +25,16 @@ export const EmailConfirmContext = createContext<IEmailConfirmContext>(
 
 export const EmailConfirmProvider = ({ children }: IEmailConfirmProvider) => {
   const [isEmailConfirm, setIsEmailConfirm] = useState(false);
-  const [isDbMenssage, setIsDbMenssage] = useState([""]);
 
   const isMobile = useMediaQuery({ maxWidth: 480 });
 
   const emailConfirmSubmit = async (data: IEmail) => {
     try {
-      const dbMenssage = await api.post("/users/confirm-email", {
+      await api.post("/users/confirm-email", {
         email: data.email,
       });
-      setIsDbMenssage(dbMenssage.data);
-      toast.info(`${isDbMenssage[0]}`, {
+
+      toast.info("A password reset link has been sent to your email!", {
         position: isMobile ? "top-center" : "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -47,11 +44,13 @@ export const EmailConfirmProvider = ({ children }: IEmailConfirmProvider) => {
         progress: undefined,
         theme: "light",
         style: {
-          width: isMobile ? "90%" : "440px",
+          width: isMobile ? "90%" : "fit-content",
           margin: isMobile ? "0 auto" : "default",
           marginTop: isMobile ? "20px" : "default",
           borderRadius: isMobile ? "5px" : "default",
           fontSize: isMobile ? "12px" : "16px",
+          fontFamily: "Orbitron",
+          letterSpacing: "0.5px",
           color: "black",
         },
       });
@@ -68,7 +67,7 @@ export const EmailConfirmProvider = ({ children }: IEmailConfirmProvider) => {
         progress: undefined,
         theme: "light",
         style: {
-          width: isMobile ? "90%" : "440px",
+          width: isMobile ? "90%" : "fit-content",
           margin: isMobile ? "0 auto" : "default",
           marginTop: isMobile ? "20px" : "default",
           borderRadius: isMobile ? "5px" : "default",
@@ -86,9 +85,7 @@ export const EmailConfirmProvider = ({ children }: IEmailConfirmProvider) => {
       value={{
         isEmailConfirm,
         setIsEmailConfirm,
-        isDbMenssage,
         emailConfirmSubmit,
-        setIsDbMenssage,
         isMobile,
       }}
     >

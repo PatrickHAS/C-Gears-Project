@@ -50,3 +50,7 @@ export interface IAddressUpdate {
   state?: string;
   zipcode?: string;
 }
+
+export interface IUserResetPass {
+  password?: string;
+}

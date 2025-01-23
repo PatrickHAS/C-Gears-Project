@@ -3,8 +3,9 @@ import { IoCloseOutline } from "react-icons/io5";
 import { StyledPasswordReset } from "./styles";
 import { useForm } from "react-hook-form";
 import { PasswordResetSchema } from "../../validators/schema";
-import { usePasswordResetContext } from "../../contexts/passwordReset.context";
+import { usePasswordResetContext } from "../../contexts/password-reset-context";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams } from "react-router-dom";
 
 export interface IPasswordReset {
   password: string;
@@ -13,6 +14,15 @@ export interface IPasswordReset {
 
 const PasswordReset = () => {
   const { passwordResetSubmit } = usePasswordResetContext();
+  const { id, token } = useParams<{ id: string; token: string }>();
+
+  const onSubmit = (data: IPasswordReset) => {
+    if (id && token) {
+      passwordResetSubmit(data, id, token);
+    } else {
+      console.error("Missing id or token");
+    }
+  };
 
   const {
     register,
@@ -40,7 +50,7 @@ const PasswordReset = () => {
           </div>
           <form
             className="form-passwordReset"
-            onSubmit={handleSubmit(passwordResetSubmit)}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <input
               className="input-password"
@@ -57,7 +67,7 @@ const PasswordReset = () => {
               className="input-passwordConfirm"
               id="passwordConfirm"
               type="password"
-              placeholder="Confirm your new password"
+              placeholder="Confirm password"
               {...register("passwordConfirm")}
             />
             <div className="label-errors">
