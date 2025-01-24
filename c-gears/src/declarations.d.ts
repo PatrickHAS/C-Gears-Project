@@ -65,3 +65,7 @@ declare module "react-icons/rx" {
 declare module "react-icons/im" {
   export const ImExit: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
+
+declare module "react-icons/gr" {
+  export const GrMoney: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}

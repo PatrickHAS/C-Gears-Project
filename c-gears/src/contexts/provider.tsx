@@ -4,7 +4,7 @@ import { LoginProvier } from "./login-context";
 import { RegisterProvider } from "./register-context";
 import { EmailConfirmProvider } from "./email-confirm-context";
 import { PasswordResetProvider } from "./password-reset-context";
-import { ModalSetupProvider } from "./modal-setup-context";
+import { DropdownSetupProvider } from "./drop-down-setup-context";
 
 interface IProvider {
   children: ReactNode;
@@ -16,7 +16,7 @@ const Provider = ({ children }: IProvider) => (
       <RegisterProvider>
         <EmailConfirmProvider>
           <PasswordResetProvider>
-            <ModalSetupProvider>{children}</ModalSetupProvider>
+            <DropdownSetupProvider>{children}</DropdownSetupProvider>
           </PasswordResetProvider>
         </EmailConfirmProvider>
       </RegisterProvider>

@@ -108,6 +108,7 @@ export const StyledHeader = styled.div`
       height: fit-content;
 
       position: relative;
+      cursor: pointer;
 
       @media (max-width: 1380px) {
         padding: 0 10px;
@@ -131,12 +132,6 @@ export const StyledHeader = styled.div`
         }
       }
 
-      :hover {
-        cursor: pointer;
-        color: var(--Red-9);
-        transition: 0.9s;
-      }
-
       p::after {
         content: "";
         position: absolute;
@@ -150,7 +145,14 @@ export const StyledHeader = styled.div`
     }
   }
 
-  .menu-item:hover p::after {
+  .menu-item:hover p,
+  .menu-item:focus p {
+    color: var(--Red-9);
+    transition: 0.9s;
+  }
+
+  .menu-item:hover p::after,
+  .menu-item:focus p::after {
     width: 70%;
   }
 
@@ -226,7 +228,7 @@ export const StyledHeader = styled.div`
         }
 
         @media (max-width: 400px) {
-          font-size: 8px;
+          font-size: 9px;
         }
       }
 

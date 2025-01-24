@@ -44,6 +44,7 @@ export const StyledHeaderMenuList = styled.ul`
     height: 100%;
 
     position: relative;
+    cursor: pointer;
 
     p {
       font-family: "Orbitron";
@@ -76,12 +77,6 @@ export const StyledHeaderMenuList = styled.ul`
       }
     }
 
-    :hover {
-      cursor: pointer;
-      color: var(--Red-9);
-      transition: 0.9s;
-    }
-
     p::after {
       content: "";
       position: absolute;
@@ -93,8 +88,17 @@ export const StyledHeaderMenuList = styled.ul`
       transition: width 0.9s;
     }
   }
-  .menu-item--mobile:hover p::after {
+
+  .menu-item--mobile:hover p,
+  .menu-item--mobile:focus p {
+    color: var(--Red-9);
+    transition: 0.9s;
+  }
+
+  .menu-item--mobile:hover p::after,
+  .menu-item--mobile:focus p::after {
     width: 70%;
+    transition: 0.9s;
   }
 
   @media (max-height: 533px) {

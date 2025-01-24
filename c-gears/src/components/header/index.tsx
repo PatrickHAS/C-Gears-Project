@@ -6,15 +6,15 @@ import HeaderMenuListMobile from "../mobile/herder-menu";
 import { useLoginContext } from "../../contexts/login-context";
 import { RxExit } from "react-icons/rx";
 import { FaCaretUp } from "react-icons/fa";
-import { useModalSetupContext } from "../../contexts/modal-setup-context";
-import ModalSetup from "../account-setup";
+import { useDropdownSetupContext } from "../../contexts/drop-down-setup-context";
+import DropdownSetup from "../drop-down-setup";
 
 const Header = () => {
   const { isMenuMobile, setIsMenuMobile, isLogin, setIsLogin } =
     useHeaderContext();
 
   const { token, logout, user } = useLoginContext();
-  const { isModalSetup, setIsModalSetup } = useModalSetupContext();
+  const { isDropdownSetup, setIsDropdownSetup } = useDropdownSetupContext();
 
   return (
     <>
@@ -25,22 +25,22 @@ const Header = () => {
         </div>
         {token ? <button className="btn-playnow">Play now</button> : null}
         <ul className="menu-list">
-          <li className="menu-item">
+          <li className="menu-item" tabIndex={0}>
             <p>Teams</p>
           </li>
-          <li className="menu-item">
+          <li className="menu-item" tabIndex={0}>
             <p>Champions</p>
           </li>
-          <li className="menu-item">
+          <li className="menu-item" tabIndex={0}>
             <p>Tournament</p>
           </li>
-          <li className="menu-item">
+          <li className="menu-item" tabIndex={0}>
             <p>News</p>
           </li>
-          <li className="menu-item">
+          <li className="menu-item" tabIndex={0}>
             <p>Communities</p>
           </li>
-          <li className="menu-item">
+          <li className="menu-item" tabIndex={0}>
             <p>Gears Club</p>
           </li>
         </ul>
@@ -49,10 +49,10 @@ const Header = () => {
             <div className="container--username-icondown">
               <h4 className="username">{user.username}</h4>
               <FaCaretUp
-                className={`icon-down ${isModalSetup ? "rotate" : ""}`}
-                onClick={() => setIsModalSetup(!isModalSetup)}
+                className={`icon-down ${isDropdownSetup ? "rotate" : ""}`}
+                onClick={() => setIsDropdownSetup(!isDropdownSetup)}
               />
-              {isModalSetup && <ModalSetup />}
+              {isDropdownSetup && <DropdownSetup />}
             </div>
           ) : null}
 

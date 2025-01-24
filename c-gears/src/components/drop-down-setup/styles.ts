@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledModalSetup = styled.div`
+export const StyledDropdownSetup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,6 +19,20 @@ export const StyledModalSetup = styled.div`
 
   margin-top: 5px;
 
+  @media (max-width: 600px) {
+    width: 100%;
+
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+
+    position: fixed;
+    top: 68px;
+    left: 0;
+
+    z-index: 999;
+  }
+
   transform-origin: top;
   animation: cascadeOpen 0.3s ease-out forwards;
 
@@ -31,9 +45,10 @@ export const StyledModalSetup = styled.div`
     }
   }
 
-  .modal--user-settings,
-  .modal--signatures,
-  .modal--support {
+  .dropdown--user-settings,
+  .dropdown--signatures,
+  .dropdown--support,
+  .dropdown--money {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -41,12 +56,16 @@ export const StyledModalSetup = styled.div`
     width: 100%;
     height: 30px;
 
+    background: transparent;
+    transition: background 0.9s, border-radius 0.9s;
+
     cursor: pointer;
   }
 
   .container--icon-gear,
   .container--icon-star,
-  .container--icon-support {
+  .container--icon-support,
+  .container--icon-money {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,14 +76,17 @@ export const StyledModalSetup = styled.div`
 
   .icon-gear,
   .icon-star,
-  .icon-support {
+  .icon-support,
+  .icon-money {
     font-size: 16px;
     color: var(--Gray-0);
+    transition: color 0.7s;
   }
 
   .title-settings,
   .title-signatures,
-  .title-support {
+  .title-support,
+  .money-wallet {
     font-family: "Orbitron";
     font-style: normal;
     font-weight: 600;
@@ -72,9 +94,10 @@ export const StyledModalSetup = styled.div`
     line-height: 20px;
 
     color: var(--Gray-0);
+    transition: color 0.7s;
   }
 
-  .modal--exit {
+  .dropdown--exit {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -82,9 +105,12 @@ export const StyledModalSetup = styled.div`
     width: 100%;
     height: 30px;
 
+    background: transparent;
+    transition: background 0.9s, border-radius 0.9s;
+
     cursor: pointer;
 
-    @media (min-width: 1107px) {
+    @media (min-width: 1108px) {
       display: none;
     }
 
@@ -99,6 +125,7 @@ export const StyledModalSetup = styled.div`
       .icon-exit {
         font-size: 16px;
         color: var(--Gray-0);
+        transition: color 0.7s;
       }
     }
 
@@ -110,32 +137,36 @@ export const StyledModalSetup = styled.div`
       line-height: 20px;
 
       color: var(--Gray-0);
+      transition: color 0.7s;
     }
   }
 
-  .modal--user-settings:hover {
+  .dropdown--user-settings:hover,
+  .dropdown--user-settings:focus {
     background: var(--Gray-0);
-    transition: 0.9s;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
     .icon-gear {
       color: var(--Black-0);
-      transition: 0.7s;
     }
 
     .title-settings {
       color: var(--Black-0);
     }
+
+    @media (max-width: 600px) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
   }
 
-  .modal--signatures:hover {
+  .dropdown--signatures:hover,
+  .dropdown--signatures:focus {
     background: var(--Gray-0);
-    transition: 0.9s;
 
     .icon-star {
       color: var(--Black-0);
-      transition: 0.7s;
     }
 
     .title-signatures {
@@ -143,18 +174,30 @@ export const StyledModalSetup = styled.div`
     }
   }
 
-  .modal--support:hover {
+  .dropdown--support:hover,
+  .dropdown--support:focus {
     background: var(--Gray-0);
-    transition: 0.9s;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
 
     .icon-support {
       color: var(--Black-0);
-      transition: 0.7s;
     }
 
     .title-support {
+      color: var(--Black-0);
+    }
+  }
+
+  .dropdown--money:hover,
+  .dropdown--money:focus {
+    background: var(--Gray-0);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    .icon-money {
+      color: var(--Black-0);
+    }
+
+    .money-wallet {
       color: var(--Black-0);
     }
 
@@ -164,19 +207,22 @@ export const StyledModalSetup = styled.div`
     }
   }
 
-  .modal--exit:hover {
+  .dropdown--exit:hover {
     background: var(--Gray-0);
-    transition: 0.9s;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
     .icon-exit {
       color: var(--Black-0);
-      transition: 0.7s;
     }
 
     .title-exit {
       color: var(--Black-0);
+    }
+
+    @media (max-width: 600px) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
   }
 `;
