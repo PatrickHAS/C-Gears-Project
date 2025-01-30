@@ -10,11 +10,14 @@ import Login from "../../components/login";
 import Register from "../../components/register";
 import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
 import EmailConfirm from "../../components/email-confirm";
+import { useUserSettingsContext } from "../../contexts/user-settings-context";
+import UserSettings from "../../components/user-settings";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
   const { isRegister } = useRegisterContext();
   const { isEmailConfirm } = useEmailConfirmContext();
+  const { isUserSettings } = useUserSettingsContext();
   const [isVideoPlayable, setIsVideoPlayable] = useState(true);
 
   useEffect(() => {
@@ -59,6 +62,7 @@ const Home = () => {
       {isLogin && <Login />}
       {isRegister && <Register />}
       {isEmailConfirm && <EmailConfirm />}
+      {isUserSettings && <UserSettings />}
       <LogoHomeCenter />
       <SocialMedia />
     </StyledHome>

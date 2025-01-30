@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledHeader = styled.div`
+export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -257,7 +257,7 @@ export const StyledHeader = styled.div`
       font-size: 20px;
       line-height: 20px;
 
-      color: var(--Red-9);
+      color: var(--Gray-0);
 
       @media (max-width: 1280px) {
         font-size: 16px;
@@ -266,7 +266,7 @@ export const StyledHeader = styled.div`
 
     .logout:hover {
       cursor: pointer;
-      color: var(--Gray-6);
+      color: var(--Red-9);
       transition: 0.9s;
     }
 

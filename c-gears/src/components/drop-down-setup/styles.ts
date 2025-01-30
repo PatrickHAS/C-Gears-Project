@@ -8,7 +8,6 @@ export const StyledDropdownSetup = styled.div`
   position: absolute;
   top: 100%;
   right: 0;
-  z-index: 10;
 
   background: linear-gradient(to right, var(--Black-0), var(--Gray-8));
   border: 1px solid var(--Gray-6);

@@ -4,6 +4,8 @@ const GlobalStyle = createGlobalStyle`
     :root {
 		--Black-0: #000;
 		--Gray-0:#f8f9fa;
+		--Gray-1:#f1f3f5;
+		--Gray-2:#e9ecef;
 		--Gray-3: #dee2e6;
 		--Gray-4:#ced4da;
 		--Gray-6:#868e96;

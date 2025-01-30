@@ -37,10 +37,21 @@ declare module "react-icons/fa" {
   export const FaXbox: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export const FaCaretUp: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export const FaStar: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  export const FaRegAddressBook: React.ComponentType<
+    React.SVGProps<SVGSVGElement>
+  >;
+  export const FaLink: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}
+
+declare module "react-icons/fa6" {
+  export const FaUserLock: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
 declare module "react-icons/ri" {
   export const RiTwitterXFill: React.ComponentType<
+    React.SVGProps<SVGSVGElement>
+  >;
+  export const RiFileUserLine: React.ComponentType<
     React.SVGProps<SVGSVGElement>
   >;
 }
@@ -68,4 +79,14 @@ declare module "react-icons/im" {
 
 declare module "react-icons/gr" {
   export const GrMoney: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}
+
+declare module "react-icons/ti" {
+  export const TiArrowBack: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+}
+
+declare module "react-icons/md" {
+  export const MdOutlineMailLock: React.ComponentType<
+    React.SVGProps<SVGSVGElement>
+  >;
 }

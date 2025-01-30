@@ -7,16 +7,25 @@ import { ImExit } from "react-icons/im";
 import { GrMoney } from "react-icons/gr";
 import { useLoginContext } from "../../contexts/login-context";
 import { useDropdownSetupContext } from "../../contexts/drop-down-setup-context";
+import { useUserSettingsContext } from "../../contexts/user-settings-context";
 
 const DropdownSetup = () => {
   const { logout } = useLoginContext();
   const { isDropdownSetup, setIsDropdownSetup } = useDropdownSetupContext();
+  const { isUserSettings, setIsUserSettings } = useUserSettingsContext();
 
   const saldo = 0;
 
   return (
     <StyledDropdownSetup>
-      <div className="dropdown--user-settings" tabIndex={0}>
+      <div
+        className="dropdown--user-settings"
+        tabIndex={0}
+        onClick={() => (
+          setIsUserSettings(!isUserSettings),
+          setIsDropdownSetup(!isDropdownSetup)
+        )}
+      >
         <div className="container--icon-gear">
           <IoSettingsSharp className="icon-gear" />
         </div>
