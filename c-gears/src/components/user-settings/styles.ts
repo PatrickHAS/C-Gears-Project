@@ -107,9 +107,9 @@ export const StyledUserSettings = styled.section`
 
   .options-settings--container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 
-    width: 70%;
+    width: 80%;
     height: 650px;
 
     .options-settings {
@@ -250,6 +250,82 @@ export const StyledUserSettings = styled.section`
         border-bottom-left-radius: 5px;
       }
     }
+
+    .user-data--content,
+    .user-address--content,
+    .change-email--content,
+    .change-pass--content,
+    .link-account--content {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      width: 650px;
+      height: fit-content;
+
+      .title-my-data,
+      .title-my-address,
+      .title-change-email,
+      .title-change-pass,
+      .title-link-account {
+        font-family: "Orbitron";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 14px;
+        line-height: 20px;
+
+        text-align: start;
+      }
+
+      .form-user-data,
+      .form-user-address,
+      .form-change-email,
+      .form-change-pass,
+      .form-link-account {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        height: 600px;
+
+        background: var(--Gray-1);
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .options-settings .option-my-data.active .icon--container,
+  .options-settings .option-my-address.active .icon--container,
+  .options-settings .option-change-email.active .icon--container,
+  .options-settings .option-change-password.active .icon--container,
+  .options-settings .option-link-account.active .icon--container {
+    background: linear-gradient(to right, var(--Black-0), var(--Gray-8));
+  }
+
+  .options-settings .option-my-data.active .icon--container {
+    border-top-left-radius: 5px;
+  }
+
+  .options-settings .option-link-account.active .icon--container {
+    border-bottom-left-radius: 5px;
+  }
+
+  .options-settings .option-my-data.active .icon--container .icon-my-data,
+  .options-settings .option-my-address.active .icon--container .icon-my-address,
+  .options-settings
+    .option-change-email.active
+    .icon--container
+    .icon-change-email,
+  .options-settings
+    .option-change-password.active
+    .icon--container
+    .icon-change-password,
+  .options-settings
+    .option-link-account.active
+    .icon--container
+    .icon-link-account {
+    color: var(--Gray-0);
   }
 
   .footer-settings--container {

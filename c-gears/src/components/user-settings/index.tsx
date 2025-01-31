@@ -10,7 +10,8 @@ import { FaLink } from "react-icons/fa";
 
 const UserSettings = () => {
   const { user } = useLoginContext();
-  const { isUserSettings, setIsUserSettings } = useUserSettingsContext();
+  const { isUserSettings, setIsUserSettings, activeTab, setActiveTab } =
+    useUserSettingsContext();
 
   return (
     <StyledUserSettings>
@@ -32,37 +33,97 @@ const UserSettings = () => {
       </div>
       <div className="options-settings--container">
         <div className="options-settings">
-          <div className="option-my-data" tabIndex={0}>
+          <div
+            className={`option-my-data ${
+              activeTab === "myData" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("myData")}
+            tabIndex={0}
+          >
             <div className="icon--container">
               <RiFileUserLine className="icon-my-data" />
             </div>
             <p className="text-my-data">My data</p>
           </div>
-          <div className="option-my-address" tabIndex={0}>
+          <div
+            className={`option-my-address ${
+              activeTab === "myAddress" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("myAddress")}
+            tabIndex={0}
+          >
             <div className="icon--container">
               <FaRegAddressBook className="icon-my-address" />
             </div>
             <p className="text-my-address">My address</p>
           </div>
-          <div className="option-change-email" tabIndex={0}>
+          <div
+            className={`option-change-email ${
+              activeTab === "changeEmail" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("changeEmail")}
+            tabIndex={0}
+          >
             <div className="icon--container">
               <MdOutlineMailLock className="icon-change-email" />
             </div>
             <p className="text-change-email">Change email</p>
           </div>
-          <div className="option-change-password" tabIndex={0}>
+          <div
+            className={`option-change-password ${
+              activeTab === "changePass" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("changePass")}
+            tabIndex={0}
+          >
             <div className="icon--container">
               <FaUserLock className="icon-change-password" />
             </div>
             <p className="text-change-password">Change password</p>
           </div>
-          <div className="option-link-account" tabIndex={0}>
+          <div
+            className={`option-link-account ${
+              activeTab === "linkAccount" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("linkAccount")}
+            tabIndex={0}
+          >
             <div className="icon--container">
               <FaLink className="icon-link-account" />
             </div>
             <p className="text-link-account">Link account</p>
           </div>
         </div>
+        {activeTab === "myData" && (
+          <div className="user-data--content">
+            <h3 className="title-my-data"> My data</h3>
+            <form className="form-user-data"></form>
+          </div>
+        )}
+        {activeTab === "myAddress" && (
+          <div className="user-address--content">
+            <h3 className="title-my-address"> My address</h3>
+            <form className="form-user-address"></form>
+          </div>
+        )}
+        {activeTab === "changeEmail" && (
+          <div className="change-email--content">
+            <h3 className="title-change-email"> Change email</h3>
+            <form className="form-change-email"></form>
+          </div>
+        )}
+        {activeTab === "changePass" && (
+          <div className="change-pass--content">
+            <h3 className="title-change-pass"> Change password</h3>
+            <form className="form-change-pass"></form>
+          </div>
+        )}
+        {activeTab === "linkAccount" && (
+          <div className="link-account--content">
+            <h3 className="title-link-account"> Link account</h3>
+            <form className="form-link-account"></form>
+          </div>
+        )}
       </div>
       <footer className="footer-settings--container">
         <div className="footer-content">
