@@ -109,7 +109,7 @@ export const StyledUserSettings = styled.section`
     display: flex;
     justify-content: space-around;
 
-    width: 80%;
+    width: 70%;
     height: 650px;
 
     .options-settings {
@@ -283,14 +283,64 @@ export const StyledUserSettings = styled.section`
       .form-change-pass,
       .form-link-account {
         display: flex;
-        align-items: center;
+        flex-wrap: wrap;
 
         width: 100%;
-        height: 600px;
+        height: fit-content;
 
-        background: var(--Gray-1);
+        gap: 20px;
+
         border-radius: 5px;
-        margin-top: 10px;
+        margin-top: 20px;
+
+        .label-input--container {
+          display: flex;
+          flex-direction: column;
+
+          width: 200px;
+          height: fit-content;
+
+          gap: 5px;
+
+          label {
+            font-family: "Orbitron";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 17px;
+
+            color: var(--Black-0);
+          }
+
+          .input--container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            width: 100%;
+            height: fit-content;
+
+            background: var(--Gray-1);
+            border: 1px solid var(--Gray-4);
+            border-radius: 5px;
+
+            input {
+              width: 100%;
+              height: 30px;
+
+              background: transparent;
+              box-sizing: border-box;
+              text-indent: 10px;
+              outline: none;
+              border-style: none;
+            }
+
+            .icon-edit {
+              padding: 5px;
+              cursor: pointer;
+            }
+          }
+        }
       }
     }
   }

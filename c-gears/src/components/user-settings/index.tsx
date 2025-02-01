@@ -6,7 +6,15 @@ import { RiFileUserLine } from "react-icons/ri";
 import { FaRegAddressBook } from "react-icons/fa";
 import { MdOutlineMailLock } from "react-icons/md";
 import { FaUserLock } from "react-icons/fa6";
-import { FaLink } from "react-icons/fa";
+import { FaLink, FaEdit } from "react-icons/fa";
+
+export interface IUpdateUserData {
+  name?: string;
+  surname?: string;
+  username?: string;
+  cellphone?: string;
+  birthday?: string;
+}
 
 const UserSettings = () => {
   const { user } = useLoginContext();
@@ -97,7 +105,79 @@ const UserSettings = () => {
         {activeTab === "myData" && (
           <div className="user-data--content">
             <h3 className="title-my-data"> My data</h3>
-            <form className="form-user-data"></form>
+            <form className="form-user-data">
+              <div className="label-input--container">
+                <label htmlFor="name">Name</label>
+                <div className="input--container">
+                  <input
+                    className="input-name"
+                    id="name"
+                    type="text"
+                    value={user.name}
+                  />
+                  <FaEdit className="icon-edit" />
+                </div>
+              </div>
+              <div className="label-input--container">
+                <label htmlFor="surname">Surname</label>
+                <div className="input--container">
+                  <input
+                    className="input-surname"
+                    id="surname"
+                    type="text"
+                    value={user.surname}
+                  />
+                  <FaEdit className="icon-edit" />
+                </div>
+              </div>
+              <div className="label-input--container">
+                <label htmlFor="username">Username</label>
+                <div className="input--container">
+                  <input
+                    className="input-username"
+                    id="username"
+                    type="text"
+                    value={user.username}
+                  />
+                  <FaEdit className="icon-edit" />
+                </div>
+              </div>
+              <div className="label-input--container">
+                <label htmlFor="email">Email</label>
+                <div className="input--container">
+                  <input
+                    className="input-email"
+                    id="email"
+                    type="text"
+                    value={user.email}
+                  />
+                </div>
+              </div>
+              <div className="label-input--container">
+                <label htmlFor="cellphone">Cellphone</label>
+                <div className="input--container">
+                  <input
+                    className="input-cellphone"
+                    id="cellphone"
+                    type="text"
+                    value={user.cellphone}
+                  />
+                  <FaEdit className="icon-edit" />
+                </div>
+              </div>
+              <div className="label-input--container">
+                <label htmlFor="birthday">Birthday</label>
+                <div className="input--container">
+                  <input
+                    className="input-birthday"
+                    id="birthday"
+                    type="text"
+                    value={String(user.birthday)}
+                  />
+                  <FaEdit className="icon-edit" />
+                </div>
+              </div>
+            </form>
           </div>
         )}
         {activeTab === "myAddress" && (

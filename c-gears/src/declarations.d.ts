@@ -41,6 +41,7 @@ declare module "react-icons/fa" {
     React.SVGProps<SVGSVGElement>
   >;
   export const FaLink: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  export const FaEdit: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
 declare module "react-icons/fa6" {
