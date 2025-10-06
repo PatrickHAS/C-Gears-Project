@@ -177,6 +177,9 @@ const UserSettings = () => {
                   <FaEdit className="icon-edit" />
                 </div>
               </div>
+              <button className="btn--save-change" type="submit">
+                SAVE CHANGE
+              </button>
             </form>
           </div>
         )}
