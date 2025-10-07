@@ -200,6 +200,27 @@ export const StyledLogin = styled.div`
           }
         }
 
+        .password-input-container {
+          position: relative;
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          margin: 10px;
+        }
+
+        .password-toggle-button {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          right: 10px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 1.2rem;
+          color: var(--Black-0);
+        }
+
         input {
           display: flex;
           flex-direction: row;
@@ -207,8 +228,6 @@ export const StyledLogin = styled.div`
 
           width: 100%;
           height: 48px;
-
-          margin: 10px;
 
           background: var(--Gray-3);
           border: 2px solid transparent;

@@ -8,6 +8,7 @@ import { LoginSchema } from "../../validators/schema";
 import { useLoginContext } from "../../contexts/login-context";
 import { useRegisterContext } from "../../contexts/register-context";
 import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 interface Ilogin {
   email: string;
@@ -17,7 +18,8 @@ interface Ilogin {
 const Login = () => {
   const { setIsLogin, isLogin } = useHeaderContext();
   const { onSubmitLogin } = useLoginContext();
-  const { isRegister, setIsRegister } = useRegisterContext();
+  const { isRegister, setIsRegister, showPassword, togglePasswordVisibility } =
+    useRegisterContext();
   const { isEmailConfirm, setIsEmailConfirm } = useEmailConfirmContext();
 
   const {
@@ -53,24 +55,36 @@ const Login = () => {
                 </span>
               </p>
             </div>
-            <input
-              className="input-email"
-              id="email"
-              type="text"
-              placeholder="Email address"
-              {...register("email")}
-            />
+            <div className="password-input-container">
+              <input
+                className="input-email"
+                id="email"
+                type="text"
+                placeholder="Email address"
+                {...register("email")}
+              />
+            </div>
             <div className="label-errors">
               <label htmlFor="email"></label>
               <p>{errors.email?.message}</p>
             </div>
-            <input
-              className="input-password"
-              id="password"
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-            />
+            <div className="password-input-container">
+              <input
+                className="input-password"
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                {...register("password")}
+              />
+              <button
+                type="button"
+                className="password-toggle-button"
+                onClick={togglePasswordVisibility}
+                aria-label="Toggle password visibility"
+              >
+                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}{" "}
+              </button>
+            </div>
             <div className="label-errors">
               <label htmlFor="password"></label>
               <p>{errors.password?.message}</p>

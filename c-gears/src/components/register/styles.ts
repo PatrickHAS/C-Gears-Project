@@ -241,7 +241,7 @@ export const StyledRegister = styled.div`
             border: none;
             cursor: pointer;
             font-size: 1.2rem;
-            color: var(--Gray-1);
+            color: var(--Black-0);
           }
 
           .label-errors {
