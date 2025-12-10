@@ -43,6 +43,23 @@ export const LoginSchema = yup.object().shape({
     .matches(/(\W)|_/, "Must contain at least 1 special character"),
 });
 
+export const UserSettingsSchema = yup.object().shape({
+  name: yup.string().optional().max(15, "Name must be at most 15 characters"),
+  surname: yup
+    .string()
+    .optional()
+    .max(15, "Surname must be at most 15 characters"),
+  username: yup
+    .string()
+    .optional()
+    .max(15, "Username must be at most 15 characters"),
+  cellphone: yup
+    .string()
+    .optional()
+    .max(25, "Cellphone must be at most 25 characters"),
+  birthday: yup.string().optional(),
+});
+
 export const RegisterSchema = yup.object().shape({
   name: yup
     .string()

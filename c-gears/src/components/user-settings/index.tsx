@@ -6,7 +6,13 @@ import { RiFileUserLine } from "react-icons/ri";
 import { FaRegAddressBook } from "react-icons/fa";
 import { MdOutlineMailLock } from "react-icons/md";
 import { FaUserLock } from "react-icons/fa6";
-import { FaLink, FaEdit } from "react-icons/fa";
+import { FaLink } from "react-icons/fa";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { UserSettingsSchema } from "../../validators/schema";
+import { useRegisterContext } from "../../contexts/register-context";
 
 export interface IUpdateUserData {
   name?: string;
@@ -17,9 +23,25 @@ export interface IUpdateUserData {
 }
 
 const UserSettings = () => {
-  const { user } = useLoginContext();
-  const { isUserSettings, setIsUserSettings, activeTab, setActiveTab } =
-    useUserSettingsContext();
+  const { user, setUser } = useLoginContext();
+  const { setPhone } = useRegisterContext();
+  const {
+    isUserSettings,
+    setIsUserSettings,
+    activeTab,
+    setActiveTab,
+    updateSubmit,
+  } = useUserSettingsContext();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    control,
+  } = useForm<IUpdateUserData>({
+    resolver: yupResolver(UserSettingsSchema),
+  });
 
   return (
     <StyledUserSettings>
@@ -105,7 +127,12 @@ const UserSettings = () => {
         {activeTab === "myData" && (
           <div className="user-data--content">
             <h3 className="title-my-data"> My data</h3>
-            <form className="form-user-data">
+            <form
+              className="form-user-data"
+              onSubmit={handleSubmit((data) => {
+                updateSubmit({ ...data });
+              })}
+            >
               <div className="label-input--container">
                 <label htmlFor="name">Name</label>
                 <div className="input--container">
@@ -113,9 +140,13 @@ const UserSettings = () => {
                     className="input-name"
                     id="name"
                     type="text"
-                    value={user.name}
+                    placeholder={user.name}
+                    {...register("name")}
                   />
-                  <FaEdit className="icon-edit" />
+                </div>
+                <div className="label-errors">
+                  <label htmlFor="name"></label>
+                  <p>{errors.name?.message}</p>
                 </div>
               </div>
               <div className="label-input--container">
@@ -125,9 +156,12 @@ const UserSettings = () => {
                     className="input-surname"
                     id="surname"
                     type="text"
-                    value={user.surname}
+                    placeholder={user.surname}
+                    {...register("surname")}
+                    // onChange={(e) =>
+                    //   setUser({ ...user, surname: e.target.value })
+                    // }
                   />
-                  <FaEdit className="icon-edit" />
                 </div>
               </div>
               <div className="label-input--container">
@@ -137,9 +171,12 @@ const UserSettings = () => {
                     className="input-username"
                     id="username"
                     type="text"
-                    value={user.username}
+                    placeholder={user.username}
+                    {...register("username")}
+                    // onChange={(e) =>
+                    //   setUser({ ...user, username: e.target.value })
+                    // }
                   />
-                  <FaEdit className="icon-edit" />
                 </div>
               </div>
               <div className="label-input--container">
@@ -155,15 +192,22 @@ const UserSettings = () => {
               </div>
               <div className="label-input--container">
                 <label htmlFor="cellphone">Cellphone</label>
-                <div className="input--container">
-                  <input
-                    className="input-cellphone"
-                    id="cellphone"
-                    type="text"
-                    value={user.cellphone}
-                  />
-                  <FaEdit className="icon-edit" />
-                </div>
+                <Controller
+                  control={control}
+                  name="cellphone"
+                  render={({ field }) => (
+                    <PhoneInput
+                      country={"br"}
+                      value={user.cellphone}
+                      onChange={(phone) => {
+                        setPhone(phone);
+                        setValue("cellphone", phone);
+                      }}
+                      enableSearch={true}
+                      placeholder="Enter your phone number"
+                    />
+                  )}
+                />
               </div>
               <div className="label-input--container">
                 <label htmlFor="birthday">Birthday</label>
@@ -171,10 +215,15 @@ const UserSettings = () => {
                   <input
                     className="input-birthday"
                     id="birthday"
-                    type="text"
+                    type="date"
                     value={String(user.birthday)}
+                    onChange={(e) =>
+                      setUser({
+                        ...user,
+                        birthday: e.target.value as unknown as Date,
+                      })
+                    }
                   />
-                  <FaEdit className="icon-edit" />
                 </div>
               </div>
               <button className="btn--save-change" type="submit">

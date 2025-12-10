@@ -366,7 +366,8 @@ export const StyledUserSettings = styled.section`
             }
           }
 
-          .input--container {
+          .input--container,
+          .form-control {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -401,6 +402,52 @@ export const StyledUserSettings = styled.section`
             .icon-edit {
               padding: 5px;
               cursor: pointer;
+            }
+          }
+
+          input.form-control {
+            height: 32px;
+            font-size: 8px;
+
+            @media (min-width: 471px) {
+              font-size: 12px;
+            }
+          }
+        }
+
+        ul.country-list {
+          width: 150px;
+
+          @media (min-width: 471px) {
+            width: 200px;
+          }
+
+          @media (min-width: 700px) {
+            width: 250px;
+          }
+
+          .search-box {
+            width: 70%;
+            height: 25px;
+
+            @media (min-width: 700px) {
+              width: 80%;
+            }
+          }
+
+          .dial-code {
+            font-size: 10px;
+
+            @media (min-width: 700px) {
+              font-size: 12px;
+            }
+          }
+
+          .country-name {
+            font-size: 10px;
+
+            @media (min-width: 700px) {
+              font-size: 12px;
             }
           }
         }

@@ -302,7 +302,6 @@ export const StyledRegister = styled.div`
           .input-surname:hover,
           .input-email:hover,
           .form-control:hover,
-          .selected-flag:hover,
           .input-password:hover {
             cursor: pointer;
             border: 2px solid var(--Indigo-9);
@@ -313,7 +312,6 @@ export const StyledRegister = styled.div`
           .input-surname:focus,
           .input-email:focus,
           .form-control:focus,
-          .selected-flag:focus,
           .input-password:focus {
             border: 2px solid var(--Indigo-9);
             box-shadow: 0px 0px 8px 3px rgba(54, 79, 199, 1);
