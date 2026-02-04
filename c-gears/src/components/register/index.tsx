@@ -56,57 +56,61 @@ const Register = () => {
             <div className="data-user">
               <input
                 className="input-name"
-                id="name"
+                id="name-register"
                 type="text"
+                autoComplete="given-name"
                 placeholder="First name"
                 {...register("name")}
               />
               <div className="label-errors">
-                <label htmlFor="name"></label>
+                <label htmlFor="name-register"></label>
                 <p>{errors.name?.message}</p>
               </div>
               <input
                 className="input-surname"
-                id="surname"
+                id="surname-register"
                 type="text"
+                autoComplete="family-name"
                 placeholder="Last name"
                 {...register("surname")}
               />
               <div className="label-errors">
-                <label htmlFor="surname"></label>
+                <label htmlFor="surname-register"></label>
                 <p>{errors.surname?.message}</p>
               </div>
               <input
                 className="input-username"
-                id="username"
+                id="username-register"
                 type="text"
+                autoComplete="off"
                 placeholder="Username"
                 {...register("username")}
               />
               <div className="label-errors">
-                <label htmlFor="username"></label>
+                <label htmlFor="username-register"></label>
                 <p>{errors.username?.message}</p>
               </div>
               <input
                 className="input-email"
-                id="email"
+                id="email-register"
                 type="text"
+                autoComplete="email"
                 placeholder="Email address"
                 {...register("email")}
               />
               <div className="label-errors">
-                <label htmlFor="email"></label>
+                <label htmlFor="email-register"></label>
                 <p>{errors.email?.message}</p>
               </div>
               <input
                 className="input-emailConfirm"
-                id="emailConfirm"
+                id="emailConfirm-register"
                 type="text"
                 placeholder="Confirm your email"
                 {...register("emailConfirm")}
               />
               <div className="label-errors">
-                <label htmlFor="emailConfirm"></label>
+                <label htmlFor="emailConfirm-register"></label>
                 <p>{errors.emailConfirm?.message}</p>
               </div>
               <Controller
@@ -120,13 +124,18 @@ const Register = () => {
                       setPhone(phone);
                       setValue("cellphone", phone);
                     }}
+                    inputProps={{
+                      id: "cellphone-register",
+                      name: "cellphone",
+                      autoComplete: "tel",
+                    }}
                     enableSearch={true}
                     placeholder="Enter your phone number"
                   />
                 )}
               />
               <div className="label-errors">
-                <label htmlFor="cellphone"></label>
+                <label htmlFor="cellphone-register"></label>
                 <p>{errors.cellphone?.message}</p>
               </div>
               <input

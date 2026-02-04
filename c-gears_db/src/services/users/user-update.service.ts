@@ -18,7 +18,7 @@ const userUpdateService = async (
     password,
   }: IUserUpdate,
   id: string,
-  tokenId: string
+  tokenId: string,
 ): Promise<Users | Array<string>> => {
   const userRepository = AppDataSource.getRepository(Users);
   const findUser = await userRepository.findOneBy({ id });
@@ -46,7 +46,7 @@ const userUpdateService = async (
         id: userId,
       },
       process.env.SECRET_KEY as string,
-      { expiresIn: "15m" }
+      { expiresIn: "15m" },
     );
 
     return token;
@@ -54,12 +54,12 @@ const userUpdateService = async (
 
   if (email || password) {
     const updateToken = generateUpdateToken(findUser.id);
-    const hashedPassword = await hash(password!, 10);
+    // const hashedPassword = await hash(password!, 10);
 
     await userRepository.update(id, {
       updateToken,
-      emailToUpdate: email ? email : findUser!.email,
-      passwordToUpdate: hashedPassword ? hashedPassword : findUser!.password,
+      emailToUpdate: email ?? findUser.email,
+      passwordToUpdate: password ? await hash(password, 10) : findUser.password,
     });
 
     await emailService().sendEmail(
@@ -82,7 +82,7 @@ const userUpdateService = async (
       <p>${process.env.DB_HOST}:${
         process.env.PORT
       }/users/confirm-update/${updateToken}</p>
-      `
+      `,
     );
 
     return [

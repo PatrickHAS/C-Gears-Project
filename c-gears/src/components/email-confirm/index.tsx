@@ -39,7 +39,8 @@ const EmailConfirm = () => {
             <IoCloseOutline
               className="icon-close-emailConfirm"
               onClick={() => (
-                setIsEmailConfirm(!isEmailConfirm), setIsLogin(!isLogin)
+                setIsEmailConfirm(!isEmailConfirm),
+                setIsLogin(!isLogin)
               )}
             />
           </div>
@@ -49,13 +50,14 @@ const EmailConfirm = () => {
           >
             <input
               className="input-email"
-              id="email"
+              id="email-first"
               type="text"
+              autoComplete="email"
               placeholder="Email address"
               {...register("email")}
             />
             <div className="label-errors">
-              <label htmlFor="email"></label>
+              <label htmlFor="email-first"></label>
               <p>{errors.email?.message}</p>
             </div>
             <input

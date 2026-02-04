@@ -12,7 +12,6 @@ import "react-phone-input-2/lib/style.css";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UserSettingsSchema } from "../../validators/schema";
-import { useRegisterContext } from "../../contexts/register-context";
 
 export interface IUpdateUserData {
   name?: string;
@@ -23,20 +22,19 @@ export interface IUpdateUserData {
 }
 
 const UserSettings = () => {
-  const { user, setUser } = useLoginContext();
-  const { setPhone } = useRegisterContext();
+  const { user } = useLoginContext();
+
   const {
     isUserSettings,
     setIsUserSettings,
     activeTab,
     setActiveTab,
     updateSubmit,
+    formatDateForInput,
   } = useUserSettingsContext();
 
   const {
-    register,
     handleSubmit,
-    setValue,
     formState: { errors },
     control,
   } = useForm<IUpdateUserData>({
@@ -136,12 +134,20 @@ const UserSettings = () => {
               <div className="label-input--container">
                 <label htmlFor="name">Name</label>
                 <div className="input--container">
-                  <input
-                    className="input-name"
-                    id="name"
-                    type="text"
-                    placeholder={user.name}
-                    {...register("name")}
+                  <Controller
+                    name="name"
+                    control={control}
+                    defaultValue={user.name}
+                    render={({ field }) => (
+                      <input
+                        className="input-name"
+                        id="name"
+                        type="text"
+                        autoComplete="given-name"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                      />
+                    )}
                   />
                 </div>
                 <div className="label-errors">
@@ -152,30 +158,40 @@ const UserSettings = () => {
               <div className="label-input--container">
                 <label htmlFor="surname">Surname</label>
                 <div className="input--container">
-                  <input
-                    className="input-surname"
-                    id="surname"
-                    type="text"
-                    placeholder={user.surname}
-                    {...register("surname")}
-                    // onChange={(e) =>
-                    //   setUser({ ...user, surname: e.target.value })
-                    // }
+                  <Controller
+                    name="surname"
+                    control={control}
+                    defaultValue={user.surname}
+                    render={({ field }) => (
+                      <input
+                        className="input-surname"
+                        id="surname"
+                        type="text"
+                        autoComplete="family-name"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                      />
+                    )}
                   />
                 </div>
               </div>
               <div className="label-input--container">
                 <label htmlFor="username">Username</label>
                 <div className="input--container">
-                  <input
-                    className="input-username"
-                    id="username"
-                    type="text"
-                    placeholder={user.username}
-                    {...register("username")}
-                    // onChange={(e) =>
-                    //   setUser({ ...user, username: e.target.value })
-                    // }
+                  <Controller
+                    name="username"
+                    control={control}
+                    defaultValue={user.username}
+                    render={({ field }) => (
+                      <input
+                        className="input-username"
+                        id="username"
+                        type="text"
+                        autoComplete="off"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                      />
+                    )}
                   />
                 </div>
               </div>
@@ -186,25 +202,30 @@ const UserSettings = () => {
                     className="input-email"
                     id="email"
                     type="text"
+                    autoComplete="email"
                     value={user.email}
+                    readOnly
                   />
                 </div>
               </div>
               <div className="label-input--container">
-                <label htmlFor="cellphone">Cellphone</label>
+                <label htmlFor="cellphone-setting">Cellphone</label>
                 <Controller
                   control={control}
                   name="cellphone"
+                  defaultValue={user.cellphone}
                   render={({ field }) => (
                     <PhoneInput
-                      country={"br"}
-                      value={user.cellphone}
-                      onChange={(phone) => {
-                        setPhone(phone);
-                        setValue("cellphone", phone);
-                      }}
-                      enableSearch={true}
+                      country="br"
+                      enableSearch
                       placeholder="Enter your phone number"
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                      inputProps={{
+                        id: "cellphone-setting",
+                        name: "cellphone",
+                        autoComplete: "tel",
+                      }}
                     />
                   )}
                 />
@@ -212,17 +233,19 @@ const UserSettings = () => {
               <div className="label-input--container">
                 <label htmlFor="birthday">Birthday</label>
                 <div className="input--container">
-                  <input
-                    className="input-birthday"
-                    id="birthday"
-                    type="date"
-                    value={String(user.birthday)}
-                    onChange={(e) =>
-                      setUser({
-                        ...user,
-                        birthday: e.target.value as unknown as Date,
-                      })
-                    }
+                  <Controller
+                    name="birthday"
+                    control={control}
+                    defaultValue={formatDateForInput(user.birthday)}
+                    render={({ field }) => (
+                      <input
+                        className="input-birthday"
+                        id="birthday"
+                        type="date"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                      />
+                    )}
                   />
                 </div>
               </div>

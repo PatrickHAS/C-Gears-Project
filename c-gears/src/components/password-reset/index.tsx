@@ -54,24 +54,24 @@ const PasswordReset = () => {
           >
             <input
               className="input-password"
-              id="password"
+              id="password-reset"
               type="password"
               placeholder="Password"
               {...register("password")}
             />
             <div className="label-errors">
-              <label htmlFor="password"></label>
+              <label htmlFor="password-reset"></label>
               <p>{errors.password?.message}</p>
             </div>
             <input
               className="input-passwordConfirm"
-              id="passwordConfirm"
+              id="passwordConfirm-reset"
               type="password"
               placeholder="Confirm password"
               {...register("passwordConfirm")}
             />
             <div className="label-errors">
-              <label htmlFor="passwordConfirm"></label>
+              <label htmlFor="passwordConfirm-reset"></label>
               <p>{errors.passwordConfirm?.message}</p>
             </div>
             <button className="btn-passwordReset" type="submit">

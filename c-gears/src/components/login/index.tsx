@@ -48,7 +48,8 @@ const Login = () => {
                 New player?{" "}
                 <span
                   onClick={() => (
-                    setIsRegister(!isRegister), setIsLogin(!isLogin)
+                    setIsRegister(!isRegister),
+                    setIsLogin(!isLogin)
                   )}
                 >
                   Register
@@ -58,20 +59,21 @@ const Login = () => {
             <div className="password-input-container">
               <input
                 className="input-email"
-                id="email"
+                id="email-login"
                 type="text"
+                autoComplete="email"
                 placeholder="Email address"
                 {...register("email")}
               />
             </div>
             <div className="label-errors">
-              <label htmlFor="email"></label>
+              <label htmlFor="email-login"></label>
               <p>{errors.email?.message}</p>
             </div>
             <div className="password-input-container">
               <input
                 className="input-password"
-                id="password"
+                id="password-login"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 {...register("password")}
@@ -86,13 +88,14 @@ const Login = () => {
               </button>
             </div>
             <div className="label-errors">
-              <label htmlFor="password"></label>
+              <label htmlFor="password-login"></label>
               <p>{errors.password?.message}</p>
             </div>
             <div className="forgot-password">
               <p
                 onClick={() => (
-                  setIsEmailConfirm(!isEmailConfirm), setIsLogin(!isLogin)
+                  setIsEmailConfirm(!isEmailConfirm),
+                  setIsLogin(!isLogin)
                 )}
               >
                 Forgot your password?
