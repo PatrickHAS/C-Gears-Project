@@ -347,7 +347,7 @@ export const StyledUserSettings = styled.section`
           display: flex;
           flex-direction: column;
 
-          width: 200px;
+          width: 220px;
           height: fit-content;
 
           gap: 5px;
@@ -411,6 +411,25 @@ export const StyledUserSettings = styled.section`
 
             @media (min-width: 471px) {
               font-size: 12px;
+            }
+          }
+
+          .label-errors {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            width: 100%;
+            height: 10px;
+
+            p {
+              font-family: "Orbitron";
+              font-style: normal;
+              font-weight: 500;
+              font-size: 9px;
+              line-height: 17px;
+
+              color: var(--Gray-9);
             }
           }
         }

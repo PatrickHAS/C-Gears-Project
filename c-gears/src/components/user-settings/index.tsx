@@ -31,15 +31,42 @@ const UserSettings = () => {
     setActiveTab,
     updateSubmit,
     formatDateForInput,
+    TOAST_MESSAGES,
+    showToast,
   } = useUserSettingsContext();
 
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
     control,
   } = useForm<IUpdateUserData>({
     resolver: yupResolver(UserSettingsSchema),
   });
+
+  const onSubmit = (data: IUpdateUserData) => {
+    const updatedData = Object.keys(dirtyFields).reduce((acc, field) => {
+      acc[field as keyof IUpdateUserData] =
+        data[field as keyof IUpdateUserData];
+      return acc;
+    }, {} as Partial<IUpdateUserData>);
+
+    if (!Object.keys(updatedData).length) {
+      showToast("info", TOAST_MESSAGES.NO_CHANGES);
+      return;
+    }
+
+    if (updatedData.username && updatedData.username === user.username) {
+      showToast("info", TOAST_MESSAGES.USERNAME_SAME);
+      return;
+    }
+
+    if (updatedData.cellphone && updatedData.cellphone === user.cellphone) {
+      showToast("info", TOAST_MESSAGES.CELLPHONE_SAME);
+      return;
+    }
+
+    updateSubmit(updatedData);
+  };
 
   return (
     <StyledUserSettings>
@@ -125,12 +152,7 @@ const UserSettings = () => {
         {activeTab === "myData" && (
           <div className="user-data--content">
             <h3 className="title-my-data"> My data</h3>
-            <form
-              className="form-user-data"
-              onSubmit={handleSubmit((data) => {
-                updateSubmit({ ...data });
-              })}
-            >
+            <form className="form-user-data" onSubmit={handleSubmit(onSubmit)}>
               <div className="label-input--container">
                 <label htmlFor="name">Name</label>
                 <div className="input--container">
@@ -174,6 +196,10 @@ const UserSettings = () => {
                     )}
                   />
                 </div>
+                <div className="label-errors">
+                  <label htmlFor="surname"></label>
+                  <p>{errors.surname?.message}</p>
+                </div>
               </div>
               <div className="label-input--container">
                 <label htmlFor="username">Username</label>
@@ -193,6 +219,10 @@ const UserSettings = () => {
                       />
                     )}
                   />
+                </div>
+                <div className="label-errors">
+                  <label htmlFor="username"></label>
+                  <p>{errors.username?.message}</p>
                 </div>
               </div>
               <div className="label-input--container">
@@ -229,9 +259,13 @@ const UserSettings = () => {
                     />
                   )}
                 />
+                <div className="label-errors">
+                  <label htmlFor="cellphone-setting"></label>
+                  <p>{errors.cellphone?.message}</p>
+                </div>
               </div>
               <div className="label-input--container">
-                <label htmlFor="birthday">Birthday</label>
+                <label htmlFor="birthday-setting">Birthday</label>
                 <div className="input--container">
                   <Controller
                     name="birthday"
@@ -240,13 +274,17 @@ const UserSettings = () => {
                     render={({ field }) => (
                       <input
                         className="input-birthday"
-                        id="birthday"
+                        id="birthday-setting"
                         type="date"
                         value={field.value ?? ""}
                         onChange={field.onChange}
                       />
                     )}
                   />
+                </div>
+                <div className="label-errors">
+                  <label htmlFor="birthday-setting"></label>
+                  <p>{errors.birthday?.message}</p>
                 </div>
               </div>
               <button className="btn--save-change" type="submit">

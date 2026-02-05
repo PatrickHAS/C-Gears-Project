@@ -262,6 +262,7 @@ export const StyledRegister = styled.div`
               color: var(--Gray-4);
             }
           }
+
           @media (max-width: 355px) {
             ul.country-list {
               width: 250px;

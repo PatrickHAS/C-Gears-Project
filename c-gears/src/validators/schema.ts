@@ -44,20 +44,27 @@ export const LoginSchema = yup.object().shape({
 });
 
 export const UserSettingsSchema = yup.object().shape({
-  name: yup.string().optional().max(15, "Name must be at most 15 characters"),
+  name: yup
+    .string()
+    .required("Preencha o campo!")
+    .optional()
+    .max(15, "Name must be at most 15 characters"),
   surname: yup
     .string()
+    .required("Preencha o campo!")
     .optional()
     .max(15, "Surname must be at most 15 characters"),
   username: yup
     .string()
+    .required("Preencha o campo!")
     .optional()
     .max(15, "Username must be at most 15 characters"),
   cellphone: yup
     .string()
+    .required("Preencha o campo!")
     .optional()
     .max(25, "Cellphone must be at most 25 characters"),
-  birthday: yup.string().optional(),
+  birthday: yup.string().required("Preencha o campo!").optional(),
 });
 
 export const RegisterSchema = yup.object().shape({

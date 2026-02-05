@@ -31,6 +31,36 @@ const userUpdateService = async (
     throw new AppError("Unauthorized access", 401);
   }
 
+  if (username) {
+    const usernameAlreadyExists = await userRepository.findOne({
+      where: { username },
+    });
+
+    if (usernameAlreadyExists && usernameAlreadyExists.id !== findUser.id) {
+      throw new AppError("Username already exists", 409);
+    }
+  }
+
+  if (email) {
+    const emailAlreadyExists = await userRepository.findOne({
+      where: { email },
+    });
+
+    if (emailAlreadyExists && emailAlreadyExists.id !== findUser.id) {
+      throw new AppError("Email already exists", 409);
+    }
+  }
+
+  if (cellphone) {
+    const cellphoneAlreadyExists = await userRepository.findOne({
+      where: { cellphone },
+    });
+
+    if (cellphoneAlreadyExists && cellphoneAlreadyExists.id !== findUser.id) {
+      throw new AppError("Cellphone already exists", 409);
+    }
+  }
+
   await userRepository.update(id, {
     name: name ? name : findUser!.name,
     surname: surname ? surname : findUser!.surname,
