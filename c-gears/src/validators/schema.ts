@@ -44,27 +44,29 @@ export const LoginSchema = yup.object().shape({
 });
 
 export const UserSettingsSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Preencha o campo!")
-    .optional()
-    .max(15, "Name must be at most 15 characters"),
-  surname: yup
-    .string()
-    .required("Preencha o campo!")
-    .optional()
-    .max(15, "Surname must be at most 15 characters"),
+  name: yup.string().min(1, "The field cannot be empty.").max(15).optional(),
+  surname: yup.string().min(1, "The field cannot be empty.").max(15).optional(),
   username: yup
     .string()
-    .required("Preencha o campo!")
-    .optional()
-    .max(15, "Username must be at most 15 characters"),
+    .min(1, "The field cannot be empty.")
+    .max(15)
+    .optional(),
   cellphone: yup
     .string()
-    .required("Preencha o campo!")
-    .optional()
-    .max(25, "Cellphone must be at most 25 characters"),
-  birthday: yup.string().required("Preencha o campo!").optional(),
+    .min(1, "The field cannot be empty.")
+    .max(25)
+    .optional(),
+  birthday: yup.string().optional(),
+});
+
+export const AddressSettingsSchema = yup.object().shape({
+  street: yup.string().min(1, "The field cannot be empty.").max(75).optional(),
+  number: yup.string().min(1, "The field cannot be empty.").max(10).optional(),
+  apt_unit: yup.string().max(10).optional(),
+  neighborhoods: yup.string().max(50).optional(),
+  city: yup.string().min(1, "The field cannot be empty.").max(75).optional(),
+  state: yup.string().min(1, "The field cannot be empty.").max(75).optional(),
+  zipcode: yup.string().min(1, "The field cannot be empty.").max(10).optional(),
 });
 
 export const RegisterSchema = yup.object().shape({

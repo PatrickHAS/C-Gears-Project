@@ -39,6 +39,7 @@ export interface IUserUpdate {
   cellphone?: string;
   birthday?: Date;
   password?: string;
+  address: IAddressUpdate;
 }
 
 export interface IAddressUpdate {

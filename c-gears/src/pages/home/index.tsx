@@ -11,7 +11,7 @@ import Register from "../../components/register";
 import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
 import EmailConfirm from "../../components/email-confirm";
 import { useUserSettingsContext } from "../../contexts/user-settings-context";
-import UserSettings from "../../components/user-settings";
+import UserSettings from "../../components/user-settings/UserSettings";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     const handleResize = () => {
       const video = document.getElementById(
-        "background-video"
+        "background-video",
       ) as HTMLVideoElement;
       if (video) {
         if (window.innerWidth <= 1024) {

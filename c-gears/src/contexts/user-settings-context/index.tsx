@@ -1,8 +1,9 @@
 import { useContext, createContext, useState, ReactNode } from "react";
-import { IUpdateUserData } from "../../components/user-settings";
+
 import api from "../../services/Api";
 import { useLoginContext } from "../login-context";
 import { toast } from "react-toastify";
+import { IUpdateUserData } from "../../components/user-settings/UserSettings";
 
 interface IUserSettingsProvider {
   children: ReactNode;
@@ -22,7 +23,10 @@ interface IUserSettingsContext {
       "myData" | "myAddress" | "changeEmail" | "changePass" | "linkAccount"
     >
   >;
-  updateSubmit: (data: IUpdateUserData) => Promise<void>;
+
+  updateSubmit: (
+    data: Partial<IUpdateUserData>,
+  ) => Promise<boolean | undefined>;
   formatDateForInput: (date: Date | string) => string;
 
   showToast: (type: "success" | "error" | "info", message: string) => void;
@@ -47,7 +51,9 @@ export const UserSettingsContext = createContext<IUserSettingsContext>(
   {} as IUserSettingsContext,
 );
 
-export const UserSettingsProvider = ({ children }: IUserSettingsProvider) => {
+export const UserSettingsProvider = ({
+  children,
+}: IUserSettingsProvider): ReactNode => {
   const { user, setUser } = useLoginContext();
   const [isUserSettings, setIsUserSettings] = useState(false);
   const [activeTab, setActiveTab] = useState<
@@ -66,6 +72,7 @@ export const UserSettingsProvider = ({ children }: IUserSettingsProvider) => {
     USERNAME_EXISTS: "Username already exists!",
     CELLPHONE_SAME: "You already use this phone number!",
     CELLPHONE_EXISTS: "The phone number already exists!",
+    EMPETY_FIELDS: "Submitting empty fields is not allowed!",
     ERROR: "Error updating data!",
   };
 
@@ -75,7 +82,16 @@ export const UserSettingsProvider = ({ children }: IUserSettingsProvider) => {
 
   const updateSubmit = async (data: Partial<IUpdateUserData>) => {
     try {
-      const { data: updatedUser } = await api.patch(`/users/${user.id}`, data);
+      const cleanedData = Object.fromEntries(
+        Object.entries(data).filter(
+          ([_, value]) => value !== "" && value !== undefined,
+        ),
+      );
+      const { data: updatedUser } = await api.patch(
+        `/users/${user.id}`,
+        cleanedData,
+      );
+      console.log("Deu Certo", data);
 
       showToast("success", TOAST_MESSAGES.SUCCESS);
 
@@ -84,8 +100,14 @@ export const UserSettingsProvider = ({ children }: IUserSettingsProvider) => {
         localStorage.setItem("@UserId", JSON.stringify(newUser));
         return newUser;
       });
+      return true;
     } catch (error: any) {
       const message = error?.response?.data?.message;
+
+      if (message === "You already use that name") {
+        showToast("error", TOAST_MESSAGES.USERNAME_SAME);
+        return;
+      }
 
       if (message === "Username already exists") {
         showToast("error", TOAST_MESSAGES.USERNAME_EXISTS);
@@ -97,8 +119,14 @@ export const UserSettingsProvider = ({ children }: IUserSettingsProvider) => {
         return;
       }
 
+      if (message === "Submitting empty fields is not allowed") {
+        showToast("error", TOAST_MESSAGES.EMPETY_FIELDS);
+        return;
+      }
+
       showToast("error", TOAST_MESSAGES.ERROR);
       console.error(error);
+      return false;
     }
   };
 

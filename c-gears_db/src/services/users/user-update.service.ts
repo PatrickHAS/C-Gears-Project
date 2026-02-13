@@ -8,20 +8,16 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 const userUpdateService = async (
-  {
-    name,
-    surname,
-    username,
-    email,
-    cellphone,
-    birthday,
-    password,
-  }: IUserUpdate,
+  data: IUserUpdate,
   id: string,
   tokenId: string,
-): Promise<Users | Array<string>> => {
+): Promise<Users | { message: string }> => {
   const userRepository = AppDataSource.getRepository(Users);
-  const findUser = await userRepository.findOneBy({ id });
+
+  const findUser = await userRepository.findOne({
+    where: { id },
+    relations: { address: true },
+  });
 
   if (!findUser) {
     throw new AppError("User not found", 404);
@@ -31,66 +27,87 @@ const userUpdateService = async (
     throw new AppError("Unauthorized access", 401);
   }
 
-  if (username) {
-    const usernameAlreadyExists = await userRepository.findOne({
-      where: { username },
+  const hasEmptyField = Object.values(data).some(
+    (value) => typeof value === "string" && value.trim() === "",
+  );
+
+  if (hasEmptyField) {
+    throw new AppError("Submitting empty fields is not allowed", 400);
+  }
+
+  if (data.username) {
+    if (data.username === findUser.username) {
+      throw new AppError("You already use that name", 400);
+    }
+
+    const usernameExists = await userRepository.findOne({
+      where: { username: data.username },
     });
 
-    if (usernameAlreadyExists && usernameAlreadyExists.id !== findUser.id) {
+    if (usernameExists && usernameExists.id !== findUser.id) {
       throw new AppError("Username already exists", 409);
     }
   }
 
-  if (email) {
-    const emailAlreadyExists = await userRepository.findOne({
-      where: { email },
+  if (data.email) {
+    const emailExists = await userRepository.findOne({
+      where: { email: data.email },
     });
 
-    if (emailAlreadyExists && emailAlreadyExists.id !== findUser.id) {
+    if (emailExists && emailExists.id !== findUser.id) {
       throw new AppError("Email already exists", 409);
     }
   }
 
-  if (cellphone) {
-    const cellphoneAlreadyExists = await userRepository.findOne({
-      where: { cellphone },
+  if (data.cellphone) {
+    const cellphoneExists = await userRepository.findOne({
+      where: { cellphone: data.cellphone },
     });
 
-    if (cellphoneAlreadyExists && cellphoneAlreadyExists.id !== findUser.id) {
+    if (cellphoneExists && cellphoneExists.id !== findUser.id) {
       throw new AppError("Cellphone already exists", 409);
     }
   }
 
-  await userRepository.update(id, {
-    name: name ? name : findUser!.name,
-    surname: surname ? surname : findUser!.surname,
-    username: username ? username : findUser!.username,
-    email: email ? email : findUser!.email,
-    cellphone: cellphone ? cellphone : findUser!.cellphone,
-    birthday: birthday ? birthday : findUser!.birthday,
-  });
+  findUser.name = data.name ?? findUser.name;
+  findUser.surname = data.surname ?? findUser.surname;
+  findUser.username = data.username ?? findUser.username;
+  findUser.cellphone = data.cellphone ?? findUser.cellphone;
+  findUser.birthday = data.birthday ?? findUser.birthday;
 
-  const generateUpdateToken = (userId: string): string => {
-    const token = jwt.sign(
-      {
-        id: userId,
-      },
+  if (data.address && findUser.address) {
+    findUser.address.street = data.address.street ?? findUser.address.street;
+    findUser.address.number = data.address.number ?? findUser.address.number;
+    findUser.address.apt_unit =
+      data.address.apt_unit ?? findUser.address.apt_unit;
+    findUser.address.neighborhoods =
+      data.address.neighborhoods ?? findUser.address.neighborhoods;
+    findUser.address.city = data.address.city ?? findUser.address.city;
+    findUser.address.state = data.address.state ?? findUser.address.state;
+    findUser.address.zipcode = data.address.zipcode ?? findUser.address.zipcode;
+  }
+
+  await userRepository.save(findUser);
+
+  if (data.email || data.password) {
+    if (data.password !== undefined && data.password.trim() === "") {
+      throw new AppError("Password cannot be empty", 400);
+    }
+
+    const updateToken = jwt.sign(
+      { id: findUser.id },
       process.env.SECRET_KEY as string,
       { expiresIn: "15m" },
     );
 
-    return token;
-  };
+    findUser.updateToken = updateToken;
+    findUser.emailToUpdate = data.email ?? findUser.email;
 
-  if (email || password) {
-    const updateToken = generateUpdateToken(findUser.id);
-    // const hashedPassword = await hash(password!, 10);
+    if (data.password) {
+      findUser.passwordToUpdate = await hash(data.password, 10);
+    }
 
-    await userRepository.update(id, {
-      updateToken,
-      emailToUpdate: email ?? findUser.email,
-      passwordToUpdate: password ? await hash(password, 10) : findUser.password,
-    });
+    await userRepository.save(findUser);
 
     await emailService().sendEmail(
       findUser!.email,
@@ -115,9 +132,10 @@ const userUpdateService = async (
       `,
     );
 
-    return [
-      "A confirmation email has been sent to your current email address.",
-    ];
+    return {
+      message:
+        "A confirmation email has been sent to your current email address.",
+    };
   }
 
   const user = await userRepository.findOneBy({ id });
