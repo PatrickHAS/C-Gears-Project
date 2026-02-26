@@ -331,7 +331,8 @@ export const StyledUserSettings = styled.section`
       .form-user-address,
       .form-change-email,
       .form-change-pass,
-      .form-link-account {
+      .form-link-account,
+      .all-inputs--container {
         display: flex;
         flex-wrap: wrap;
 
@@ -505,6 +506,10 @@ export const StyledUserSettings = styled.section`
           color: var(--Gray-1);
           transition: 0.9s;
         }
+      }
+
+      .all-inputs--container {
+        margin-top: 0;
       }
     }
   }

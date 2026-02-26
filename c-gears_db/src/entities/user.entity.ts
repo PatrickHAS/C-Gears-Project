@@ -47,13 +47,20 @@ export class Users {
   @Column({ type: "boolean", default: false })
   availability: boolean;
 
-  @Column({ nullable: true, type: "text", default: null })
-  updateToken: string | null;
+  @Column({ type: "varchar", nullable: true })
+  updateCode: string | null;
 
-  @Column({ nullable: true, type: "text", default: null })
+  @Column({ type: "timestamp", nullable: true })
+  updateCodeExpires: Date | null;
+
+  @Column({ type: "int", default: 0 })
+  updateAttempts: number;
+
+  @Column({ type: "text", nullable: true })
   emailToUpdate: string | null;
 
-  @Column({ nullable: true, type: "text", default: null })
+  @Column({ type: "text", nullable: true })
+  @Exclude()
   passwordToUpdate: string | null;
 
   @CreateDateColumn()

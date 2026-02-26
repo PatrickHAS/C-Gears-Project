@@ -44,8 +44,8 @@ export interface IUser {
 }
 
 interface IAuthContext {
-  user: IUser;
-  setUser: React.Dispatch<React.SetStateAction<IUser>>;
+  user: IUser | null;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   token: string | null;
@@ -58,7 +58,7 @@ interface IAuthContext {
 export const LoginContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const LoginProvier = ({ children }: ILoginProvider) => {
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const [user, setUser] = useState<IUser | null>({} as IUser);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("@Token");
   const id = localStorage.getItem("@UserId");
@@ -123,8 +123,13 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
   }, [token]);
 
   const logout = () => {
+    localStorage.removeItem("@Token");
+    localStorage.removeItem("@UserId");
+
+    setUser(null);
+
     navigate("/");
-    window.localStorage.clear();
+    window.location.reload();
   };
 
   return (

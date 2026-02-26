@@ -11,6 +11,10 @@ interface IUserSettingsProvider {
 
 interface IUserSettingsContext {
   setIsUserSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  pendingSensitiveUpdate: Partial<IUpdateUserData> | null;
+  setPendingSensitiveUpdate: React.Dispatch<
+    React.SetStateAction<Partial<IUpdateUserData> | null>
+  >;
   isUserSettings: boolean;
   activeTab:
     | "myData"
@@ -24,9 +28,7 @@ interface IUserSettingsContext {
     >
   >;
 
-  updateSubmit: (
-    data: Partial<IUpdateUserData>,
-  ) => Promise<boolean | undefined>;
+  updateSubmit: (data: Partial<IUpdateUserData>) => Promise<UpdateSubmitResult>;
   formatDateForInput: (date: Date | string) => string;
 
   showToast: (type: "success" | "error" | "info", message: string) => void;
@@ -41,11 +43,17 @@ interface IUserSettingsContext {
     NO_CHANGES: string;
     USERNAME_SAME: string;
     USERNAME_EXISTS: string;
+    EMAIL_SAME: string;
     CELLPHONE_SAME: string;
     CELLPHONE_EXISTS: string;
     ERROR: string;
   };
 }
+
+type UpdateSubmitResult =
+  | { status: "success" }
+  | { status: "requires-confirmation" }
+  | { status: "error" };
 
 export const UserSettingsContext = createContext<IUserSettingsContext>(
   {} as IUserSettingsContext,
@@ -54,8 +62,10 @@ export const UserSettingsContext = createContext<IUserSettingsContext>(
 export const UserSettingsProvider = ({
   children,
 }: IUserSettingsProvider): ReactNode => {
-  const { user, setUser } = useLoginContext();
-  const [isUserSettings, setIsUserSettings] = useState(false);
+  const { user } = useLoginContext();
+  const [pendingSensitiveUpdate, setPendingSensitiveUpdate] =
+    useState<Partial<IUpdateUserData> | null>(null);
+  const [isUserSettings, setIsUserSettings] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<
     "myData" | "myAddress" | "changeEmail" | "changePass" | "linkAccount"
   >("myData");
@@ -67,9 +77,14 @@ export const UserSettingsProvider = ({
 
   const TOAST_MESSAGES = {
     SUCCESS: "Data successfully!",
+    UPDATE_SUCCESS: "Update confirmed successfully!",
+    UPDATE_EMAIL_SUCCESS: "Email updated successfully! You will be logged out!",
+    UPDATE_PASSWORD_SUCCESS:
+      "Password updated successfully! You will be logged out!",
     NO_CHANGES: "No changes detected!",
     USERNAME_SAME: "You already use that name!",
     USERNAME_EXISTS: "Username already exists!",
+    EMAIL_SAME: "You already use that email!",
     CELLPHONE_SAME: "You already use this phone number!",
     CELLPHONE_EXISTS: "The phone number already exists!",
     EMPETY_FIELDS: "Submitting empty fields is not allowed!",
@@ -80,53 +95,66 @@ export const UserSettingsProvider = ({
     toast[type](message, { style: toastStyle });
   };
 
-  const updateSubmit = async (data: Partial<IUpdateUserData>) => {
+  const updateSubmit = async (
+    data: Partial<IUpdateUserData>,
+  ): Promise<UpdateSubmitResult> => {
     try {
+      if (!user) {
+        showToast("error", TOAST_MESSAGES.ERROR);
+        return { status: "error" };
+      }
+
       const cleanedData = Object.fromEntries(
         Object.entries(data).filter(
           ([_, value]) => value !== "" && value !== undefined,
         ),
       );
-      const { data: updatedUser } = await api.patch(
-        `/users/${user.id}`,
-        cleanedData,
-      );
-      console.log("Deu Certo", data);
 
-      showToast("success", TOAST_MESSAGES.SUCCESS);
+      const isSensitiveUpdate =
+        "email" in cleanedData || "password" in cleanedData;
 
-      setUser((prev) => {
-        const newUser = { ...prev!, ...updatedUser };
-        localStorage.setItem("@UserId", JSON.stringify(newUser));
-        return newUser;
-      });
-      return true;
+      await api.patch(`/users/${user.id}`, cleanedData);
+
+      if (isSensitiveUpdate) {
+        setPendingSensitiveUpdate(cleanedData);
+        return { status: "requires-confirmation" };
+      }
+
+      showToast("success", TOAST_MESSAGES.UPDATE_SUCCESS);
+      console.log("Data updated successfully:", cleanedData);
+
+      return { status: "success" };
     } catch (error: any) {
       const message = error?.response?.data?.message;
 
       if (message === "You already use that name") {
         showToast("error", TOAST_MESSAGES.USERNAME_SAME);
-        return;
+        return { status: "error" };
       }
 
       if (message === "Username already exists") {
         showToast("error", TOAST_MESSAGES.USERNAME_EXISTS);
-        return;
+        return { status: "error" };
+      }
+
+      if (message === "You already use that email") {
+        showToast("error", TOAST_MESSAGES.EMAIL_SAME);
+        return { status: "error" };
       }
 
       if (message === "Cellphone already exists") {
         showToast("error", TOAST_MESSAGES.CELLPHONE_EXISTS);
-        return;
+        return { status: "error" };
       }
 
       if (message === "Submitting empty fields is not allowed") {
         showToast("error", TOAST_MESSAGES.EMPETY_FIELDS);
-        return;
+        return { status: "error" };
       }
 
       showToast("error", TOAST_MESSAGES.ERROR);
       console.error(error);
-      return false;
+      return { status: "error" };
     }
   };
 
@@ -147,6 +175,8 @@ export const UserSettingsProvider = ({
         TOAST_MESSAGES,
         toastStyle,
         showToast,
+        pendingSensitiveUpdate,
+        setPendingSensitiveUpdate,
       }}
     >
       {children}

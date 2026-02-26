@@ -7,7 +7,7 @@ import userDataController from "../../controllers/user/user-data.controller";
 import userUpdateController from "../../controllers/user/user-update.controller";
 import userDisableController from "../../controllers/user/user-disable.controller";
 import validateCreateUserMiddleware from "../../middlewares/validate-create-user.middleware";
-import confirmUpdateController from "../../controllers/user/confirm-update.controller";
+import confirmUpdateController from "../../controllers/user/user-confirm-update.controller";
 import userActivateController from "../../controllers/user/user-activate.controller";
 import userEmailDataController from "../../controllers/user/user-emailData.controller";
 import userResetPasswordController from "../../controllers/user/user-reset-pass.controller";
@@ -21,21 +21,21 @@ userRoutes.get(
   "",
   ensureAuthMiddleware,
   verifyAdmMiddleware,
-  userListController
+  userListController,
 );
 userRoutes.get("/:id", ensureAuthMiddleware, userDataController);
-userRoutes.patch("/:id", ensureAuthMiddleware, userUpdateController);
 userRoutes.patch(
-  "/confirm-update/:token",
+  "/confirm-update",
   ensureAuthMiddleware,
-  confirmUpdateController
+  confirmUpdateController,
 );
+userRoutes.patch("/:id", ensureAuthMiddleware, userUpdateController);
 userRoutes.delete("/:id", ensureAuthMiddleware, userDisableController);
 userRoutes.delete(
   "/active-user/:id",
   ensureAuthMiddleware,
   verifyAdmMiddleware,
-  userActivateController
+  userActivateController,
 );
 
 export default userRoutes;

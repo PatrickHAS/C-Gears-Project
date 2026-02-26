@@ -1,0 +1,89 @@
+import { ReactNode, useContext, useState, createContext } from "react";
+import api from "../../services/Api";
+import { useUserSettingsContext } from "../user-settings-context";
+import { useLoginContext } from "../login-context";
+
+interface IConfirmCodeProvider {
+  children: ReactNode;
+}
+
+interface IConfirmCodeContext {
+  setShowCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showCodeModal: boolean;
+  confirmCodeSubmit: (data: { code: string }) => Promise<void>;
+}
+
+export const ConfirmCodeContext = createContext<IConfirmCodeContext>(
+  {} as IConfirmCodeContext,
+);
+
+export const ConfirmCodeProvider = ({
+  children,
+}: IConfirmCodeProvider): ReactNode => {
+  const [showCodeModal, setShowCodeModal] = useState<boolean>(false);
+
+  const {
+    pendingSensitiveUpdate,
+    setPendingSensitiveUpdate,
+    showToast,
+    TOAST_MESSAGES,
+  } = useUserSettingsContext();
+
+  const { setUser, logout } = useLoginContext();
+
+  const confirmCodeSubmit = async (data: { code: string }) => {
+    try {
+      const response = await api.patch("/users/confirm-update", {
+        code: data.code,
+      });
+
+      if (pendingSensitiveUpdate?.email) {
+        setPendingSensitiveUpdate(null);
+        setShowCodeModal(false);
+
+        showToast(
+          "success",
+          "Email updated successfully! You will be logged out.",
+        );
+
+        setTimeout(() => {
+          logout();
+        }, 1500);
+
+        return;
+      }
+
+      setUser(response.data);
+      setPendingSensitiveUpdate(null);
+      setShowCodeModal(false);
+    } catch (error: any) {
+      const message = error?.response?.data?.message;
+
+      if (message === "Invalid code") {
+        showToast("error", "Invalid confirmation code!");
+        return;
+      }
+
+      if (message === "Code expired") {
+        showToast("error", "Confirmation code expired!");
+        return;
+      }
+
+      showToast("error", TOAST_MESSAGES.ERROR);
+    }
+  };
+
+  return (
+    <ConfirmCodeContext.Provider
+      value={{
+        showCodeModal,
+        setShowCodeModal,
+        confirmCodeSubmit,
+      }}
+    >
+      {children}
+    </ConfirmCodeContext.Provider>
+  );
+};
+
+export const useConfirmCodeContext = () => useContext(ConfirmCodeContext);

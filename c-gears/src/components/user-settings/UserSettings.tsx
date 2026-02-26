@@ -48,7 +48,7 @@ const UserSettings = () => {
         </div>
         <div className="name-back--container">
           <h4 className="name ">
-            Hello, {user.name} {user.surname}
+            Hello, {user?.name} {user?.surname}
           </h4>
           <div className="icon-back--container" title="To go back">
             <TiArrowBack

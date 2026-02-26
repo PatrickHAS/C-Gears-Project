@@ -12,6 +12,8 @@ import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
 import EmailConfirm from "../../components/email-confirm";
 import { useUserSettingsContext } from "../../contexts/user-settings-context";
 import UserSettings from "../../components/user-settings/UserSettings";
+import { useConfirmCodeContext } from "../../contexts/confirm-code-contex";
+import ConfirmCodeModal from "../../components/modals/confirm-code-modal";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
@@ -19,6 +21,7 @@ const Home = () => {
   const { isEmailConfirm } = useEmailConfirmContext();
   const { isUserSettings } = useUserSettingsContext();
   const [isVideoPlayable, setIsVideoPlayable] = useState(true);
+  const { showCodeModal } = useConfirmCodeContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,6 +66,7 @@ const Home = () => {
       {isRegister && <Register />}
       {isEmailConfirm && <EmailConfirm />}
       {isUserSettings && <UserSettings />}
+      {showCodeModal && <ConfirmCodeModal />}
       <LogoHomeCenter />
       <SocialMedia />
     </StyledHome>

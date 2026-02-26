@@ -96,7 +96,10 @@ export const RegisterSchema = yup.object().shape({
     .string()
     .required("A contact number is required.")
     .max(25, "Cellphone must be at most 25 characters"),
-  birthday: yup.string().required("Date of birth required"),
+  birthday: yup
+    .date()
+    .typeError("Invalid date")
+    .required("Date of birth required"),
   password: yup
     .string()
     .required("Password is required!")

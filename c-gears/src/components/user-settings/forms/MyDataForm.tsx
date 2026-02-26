@@ -18,18 +18,18 @@ export const MyDataForm = () => {
   } = useForm({
     resolver: yupResolver(UserSettingsSchema),
     defaultValues: {
-      name: user.name,
-      surname: user.surname,
-      username: user.username,
-      cellphone: user.cellphone,
+      name: user?.name ?? "",
+      surname: user?.surname ?? "",
+      username: user?.username ?? "",
+      cellphone: user?.cellphone ?? "",
       birthday:
-        user.birthday instanceof Date
+        user?.birthday instanceof Date
           ? user.birthday.toISOString().split("T")[0]
-          : user.birthday,
+          : (user?.birthday ?? ""),
     },
   });
 
-  const onSubmit = async (data: any) => {
+  const MyDataSubmit = async (data: any) => {
     const updatedData = Object.keys(dirtyFields).reduce((acc, field) => {
       acc[field] = data[field];
       return acc;
@@ -47,14 +47,14 @@ export const MyDataForm = () => {
   return (
     <div className="user-data--content">
       <h3 className="title-my-data"> My data</h3>
-      <form className="form-user-data" onSubmit={handleSubmit(onSubmit)}>
+      <form className="form-user-data" onSubmit={handleSubmit(MyDataSubmit)}>
         <div className="label-input--container">
           <label htmlFor="name">Name</label>
           <div className="input--container">
             <Controller
               name="name"
               control={control}
-              defaultValue={user.name}
+              defaultValue={user?.name}
               render={({ field }) => (
                 <input
                   className="input-name"
@@ -78,7 +78,7 @@ export const MyDataForm = () => {
             <Controller
               name="surname"
               control={control}
-              defaultValue={user.surname}
+              defaultValue={user?.surname}
               render={({ field }) => (
                 <input
                   className="input-surname"
@@ -102,7 +102,7 @@ export const MyDataForm = () => {
             <Controller
               name="username"
               control={control}
-              defaultValue={user.username}
+              defaultValue={user?.username}
               render={({ field }) => (
                 <input
                   className="input-username"
@@ -128,7 +128,7 @@ export const MyDataForm = () => {
               id="email"
               type="text"
               autoComplete="email"
-              value={user.email}
+              value={user?.email ?? ""}
               readOnly
             />
           </div>
@@ -138,7 +138,7 @@ export const MyDataForm = () => {
           <Controller
             control={control}
             name="cellphone"
-            defaultValue={user.cellphone}
+            defaultValue={user?.cellphone}
             render={({ field }) => (
               <PhoneInput
                 country="br"
@@ -165,7 +165,7 @@ export const MyDataForm = () => {
             <Controller
               name="birthday"
               control={control}
-              defaultValue={formatDateForInput(user.birthday)}
+              defaultValue={formatDateForInput(user?.birthday ?? "")}
               render={({ field }) => (
                 <input
                   className="input-birthday"
@@ -183,7 +183,7 @@ export const MyDataForm = () => {
           </div>
         </div>
         <button className="btn--save-change" type="submit">
-          SAVE CHANGE
+          CHANGE SAVE
         </button>
       </form>
     </div>

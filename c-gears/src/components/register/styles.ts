@@ -215,6 +215,37 @@ export const StyledRegister = styled.div`
             outline: none;
           }
 
+          .input-birthday {
+            width: 100%;
+            height: 48px;
+
+            background: var(--Gray-3);
+            border: 2px solid transparent;
+            border-radius: 2px;
+
+            box-sizing: border-box;
+
+            font-family: "Orbitron";
+            font-size: 13px;
+            color: var(--Gray-9);
+
+            padding: 0 40px 0 0px;
+            appearance: none;
+            -webkit-appearance: none;
+            position: relative;
+
+            outline: none;
+            text-indent: 5px;
+            transition: all 0.3s ease;
+          }
+
+          .input-birthday::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            opacity: 1;
+          }
+
           .password-input-container {
             position: relative;
             display: flex;

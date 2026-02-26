@@ -4,7 +4,6 @@ import { IUserUpdate } from "../../interfaces";
 import { Users } from "../../entities/user.entity";
 import { hash } from "bcrypt";
 import emailService from "./email.service";
-import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 const userUpdateService = async (
@@ -54,6 +53,10 @@ const userUpdateService = async (
       where: { email: data.email },
     });
 
+    if (data.email === findUser.email) {
+      throw new AppError("You already use that email", 400);
+    }
+
     if (emailExists && emailExists.id !== findUser.id) {
       throw new AppError("Email already exists", 409);
     }
@@ -90,18 +93,17 @@ const userUpdateService = async (
   await userRepository.save(findUser);
 
   if (data.email || data.password) {
-    if (data.password !== undefined && data.password.trim() === "") {
-      throw new AppError("Password cannot be empty", 400);
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const hashedCode = await hash(code, 8);
+
+    findUser.updateCode = hashedCode;
+    findUser.updateCodeExpires = new Date(Date.now() + 10 * 60 * 1000);
+    findUser.updateAttempts = 0;
+
+    if (data.email) {
+      findUser.emailToUpdate = data.email;
     }
-
-    const updateToken = jwt.sign(
-      { id: findUser.id },
-      process.env.SECRET_KEY as string,
-      { expiresIn: "15m" },
-    );
-
-    findUser.updateToken = updateToken;
-    findUser.emailToUpdate = data.email ?? findUser.email;
 
     if (data.password) {
       findUser.passwordToUpdate = await hash(data.password, 10);
@@ -111,30 +113,54 @@ const userUpdateService = async (
 
     await emailService().sendEmail(
       findUser!.email,
-      "Confirmation of Data Change",
-      `Hello, ${
-        findUser!.username
-      }! We have received a request to reset the password or email for the GEARS CLUB account associated with this email address. Please click the link below to confirm the password or email update: ${
-        process.env.DB_HOST
-      }:${process.env.PORT}/users/confirm-update/${updateToken}`,
+      "Confirmation Code - GEARS CLUB",
+      `Hello, ${findUser!.username}! 
+      We received a request to change your email or password on GEARS CLUB. 
+      Your confirmation code is: 
+      
+      ${code} 
+      
+      This code expires in 10 minutes.
+      
+      If you did not request this change, please ignore this email.`,
+
       `
+      <div style="font-family: Arial, sans-serif; text-align: center;">
+
       <p><img src="cid:gearsclublogo" alt="Gears Club Logo" style="width: 80px;"/></p>
-      <p>Hello, ${findUser!.username}!</p>
-      <p>We have received a request to reset the password or email for the GEARS CLUB account associated with this email address.</p>
-      <p>Please click the link below to confirm the password or email update:</p>
-      <a href="${process.env.DB_HOST}:${
-        process.env.PORT
-      }/users/confirm-update/${updateToken}">Click here to confirm the update</a>
-      <p>If the above link doesn't work, copy and paste the following URL into your browser:</p>
-      <p>${process.env.DB_HOST}:${
-        process.env.PORT
-      }/users/confirm-update/${updateToken}</p>
+
+      <h2>Hello, ${findUser!.username}!</h2>
+
+      <p>
+        We received a request to change your email or password
+        on your <strong>GEARS CLUB</strong> account.
+      </p>
+
+      <p>Your confirmation code is:</p>
+
+      <div 
+        style="
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 8px;
+        margin: 20px 0;
+        color: #111;
+      ">
+        ${code}
+      </div>
+
+      <p>This code will expire in <strong>10 minutes</strong>.</p>
+
+      <p style="font-size: 12px; color: #777;">
+        If you did not request this change, please ignore this email.
+      </p>
+
+      </div>
       `,
     );
 
     return {
-      message:
-        "A confirmation email has been sent to your current email address.",
+      message: "A confirmation code was sent to your email.",
     };
   }
 

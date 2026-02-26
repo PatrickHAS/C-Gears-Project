@@ -45,7 +45,7 @@ const Header = () => {
           </li>
         </ul>
         <div className="menu--username-login">
-          {token ? (
+          {token && user ? (
             <div className="container--username-icondown">
               <h4 className="username">{user.username}</h4>
               <FaCaretUp

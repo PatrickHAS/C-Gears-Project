@@ -141,7 +141,7 @@ const Register = () => {
               <input
                 className="input-birthday"
                 id="birthday"
-                type="text"
+                type="date"
                 placeholder="Date of birth"
                 {...register("birthday")}
               />

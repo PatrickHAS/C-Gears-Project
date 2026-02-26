@@ -12,7 +12,7 @@ export interface IRegisterData {
   surname: string;
   username: string;
   cellphone: string;
-  birthday: string;
+  birthday: Date;
   email: string;
   emailConfirm: string;
   password: string;
@@ -41,7 +41,7 @@ interface IRegisterContext {
 }
 
 export const RegisterContext = createContext<IRegisterContext>(
-  {} as IRegisterContext
+  {} as IRegisterContext,
 );
 
 export const RegisterProvider = ({ children }: IRegisterProvider) => {
