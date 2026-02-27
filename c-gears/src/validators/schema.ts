@@ -28,6 +28,21 @@ export const EmailConfirmSchema = yup.object().shape({
     .oneOf([yup.ref("email")], "Must be the same as the email"),
 });
 
+export const PassConfirmSchema = yup.object().shape({
+  password: yup
+    .string()
+    .required("Password is required!")
+    .matches(/[A-Z]/, "At least 1 capital letter")
+    .matches(/([a-z])/, "At least 1 lowercase letter")
+    .matches(/(\d)/, "At least 1 number")
+    .matches(/(\W)|_/, "At least 1 special character")
+    .min(8, "At least 8 digits"),
+  passwordConfirm: yup
+    .string()
+    .required("Confirm your password")
+    .oneOf([yup.ref("password")], "It must be the same as the new password!"),
+});
+
 export const LoginSchema = yup.object().shape({
   email: yup
     .string()

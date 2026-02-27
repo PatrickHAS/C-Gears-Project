@@ -21,51 +21,55 @@ export const ConfirmCodeProvider = ({
   children,
 }: IConfirmCodeProvider): ReactNode => {
   const [showCodeModal, setShowCodeModal] = useState<boolean>(false);
-
   const {
-    pendingSensitiveUpdate,
-    setPendingSensitiveUpdate,
-    showToast,
     TOAST_MESSAGES,
+    showToast,
+    setPendingSensitiveUpdate,
+    pendingSensitiveUpdate,
   } = useUserSettingsContext();
 
-  const { setUser, logout } = useLoginContext();
+  const { logout } = useLoginContext();
 
   const confirmCodeSubmit = async (data: { code: string }) => {
     try {
-      const response = await api.patch("/users/confirm-update", {
-        code: data.code,
-      });
-
-      if (pendingSensitiveUpdate?.email) {
-        setPendingSensitiveUpdate(null);
-        setShowCodeModal(false);
-
-        showToast(
-          "success",
-          "Email updated successfully! You will be logged out.",
-        );
-
-        setTimeout(() => {
-          logout();
-        }, 1500);
-
+      if (!pendingSensitiveUpdate) {
+        showToast("error", TOAST_MESSAGES.NOTHING_PENDING);
         return;
       }
 
-      setUser(response.data);
+      await api.patch("/users/confirm-update", {
+        code: data.code,
+      });
+
+      const wasEmailChange = !!pendingSensitiveUpdate.email;
+      const wasPasswordChange = !!pendingSensitiveUpdate.password;
+
       setPendingSensitiveUpdate(null);
       setShowCodeModal(false);
+
+      if (wasEmailChange) {
+        showToast("success", TOAST_MESSAGES.UPDATE_EMAIL_SUCCESS);
+
+        setTimeout(() => logout(), 1500);
+        return;
+      }
+
+      if (wasPasswordChange) {
+        showToast("success", TOAST_MESSAGES.UPDATE_PASSWORD_SUCCESS);
+
+        setTimeout(() => logout(), 1500);
+        return;
+      }
     } catch (error: any) {
       const message = error?.response?.data?.message;
 
-      if (message === "Invalid code") {
-        showToast("error", "Invalid confirmation code!");
+      if (message === "Invalid confirmation code") {
+        showToast("error", TOAST_MESSAGES.INVALID_CODE);
         return;
       }
 
       if (message === "Code expired") {
-        showToast("error", "Confirmation code expired!");
+        showToast("error", TOAST_MESSAGES.CODE_EXPIRED);
         return;
       }
 

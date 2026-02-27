@@ -17,12 +17,20 @@ export const StyledConfirmCodeModal = styled.div`
     align-items: center;
 
     width: 304px;
-    height: 253px;
+    height: 254px;
 
     background: linear-gradient(to right, var(--Black-0), var(--Gray-8));
     position: relative;
     border-radius: 5px;
     overflow: hidden;
+
+    @media (min-width: 500px) {
+      width: 404px;
+    }
+
+    @media (min-width: 1000px) {
+      width: 604px;
+    }
 
     .card-confirm-code {
       display: flex;
@@ -37,6 +45,14 @@ export const StyledConfirmCodeModal = styled.div`
 
       overflow: hidden;
       border-radius: 5px;
+
+      @media (min-width: 500px) {
+        width: 400px;
+      }
+
+      @media (min-width: 1000px) {
+        width: 600px;
+      }
 
       .header-confirm-code {
         display: flex;
@@ -72,6 +88,21 @@ export const StyledConfirmCodeModal = styled.div`
           color: var(--Red-6);
           transition: 0.9s;
         }
+
+        @media (min-width: 1000px) {
+          .logo-confirm-code {
+            width: 50px;
+            height: 50px;
+          }
+
+          .text-confirm-code {
+            font-size: 15px;
+          }
+
+          .icon-close-confirm-code {
+            font-size: 25px;
+          }
+        }
       }
 
       .form-confirm-code {
@@ -92,6 +123,10 @@ export const StyledConfirmCodeModal = styled.div`
 
           gap: 10px;
 
+          @media (min-width: 1000px) {
+            gap: 20px;
+          }
+
           .code-input {
             width: 30px;
             height: 40px;
@@ -106,6 +141,11 @@ export const StyledConfirmCodeModal = styled.div`
             font-size: 18px;
             font-family: "Orbitron";
             transition: 0.3s;
+
+            @media (min-width: 1000px) {
+              width: 40px;
+              height: 50px;
+            }
           }
         }
 
@@ -130,6 +170,11 @@ export const StyledConfirmCodeModal = styled.div`
           font-weight: 600;
           font-size: 12px;
           line-height: 0px;
+
+          @media (min-width: 1000px) {
+            width: 120px;
+            height: 40px;
+          }
         }
 
         .btn-confirm-code:hover {
@@ -145,6 +190,10 @@ export const StyledConfirmCodeModal = styled.div`
         font-size: 10px;
         line-height: 20px;
         color: var(--Gray-0);
+
+        @media (min-width: 1000px) {
+          font-size: 12px;
+        }
       }
     }
   }
@@ -163,6 +212,11 @@ export const StyledConfirmCodeModal = styled.div`
     border-radius: inherit;
 
     animation: animate 30s linear infinite;
+
+    @media (min-width: 1000px) {
+      width: 220px;
+      height: 300%;
+    }
   }
 
   @keyframes animate {

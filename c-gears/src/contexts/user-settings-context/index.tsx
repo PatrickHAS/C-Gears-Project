@@ -30,7 +30,6 @@ interface IUserSettingsContext {
 
   updateSubmit: (data: Partial<IUpdateUserData>) => Promise<UpdateSubmitResult>;
   formatDateForInput: (date: Date | string) => string;
-
   showToast: (type: "success" | "error" | "info", message: string) => void;
 
   toastStyle: {
@@ -40,12 +39,20 @@ interface IUserSettingsContext {
 
   TOAST_MESSAGES: {
     SUCCESS: string;
+    UPDATE_SUCCESS: string;
+    UPDATE_EMAIL_SUCCESS: string;
+    UPDATE_PASSWORD_SUCCESS: string;
+    CODE_SENT: string;
     NO_CHANGES: string;
     USERNAME_SAME: string;
     USERNAME_EXISTS: string;
     EMAIL_SAME: string;
     CELLPHONE_SAME: string;
     CELLPHONE_EXISTS: string;
+    EMPETY_FIELDS: string;
+    INVALID_CODE: string;
+    CODE_EXPIRED: string;
+    NOTHING_PENDING: string;
     ERROR: string;
   };
 }
@@ -81,6 +88,7 @@ export const UserSettingsProvider = ({
     UPDATE_EMAIL_SUCCESS: "Email updated successfully! You will be logged out!",
     UPDATE_PASSWORD_SUCCESS:
       "Password updated successfully! You will be logged out!",
+    CODE_SENT: "A confirmation code has been sent to your email.",
     NO_CHANGES: "No changes detected!",
     USERNAME_SAME: "You already use that name!",
     USERNAME_EXISTS: "Username already exists!",
@@ -88,6 +96,9 @@ export const UserSettingsProvider = ({
     CELLPHONE_SAME: "You already use this phone number!",
     CELLPHONE_EXISTS: "The phone number already exists!",
     EMPETY_FIELDS: "Submitting empty fields is not allowed!",
+    INVALID_CODE: "Invalid confirmation code!",
+    CODE_EXPIRED: "Confirmation code expired!",
+    NOTHING_PENDING: "No pending update request!",
     ERROR: "Error updating data!",
   };
 
@@ -99,6 +110,8 @@ export const UserSettingsProvider = ({
     data: Partial<IUpdateUserData>,
   ): Promise<UpdateSubmitResult> => {
     try {
+      setPendingSensitiveUpdate(null);
+
       if (!user) {
         showToast("error", TOAST_MESSAGES.ERROR);
         return { status: "error" };
@@ -121,7 +134,6 @@ export const UserSettingsProvider = ({
       }
 
       showToast("success", TOAST_MESSAGES.UPDATE_SUCCESS);
-      console.log("Data updated successfully:", cleanedData);
 
       return { status: "success" };
     } catch (error: any) {

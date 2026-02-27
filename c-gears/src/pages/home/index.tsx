@@ -20,24 +20,28 @@ const Home = () => {
   const { isRegister } = useRegisterContext();
   const { isEmailConfirm } = useEmailConfirmContext();
   const { isUserSettings } = useUserSettingsContext();
-  const [isVideoPlayable, setIsVideoPlayable] = useState(true);
+  const [isVideoPlayable, setIsVideoPlayable] = useState(
+    () => window.innerWidth > 1024,
+  );
   const { showCodeModal } = useConfirmCodeContext();
 
   useEffect(() => {
+    const video = document.getElementById(
+      "background-video",
+    ) as HTMLVideoElement | null;
+
+    if (!video) return;
+
     const handleResize = () => {
-      const video = document.getElementById(
-        "background-video",
-      ) as HTMLVideoElement;
-      if (video) {
-        if (window.innerWidth <= 1024) {
-          video.pause();
-          setIsVideoPlayable(false);
-        } else {
-          if (isVideoPlayable) {
-            video.play();
-          }
-          setIsVideoPlayable(true);
-        }
+      if (window.innerWidth <= 1024) {
+        video.pause();
+        setIsVideoPlayable(false);
+      } else {
+        setIsVideoPlayable(true);
+
+        video.play().catch((err) => {
+          console.warn("Autoplay prevented:", err);
+        });
       }
     };
 
@@ -48,7 +52,7 @@ const Home = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [isVideoPlayable]);
+  }, []);
 
   return (
     <StyledHome className="StyledHome">
@@ -57,7 +61,7 @@ const Home = () => {
         autoPlay
         loop
         id="background-video"
-        style={{ display: window.innerWidth <= 1024 ? "none" : "flex" }}
+        style={{ display: isVideoPlayable ? "flex" : "none" }}
       >
         <source src={backgroundVideo} type="video/mp4" />
       </video>

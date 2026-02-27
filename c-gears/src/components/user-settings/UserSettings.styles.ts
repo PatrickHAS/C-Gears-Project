@@ -406,6 +406,17 @@ export const StyledUserSettings = styled.section`
             }
           }
 
+          .input--container .password-toggle-button {
+            display: flex;
+            align-items: center;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--Black-0);
+          }
+
           input.form-control {
             height: 32px;
             font-size: 8px;

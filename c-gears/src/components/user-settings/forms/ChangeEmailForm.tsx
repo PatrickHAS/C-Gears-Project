@@ -29,6 +29,7 @@ export const ChangeEmailForm = () => {
     const result = await updateSubmit({ email: data.email });
 
     if (result.status === "requires-confirmation") {
+      showToast("info", TOAST_MESSAGES.CODE_SENT);
       setShowCodeModal(true);
     }
   };

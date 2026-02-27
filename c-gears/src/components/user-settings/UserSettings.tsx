@@ -19,6 +19,7 @@ export interface IUpdateUserData {
   surname?: string;
   username?: string;
   email?: string;
+  password?: string;
   cellphone?: string;
   birthday?: string;
   address?: IAddressData;

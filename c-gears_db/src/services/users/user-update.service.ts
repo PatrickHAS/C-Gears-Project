@@ -93,6 +93,12 @@ const userUpdateService = async (
   await userRepository.save(findUser);
 
   if (data.email || data.password) {
+    findUser.emailToUpdate = null;
+    findUser.passwordToUpdate = null;
+    findUser.updateCode = null;
+    findUser.updateCodeExpires = null;
+    findUser.updateAttempts = 0;
+
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
     const hashedCode = await hash(code, 8);
