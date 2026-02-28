@@ -76,6 +76,7 @@ const Login = () => {
                 id="password-login"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                autoComplete="current-password"
                 {...register("password")}
               />
               <button

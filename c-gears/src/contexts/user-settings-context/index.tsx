@@ -47,6 +47,7 @@ interface IUserSettingsContext {
     USERNAME_SAME: string;
     USERNAME_EXISTS: string;
     EMAIL_SAME: string;
+    PASSWORD_SAME: string;
     CELLPHONE_SAME: string;
     CELLPHONE_EXISTS: string;
     EMPETY_FIELDS: string;
@@ -93,6 +94,7 @@ export const UserSettingsProvider = ({
     USERNAME_SAME: "You already use that name!",
     USERNAME_EXISTS: "Username already exists!",
     EMAIL_SAME: "You already use that email!",
+    PASSWORD_SAME: "You already use that password!",
     CELLPHONE_SAME: "You already use this phone number!",
     CELLPHONE_EXISTS: "The phone number already exists!",
     EMPETY_FIELDS: "Submitting empty fields is not allowed!",
@@ -138,6 +140,11 @@ export const UserSettingsProvider = ({
       return { status: "success" };
     } catch (error: any) {
       const message = error?.response?.data?.message;
+
+      if (message === "You already use this password") {
+        showToast("error", TOAST_MESSAGES.PASSWORD_SAME);
+        return { status: "error" };
+      }
 
       if (message === "You already use that name") {
         showToast("error", TOAST_MESSAGES.USERNAME_SAME);

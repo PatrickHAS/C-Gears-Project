@@ -2,7 +2,7 @@ import AppDataSource from "../../data-source";
 import { AppError } from "../../errors/app-error";
 import { IUserUpdate } from "../../interfaces";
 import { Users } from "../../entities/user.entity";
-import { hash } from "bcrypt";
+import { compare, hash } from "bcrypt";
 import emailService from "./email.service";
 import "dotenv/config";
 
@@ -93,6 +93,14 @@ const userUpdateService = async (
   await userRepository.save(findUser);
 
   if (data.email || data.password) {
+    if (data.password) {
+      const isSamePassword = await compare(data.password, findUser.password);
+
+      if (isSamePassword) {
+        throw new AppError("You already use this password", 400);
+      }
+    }
+
     findUser.emailToUpdate = null;
     findUser.passwordToUpdate = null;
     findUser.updateCode = null;

@@ -54,13 +54,21 @@ export const ChangePasswordForm = () => {
                 render={({ field }) => (
                   <>
                     <input
+                      type="email"
+                      name="username"
+                      autoComplete="username"
+                      defaultValue=""
+                      hidden
+                    />
+
+                    <input
+                      {...field}
                       className="input-password"
                       id="new-password"
                       type={showPassword ? "text" : "password"}
                       autoComplete="new-password"
-                      value={field.value ?? ""}
-                      onChange={field.onChange}
                     />
+
                     <button
                       type="button"
                       className="password-toggle-button"
