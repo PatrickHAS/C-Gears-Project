@@ -400,6 +400,15 @@ export const StyledUserSettings = styled.section`
               }
             }
 
+            .input-email:hover {
+              cursor: not-allowed;
+              background: var(--Gray-0);
+            }
+
+            .input-birthday:hover {
+              cursor: pointer;
+            }
+
             .icon-edit {
               padding: 5px;
               cursor: pointer;

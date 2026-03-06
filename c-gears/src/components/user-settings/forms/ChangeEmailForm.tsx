@@ -50,7 +50,7 @@ export const ChangeEmailForm = () => {
                 control={control}
                 render={({ field }) => (
                   <input
-                    className="input-email"
+                    className="input-change-email"
                     id="new-email"
                     type="email"
                     autoComplete="email"
@@ -74,7 +74,7 @@ export const ChangeEmailForm = () => {
                 control={control}
                 render={({ field }) => (
                   <input
-                    className="input-email"
+                    className="input-change-emailConfirm"
                     id="emailConfirm"
                     type="email"
                     autoComplete="email"

@@ -1,3 +1,5 @@
+import { LinkedAccountProvider } from "../entities/user-linked-account.entity";
+
 export interface IUserCreate {
   name: string;
   surname: string;
@@ -54,4 +56,30 @@ export interface IAddressUpdate {
 
 export interface IUserResetPass {
   password?: string;
+}
+
+export interface ILinkAccountRequest {
+  userId: string;
+  provider: LinkedAccountProvider;
+  providerId: string;
+  gamertag: string;
+}
+
+export interface ILinkAccountMe {
+  id: string;
+  name: string;
+  surname: string;
+  username: string;
+  linkedAccounts: Array<{
+    id: string;
+    provider: string;
+    gamertag: string;
+    status: string;
+    linkedAt: Date;
+    canUnlink: boolean;
+  }>;
+}
+
+export interface IIdParams {
+  id: string;
 }

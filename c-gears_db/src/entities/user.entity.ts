@@ -9,7 +9,9 @@ import {
   UpdateDateColumn,
   JoinColumn,
   OneToOne,
+  OneToMany,
 } from "typeorm";
+import { LinkedAccount } from "./user-linked-account.entity";
 
 @Entity("users")
 export class Users {
@@ -75,4 +77,10 @@ export class Users {
   })
   @JoinColumn()
   address: IUserAddress;
+
+  @OneToMany(() => LinkedAccount, (linkedAccount) => linkedAccount.user, {
+    eager: true,
+    cascade: true,
+  })
+  linkedAccounts: LinkedAccount[];
 }

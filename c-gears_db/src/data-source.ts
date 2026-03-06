@@ -2,8 +2,9 @@ import { DataSource } from "typeorm";
 import "dotenv/config";
 import { Users } from "./entities/user.entity";
 import { Address } from "./entities/user-address.entity";
-import { InitialMigration1771944559316 } from "./migrations/1771944559316-initialMigration";
-import { CreateTables1771944625900 } from "./migrations/1771944625900-createTables";
+import { InitialMigration1772468663777 } from "./migrations/1772468663777-initialMigration";
+import { LinkedAccount } from "./entities/user-linked-account.entity";
+import { CreateTables1772468764169 } from "./migrations/1772468764169-createTables";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
@@ -22,8 +23,8 @@ const AppDataSource = new DataSource(
         database: process.env.POSTGRES_DB,
         logging: true,
         synchronize: false,
-        entities: [Users, Address],
-        migrations: [InitialMigration1771944559316, CreateTables1771944625900],
+        entities: [Users, Address, LinkedAccount],
+        migrations: [InitialMigration1772468663777, CreateTables1772468764169],
       },
 );
 
