@@ -42,6 +42,9 @@ declare module "react-icons/fa" {
   >;
   export const FaLink: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export const FaEdit: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  export const FaPlaystation: React.ComponentType<
+    React.SVGProps<SVGSVGElement>
+  >;
 }
 
 declare module "react-icons/fa6" {

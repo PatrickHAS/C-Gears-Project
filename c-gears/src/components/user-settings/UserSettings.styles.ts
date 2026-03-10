@@ -305,6 +305,10 @@ export const StyledUserSettings = styled.section`
         width: 200px;
       }
 
+      @media (min-width: 700px) {
+        width: 300px;
+      }
+
       @media (min-width: 1000px) {
         width: 700px;
       }
@@ -343,6 +347,117 @@ export const StyledUserSettings = styled.section`
 
         border-radius: 5px;
         margin-top: 10px;
+
+        .input-link-btn-desable--container {
+          display: flex;
+          flex-direction: column;
+
+          gap: 10px;
+
+          @media (min-width: 1000px) {
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+          }
+
+          .lg-input-btn--container {
+            display: flex;
+            align-items: center;
+
+            width: 100%;
+            height: 30px;
+
+            border: 1px solid var(--Gray-4);
+            border-radius: 5px;
+
+            .icon-lg--container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              width: 45px;
+              height: 30px;
+
+              background: var(--Gray-0);
+              border-radius: 5px 0 0 5px;
+
+              .steam-lg,
+              .xbox-lg,
+              .psn-lg {
+                font-size: 20px;
+              }
+            }
+
+            input {
+              width: 100%;
+              height: 30px;
+
+              background: transparent;
+              box-sizing: border-box;
+              text-indent: 5px;
+              outline: none;
+              border-style: none;
+            }
+
+            .btn-link-account-steam,
+            .btn-link-account-xbox,
+            .btn-link-account-psn {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              width: 40px;
+              height: 30px;
+
+              border-style: none;
+              border-radius: 0 5px 5px 0;
+              background: var(--Gray-0);
+            }
+
+            .btn-link-account-steam:hover,
+            .btn-link-account-xbox:hover,
+            .btn-link-account-psn:hover {
+              cursor: pointer;
+            }
+          }
+
+          .btn-unlink-steam,
+          .btn-unlink-xbox,
+          .btn-unlink-psn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100px;
+            height: 20px;
+
+            font-family: "orbitron";
+            font-size: 10px;
+
+            border-style: none;
+            border-radius: 3px;
+            border: 1px solid var(--Gray-4);
+
+            background: transparent;
+            transition: 0.8s;
+
+            @media (min-width: 1000px) {
+              width: 80px;
+              height: 30px;
+
+              border-radius: 5px;
+            }
+          }
+
+          .btn-unlink-steam:hover,
+          .btn-unlink-xbox:hover,
+          .btn-unlink-psn:hover {
+            cursor: pointer;
+            background: var(--Gray-9);
+            color: var(--Gray-0);
+            transition: 0.8s;
+          }
+        }
 
         .label-input--container {
           display: flex;
@@ -526,6 +641,10 @@ export const StyledUserSettings = styled.section`
           color: var(--Gray-1);
           transition: 0.9s;
         }
+      }
+
+      .form-link-account {
+        flex-direction: column;
       }
 
       .all-inputs--container {

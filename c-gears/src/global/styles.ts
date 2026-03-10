@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 		--Red-6:#fa5252;
 		--Red-9:#c92a2a;
 		--Indigo-9: #364fc7;
+		--Ocean-blue-8: #023e8a;
   }
 
 html, body, div, span, applet, object, iframe,
