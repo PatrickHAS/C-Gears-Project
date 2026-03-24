@@ -1,35 +1,51 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import { IAuthUser } from "../interfaces";
 
-const ensureAuthMiddleware = async (
+interface ITokenPayload {
+  sub: string;
+  isAdm: boolean;
+  isActive: boolean;
+  availability: boolean;
+}
+
+const ensureAuthMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  let token = req.headers.authorization;
-  if (!token) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({
+      message: "Missing authorization token",
+    });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(
+      token,
+      process.env.SECRET_KEY as string,
+    ) as ITokenPayload;
+
+    const user: IAuthUser = {
+      id: decoded.sub,
+      isAdm: decoded.isAdm,
+      isActive: decoded.isActive,
+      availability: decoded.availability,
+    };
+
+    req.user = user;
+
+    return next();
+  } catch {
     return res.status(401).json({
       message: "Invalid token",
     });
   }
-
-  token = token.split(" ")[1];
-
-  jwt.verify(token, process.env.SECRET_KEY as string, (error, decoded: any) => {
-    if (error) {
-      return res.status(401).json({
-        message: "Invalid token",
-      });
-    }
-    req.user = {
-      id: decoded.sub,
-      isActive: decoded.isActive,
-      isAdm: decoded.isAdm,
-      availability: decoded.availability,
-    };
-
-    return next();
-  });
 };
+
 export default ensureAuthMiddleware;

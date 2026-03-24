@@ -83,3 +83,12 @@ export interface ILinkAccountMe {
 export interface IIdParams {
   id: string;
 }
+
+export interface IAuthUser {
+  id: string;
+  steamid?: string;
+  displayName?: string;
+  isAdm: boolean;
+  isActive: boolean;
+  availability: boolean;
+}

@@ -5,6 +5,9 @@ declare global {
       EMAIL_USER: string | undefined;
       EMAIL_API_KEY: string | undefined;
       EMAIL_PASS: string | undefined;
+      STEAM_RETURN_URL: string;
+      STEAM_REALM: string;
+      STEAM_API_KEY: string;
     }
   }
 }

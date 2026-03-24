@@ -1,5 +1,5 @@
 import { useLoginContext } from "../../contexts/login-context";
-import { useUserSettingsContext } from "../../contexts/user-settings-context";
+import { useUserSettingsContext } from "../../contexts/user-settings-context/hook";
 import { StyledUserSettings } from "./UserSettings.styles";
 import { TiArrowBack } from "react-icons/ti";
 import { RiFileUserLine } from "react-icons/ri";

@@ -32,12 +32,38 @@ export const linkAccountService = async ({
   if (!user) {
     throw new AppError("User not found", 404);
   }
+
   const alreadyLinked = await linkedRepo.findOne({
     where: { provider, providerId },
+    relations: ["user"],
   });
 
   if (alreadyLinked) {
-    throw new AppError("This account is already linked to another user.");
+    if (alreadyLinked.user.id !== userId) {
+      throw new AppError(
+        "This account is already linked to another user.",
+        409,
+      );
+    }
+
+    if (alreadyLinked.status === LinkedAccountStatus.ACTIVE) {
+      throw new AppError(
+        "This account is already linked to your profile.",
+        409,
+      );
+    }
+
+    if (alreadyLinked.status === LinkedAccountStatus.INACTIVE) {
+      alreadyLinked.status = LinkedAccountStatus.ACTIVE;
+      alreadyLinked.gamertag = gamertag;
+      alreadyLinked.linkedAt = new Date();
+      alreadyLinked.unlinkAvailableAt = addMonths(new Date(), 6);
+
+      await linkedRepo.save(alreadyLinked);
+      return alreadyLinked;
+    }
+
+    return alreadyLinked;
   }
 
   const hasActiveProvider = user.linkedAccounts.find(

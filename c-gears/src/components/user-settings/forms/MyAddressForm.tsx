@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { useLoginContext } from "../../../contexts/login-context";
-import { useUserSettingsContext } from "../../../contexts/user-settings-context";
+import { useUserSettingsContext } from "../../../contexts/user-settings-context/hook";
 import { AddressSettingsSchema } from "../../../validators/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 

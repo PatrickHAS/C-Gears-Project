@@ -1,21 +1,9 @@
-import { ReactNode, useContext, useState, createContext } from "react";
-import api from "../../services/Api";
-import { useUserSettingsContext } from "../user-settings-context";
+import { ReactNode, useState } from "react";
+import { IConfirmCodeProvider } from "./types";
+import { useUserSettingsContext } from "../user-settings-context/hook";
 import { useLoginContext } from "../login-context";
-
-interface IConfirmCodeProvider {
-  children: ReactNode;
-}
-
-interface IConfirmCodeContext {
-  setShowCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
-  showCodeModal: boolean;
-  confirmCodeSubmit: (data: { code: string }) => Promise<void>;
-}
-
-export const ConfirmCodeContext = createContext<IConfirmCodeContext>(
-  {} as IConfirmCodeContext,
-);
+import { ConfirmCodeContext } from "./context";
+import api from "../../services/Api";
 
 export const ConfirmCodeProvider = ({
   children,
@@ -89,5 +77,3 @@ export const ConfirmCodeProvider = ({
     </ConfirmCodeContext.Provider>
   );
 };
-
-export const useConfirmCodeContext = () => useContext(ConfirmCodeContext);

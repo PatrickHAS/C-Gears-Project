@@ -5,8 +5,8 @@ import { RegisterProvider } from "./register-context";
 import { EmailConfirmProvider } from "./email-confirm-context";
 import { PasswordResetProvider } from "./password-reset-context";
 import { DropdownSetupProvider } from "./drop-down-setup-context";
-import { UserSettingsProvider } from "./user-settings-context";
-import { ConfirmCodeProvider } from "./confirm-code-contex";
+import { UserSettingsProvider } from "./user-settings-context/provider";
+import { ConfirmCodeProvider } from "./confirm-code-contex/provider";
 
 interface IProvider {
   children: ReactNode;

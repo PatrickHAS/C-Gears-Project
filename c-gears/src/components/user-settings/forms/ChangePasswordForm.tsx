@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useConfirmCodeContext } from "../../../contexts/confirm-code-contex";
-import { useUserSettingsContext } from "../../../contexts/user-settings-context";
+import { useConfirmCodeContext } from "../../../contexts/confirm-code-contex/hook";
+import { useUserSettingsContext } from "../../../contexts/user-settings-context/hook";
 import { PassConfirmSchema } from "../../../validators/schema";
 import { Controller, useForm } from "react-hook-form";
 import { useRegisterContext } from "../../../contexts/register-context";
@@ -56,7 +56,7 @@ export const ChangePasswordForm = () => {
                     <input
                       type="email"
                       name="username"
-                      autoComplete="username"
+                      autoComplete="new-password"
                       defaultValue=""
                       hidden
                     />

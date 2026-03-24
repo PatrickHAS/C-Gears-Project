@@ -335,7 +335,7 @@ export const StyledUserSettings = styled.section`
       .form-user-address,
       .form-change-email,
       .form-change-pass,
-      .form-link-account,
+      .link-accounts--container,
       .all-inputs--container {
         display: flex;
         flex-wrap: wrap;
@@ -418,6 +418,9 @@ export const StyledUserSettings = styled.section`
             .btn-link-account-xbox:hover,
             .btn-link-account-psn:hover {
               cursor: pointer;
+              background: var(--Gray-9);
+              color: var(--Gray-0);
+              transition: 0.8s;
             }
           }
 
@@ -643,8 +646,19 @@ export const StyledUserSettings = styled.section`
         }
       }
 
-      .form-link-account {
+      .link-accounts--container {
         flex-direction: column;
+
+        .input-link-account-steam,
+        .input-link-account-xbox,
+        .input-link-account-psn {
+          cursor: pointer;
+          caret-color: transparent;
+        }
+
+        @media (min-width: 1000px) {
+          width: 500px;
+        }
       }
 
       .all-inputs--container {

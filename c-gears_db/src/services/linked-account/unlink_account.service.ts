@@ -35,6 +35,7 @@ export const unlinkAccountService = async (
   }
 
   linked.status = LinkedAccountStatus.INACTIVE;
+  linked.unlinkAvailableAt = new Date();
 
   await repo.save(linked);
 

@@ -1,8 +1,8 @@
 import { IoCloseOutline } from "react-icons/io5";
 import { StyledConfirmCodeModal } from "./styles";
-import { useConfirmCodeContext } from "../../../contexts/confirm-code-contex";
 import { useRef, useState } from "react";
-import { useUserSettingsContext } from "../../../contexts/user-settings-context";
+import { useConfirmCodeContext } from "../../../contexts/confirm-code-contex/hook";
+import { useUserSettingsContext } from "../../../contexts/user-settings-context/hook";
 
 const ConfirmCodeModal = () => {
   const { setShowCodeModal, confirmCodeSubmit } = useConfirmCodeContext();

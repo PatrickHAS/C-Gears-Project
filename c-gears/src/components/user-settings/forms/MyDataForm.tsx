@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { useLoginContext } from "../../../contexts/login-context";
-import { useUserSettingsContext } from "../../../contexts/user-settings-context";
+import { useUserSettingsContext } from "../../../contexts/user-settings-context/hook";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UserSettingsSchema } from "../../../validators/schema";
 import PhoneInput from "react-phone-input-2";

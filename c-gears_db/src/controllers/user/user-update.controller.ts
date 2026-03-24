@@ -7,7 +7,7 @@ const userUpdateController = async (req: Request, res: Response) => {
   const user: IUserUpdate = req.body;
 
   const { id } = req.params as unknown as IIdParams;
-  const token = req.user.id as string;
+  const token = req.user!.id as string;
 
   const updatedUser = await userUpdateService(user, id, token);
 

@@ -10,6 +10,7 @@ import {
 import { toast } from "react-toastify";
 import { useMediaQuery } from "react-responsive";
 import { useHeaderContext } from "../header-context";
+import { useRegisterContext } from "../register-context";
 
 interface ILoginProvider {
   children: ReactNode;

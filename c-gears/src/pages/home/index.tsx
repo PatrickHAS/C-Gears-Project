@@ -10,10 +10,10 @@ import Login from "../../components/login";
 import Register from "../../components/register";
 import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
 import EmailConfirm from "../../components/email-confirm";
-import { useUserSettingsContext } from "../../contexts/user-settings-context";
 import UserSettings from "../../components/user-settings/UserSettings";
-import { useConfirmCodeContext } from "../../contexts/confirm-code-contex";
 import ConfirmCodeModal from "../../components/modals/confirm-code-modal";
+import { useConfirmCodeContext } from "../../contexts/confirm-code-contex/hook";
+import { useUserSettingsContext } from "../../contexts/user-settings-context/hook";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();

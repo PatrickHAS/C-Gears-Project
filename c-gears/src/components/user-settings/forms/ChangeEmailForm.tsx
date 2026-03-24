@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useUserSettingsContext } from "../../../contexts/user-settings-context";
+import { useUserSettingsContext } from "../../../contexts/user-settings-context/hook";
 import { EmailConfirmSchema } from "../../../validators/schema";
 import { Controller, useForm } from "react-hook-form";
-import { useConfirmCodeContext } from "../../../contexts/confirm-code-contex";
+import { useConfirmCodeContext } from "../../../contexts/confirm-code-contex/hook";
 
 export const ChangeEmailForm = () => {
   const { updateSubmit, TOAST_MESSAGES, showToast } = useUserSettingsContext();
