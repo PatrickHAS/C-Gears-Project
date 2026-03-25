@@ -1,13 +1,13 @@
 import { StyledHeader } from "./styles";
 import { BsOption } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
-import { useHeaderContext } from "../../contexts/header-context";
 import HeaderMenuListMobile from "../mobile/herder-menu";
-import { useLoginContext } from "../../contexts/login-context";
 import { RxExit } from "react-icons/rx";
 import { FaCaretUp } from "react-icons/fa";
-import { useDropdownSetupContext } from "../../contexts/drop-down-setup-context";
 import DropdownSetup from "../drop-down-setup";
+import { useLoginContext } from "../../contexts/login-context/hook";
+import { useHeaderContext } from "../../contexts/header-context/hook";
+import { useDropdownSetupContext } from "../../contexts/drop-down-setup-context/hook";
 
 const Header = () => {
   const { isMenuMobile, setIsMenuMobile, isLogin, setIsLogin } =

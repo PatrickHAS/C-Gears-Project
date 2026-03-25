@@ -1,14 +1,14 @@
 /* eslint-disable no-sequences */
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHeaderContext } from "../../contexts/header-context";
 import { StyledLogin } from "./styles";
 import { IoCloseOutline } from "react-icons/io5";
 import { LoginSchema } from "../../validators/schema";
-import { useLoginContext } from "../../contexts/login-context";
-import { useRegisterContext } from "../../contexts/register-context";
-import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useRegisterContext } from "../../contexts/register-context/hook";
+import { useLoginContext } from "../../contexts/login-context/hook";
+import { useHeaderContext } from "../../contexts/header-context/hook";
+import { useEmailConfirmContext } from "../../contexts/email-confirm-context/hook";
 
 interface Ilogin {
   email: string;

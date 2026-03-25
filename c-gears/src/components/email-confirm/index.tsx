@@ -1,11 +1,11 @@
 /* eslint-disable no-sequences */
 import { useForm } from "react-hook-form";
-import { useHeaderContext } from "../../contexts/header-context";
-import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
 import { StyledEmailConfirm } from "./styles";
 import { IoCloseOutline } from "react-icons/io5";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EmailConfirmSchema } from "../../validators/schema";
+import { useHeaderContext } from "../../contexts/header-context/hook";
+import { useEmailConfirmContext } from "../../contexts/email-confirm-context/hook";
 
 export interface IEmail {
   email: string;

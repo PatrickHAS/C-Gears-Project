@@ -1,17 +1,15 @@
 /* eslint-disable no-sequences */
 import { IoCloseOutline } from "react-icons/io5";
 import { StyledRegister } from "./styles";
-import {
-  IRegisterData,
-  useRegisterContext,
-} from "../../contexts/register-context";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { Controller, useForm } from "react-hook-form";
 import { RegisterSchema } from "../../validators/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { useHeaderContext } from "../../contexts/header-context";
+import { useRegisterContext } from "../../contexts/register-context/hook";
+import { IRegisterData } from "../../contexts/register-context/types";
+import { useHeaderContext } from "../../contexts/header-context/hook";
 
 const Register = () => {
   const { isLogin, setIsLogin } = useHeaderContext();

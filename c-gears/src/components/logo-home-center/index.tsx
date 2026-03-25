@@ -1,7 +1,7 @@
-import { useHeaderContext } from "../../contexts/header-context";
-import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
-import { useRegisterContext } from "../../contexts/register-context";
 import { StyledLogoHomeCenter } from "./styles";
+import { useRegisterContext } from "../../contexts/register-context/hook";
+import { useHeaderContext } from "../../contexts/header-context/hook";
+import { useEmailConfirmContext } from "../../contexts/email-confirm-context/hook";
 
 const LogoHomeCenter = () => {
   const { isLogin } = useHeaderContext();

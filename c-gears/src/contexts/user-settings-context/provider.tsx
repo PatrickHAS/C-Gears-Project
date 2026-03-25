@@ -4,12 +4,12 @@ import {
   LinkedAccount,
   UpdateSubmitResult,
 } from "./types";
-import { useLoginContext } from "../login-context";
 import { IUpdateUserData } from "../../components/user-settings/UserSettings";
 import { toast, ToastOptions } from "react-toastify";
 import api from "../../services/Api";
 import { UserSettingsContext } from "./context";
 import { useMediaQuery } from "react-responsive";
+import { useLoginContext } from "../login-context/hook";
 
 export const UserSettingsProvider = ({
   children,

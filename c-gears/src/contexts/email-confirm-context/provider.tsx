@@ -1,27 +1,9 @@
-import { useContext, createContext, useState, ReactNode } from "react";
-import api from "../../services/Api";
+import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { IEmail, IEmailConfirmProvider } from "./types";
+import api from "../../services/Api";
 import { toast } from "react-toastify";
-
-interface IEmailConfirmProvider {
-  children: ReactNode;
-}
-
-interface IEmail {
-  email: string;
-  emailConfirm: string;
-}
-
-interface IEmailConfirmContext {
-  setIsEmailConfirm: React.Dispatch<React.SetStateAction<boolean>>;
-  emailConfirmSubmit: (data: IEmail) => Promise<void>;
-  isEmailConfirm: boolean;
-  isMobile: boolean;
-}
-
-export const EmailConfirmContext = createContext<IEmailConfirmContext>(
-  {} as IEmailConfirmContext
-);
+import { EmailConfirmContext } from "./context";
 
 export const EmailConfirmProvider = ({ children }: IEmailConfirmProvider) => {
   const [isEmailConfirm, setIsEmailConfirm] = useState(false);
@@ -93,4 +75,3 @@ export const EmailConfirmProvider = ({ children }: IEmailConfirmProvider) => {
     </EmailConfirmContext.Provider>
   );
 };
-export const useEmailConfirmContext = () => useContext(EmailConfirmContext);

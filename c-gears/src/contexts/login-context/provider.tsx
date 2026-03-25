@@ -1,62 +1,11 @@
-import { useNavigate, NavigateFunction } from "react-router-dom";
-import api from "../../services/Api";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { ILoginData, ILoginProvider, IUser } from "./types";
+import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { useHeaderContext } from "../header-context";
-import { useRegisterContext } from "../register-context";
-
-interface ILoginProvider {
-  children: ReactNode;
-}
-
-export interface ILoginData {
-  email: string;
-  password: string;
-}
-
-export interface IUser {
-  id: string;
-  name: string;
-  surname: string;
-  username: string;
-  cellphone: string;
-  birthday: Date;
-  ssn: string;
-  email: string;
-  password: string;
-  isAdm?: boolean;
-  address: {
-    id: string;
-    street: string;
-    number: string;
-    apt_unit?: string | null;
-    neighborhoods?: string | null;
-    city: string;
-    state: string;
-    zipcode: string;
-  };
-}
-
-interface IAuthContext {
-  user: IUser | null;
-  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  token: string | null;
-  id: string | null;
-  navigate: NavigateFunction;
-  onSubmitLogin: (data: ILoginData) => Promise<void>;
-  logout: () => void;
-}
-
-export const LoginContext = createContext<IAuthContext>({} as IAuthContext);
+import api from "../../services/Api";
+import { toast } from "react-toastify";
+import { LoginContext } from "./context";
+import { useHeaderContext } from "../header-context/hook";
 
 export const LoginProvier = ({ children }: ILoginProvider) => {
   const [user, setUser] = useState<IUser | null>({} as IUser);
@@ -151,4 +100,3 @@ export const LoginProvier = ({ children }: ILoginProvider) => {
     </LoginContext.Provider>
   );
 };
-export const useLoginContext = () => useContext(LoginContext);

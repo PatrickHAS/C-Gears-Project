@@ -1,30 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { useState } from "react";
+import { IPasswordResetProvider } from "./types";
+import { useMediaQuery } from "react-responsive";
+import { IPasswordReset } from "../../components/password-reset";
 import api from "../../services/Api";
 import { toast } from "react-toastify";
-import { useMediaQuery } from "react-responsive";
-
-interface IPasswordResetProvider {
-  children: ReactNode;
-}
-
-interface IPasswordReset {
-  password: string;
-  passwordConfirm: string;
-}
-
-interface IPasswordResetContext {
-  setIsPasswordReset: React.Dispatch<React.SetStateAction<boolean>>;
-  passwordResetSubmit: (
-    data: IPasswordReset,
-    id: string,
-    token: string
-  ) => Promise<void>;
-  isPasswordReset: boolean;
-}
-
-export const PasswordResetContext = createContext<IPasswordResetContext>(
-  {} as IPasswordResetContext
-);
+import { PasswordResetContext } from "./context";
 
 export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
   const [isPasswordReset, setIsPasswordReset] = useState(false);
@@ -34,7 +14,7 @@ export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
   const passwordResetSubmit = async (
     data: IPasswordReset,
     id: string,
-    token: string
+    token: string,
   ) => {
     try {
       await api.patch(`/users/pass-reset/${id}/${token}`, {
@@ -99,4 +79,3 @@ export const PasswordResetProvider = ({ children }: IPasswordResetProvider) => {
     </PasswordResetContext.Provider>
   );
 };
-export const usePasswordResetContext = () => useContext(PasswordResetContext);

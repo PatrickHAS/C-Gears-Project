@@ -46,10 +46,8 @@ export const steamLinkController = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error(error);
 
-    // Se for um erro que nós lançamos (AppError)
     const message = error.message || "error";
 
-    // Codificamos a mensagem para a URL (ex: "already_linked")
     let statusParam = "error";
     if (message.includes("already linked to your profile"))
       statusParam = "already_linked";

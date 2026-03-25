@@ -5,9 +5,9 @@ import { FaStar } from "react-icons/fa";
 import { BiSupport } from "react-icons/bi";
 import { ImExit } from "react-icons/im";
 import { GrMoney } from "react-icons/gr";
-import { useLoginContext } from "../../contexts/login-context";
-import { useDropdownSetupContext } from "../../contexts/drop-down-setup-context";
 import { useUserSettingsContext } from "../../contexts/user-settings-context/hook";
+import { useLoginContext } from "../../contexts/login-context/hook";
+import { useDropdownSetupContext } from "../../contexts/drop-down-setup-context/hook";
 
 const DropdownSetup = () => {
   const { logout } = useLoginContext();

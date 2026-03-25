@@ -3,8 +3,8 @@ import { useConfirmCodeContext } from "../../../contexts/confirm-code-contex/hoo
 import { useUserSettingsContext } from "../../../contexts/user-settings-context/hook";
 import { PassConfirmSchema } from "../../../validators/schema";
 import { Controller, useForm } from "react-hook-form";
-import { useRegisterContext } from "../../../contexts/register-context";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useRegisterContext } from "../../../contexts/register-context/hook";
 
 export const ChangePasswordForm = () => {
   const { updateSubmit, TOAST_MESSAGES, showToast } = useUserSettingsContext();

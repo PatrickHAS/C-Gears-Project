@@ -1,48 +1,9 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { useState } from "react";
+import { IRegisterData, IRegisterProvider } from "./types";
+import { useMediaQuery } from "react-responsive";
 import api from "../../services/Api";
 import { toast } from "react-toastify";
-import { useMediaQuery } from "react-responsive";
-
-interface IRegisterProvider {
-  children: ReactNode;
-}
-
-export interface IRegisterData {
-  name: string;
-  surname: string;
-  username: string;
-  cellphone: string;
-  birthday: Date;
-  email: string;
-  emailConfirm: string;
-  password: string;
-  passwordConfirm: string;
-  isAdm?: boolean;
-  address: {
-    street: string;
-    number: string;
-    apt_unit?: string | null;
-    neighborhoods?: string | null;
-    city: string;
-    state: string;
-    zipcode: string;
-  };
-}
-
-interface IRegisterContext {
-  isRegister: boolean;
-  setIsRegister: React.Dispatch<React.SetStateAction<boolean>>;
-  registerSubmit: (data: IRegisterData) => Promise<void>;
-  phone: string;
-  setPhone: React.Dispatch<React.SetStateAction<string>>;
-  showPassword: boolean;
-  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  togglePasswordVisibility: () => void;
-}
-
-export const RegisterContext = createContext<IRegisterContext>(
-  {} as IRegisterContext,
-);
+import { RegisterContext } from "./context";
 
 export const RegisterProvider = ({ children }: IRegisterProvider) => {
   const [isRegister, setIsRegister] = useState(false);
@@ -123,4 +84,3 @@ export const RegisterProvider = ({ children }: IRegisterProvider) => {
     </RegisterContext.Provider>
   );
 };
-export const useRegisterContext = () => useContext(RegisterContext);

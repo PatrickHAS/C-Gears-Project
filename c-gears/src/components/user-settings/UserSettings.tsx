@@ -1,4 +1,3 @@
-import { useLoginContext } from "../../contexts/login-context";
 import { useUserSettingsContext } from "../../contexts/user-settings-context/hook";
 import { StyledUserSettings } from "./UserSettings.styles";
 import { TiArrowBack } from "react-icons/ti";
@@ -13,6 +12,7 @@ import { MyAddressForm } from "./forms/MyAddressForm";
 import { ChangeEmailForm } from "./forms/ChangeEmailForm";
 import { ChangePasswordForm } from "./forms/ChangePasswordForm";
 import { LinkAccountForm } from "./forms/LinkAccountForm";
+import { useLoginContext } from "../../contexts/login-context/hook";
 
 export interface IUpdateUserData {
   name?: string;

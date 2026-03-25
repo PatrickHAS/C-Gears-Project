@@ -1,9 +1,9 @@
 import { ReactNode, useState } from "react";
 import { IConfirmCodeProvider } from "./types";
 import { useUserSettingsContext } from "../user-settings-context/hook";
-import { useLoginContext } from "../login-context";
 import { ConfirmCodeContext } from "./context";
 import api from "../../services/Api";
+import { useLoginContext } from "../login-context/hook";
 
 export const ConfirmCodeProvider = ({
   children,

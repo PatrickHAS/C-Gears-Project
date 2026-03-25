@@ -4,16 +4,16 @@ import { StyledHome } from "./styles";
 import SocialMedia from "../../components/social-media";
 import LogoHomeCenter from "../../components/logo-home-center";
 import { useEffect, useState } from "react";
-import { useHeaderContext } from "../../contexts/header-context";
-import { useRegisterContext } from "../../contexts/register-context";
 import Login from "../../components/login";
 import Register from "../../components/register";
-import { useEmailConfirmContext } from "../../contexts/email-confirm-context";
 import EmailConfirm from "../../components/email-confirm";
 import UserSettings from "../../components/user-settings/UserSettings";
 import ConfirmCodeModal from "../../components/modals/confirm-code-modal";
 import { useConfirmCodeContext } from "../../contexts/confirm-code-contex/hook";
 import { useUserSettingsContext } from "../../contexts/user-settings-context/hook";
+import { useRegisterContext } from "../../contexts/register-context/hook";
+import { useHeaderContext } from "../../contexts/header-context/hook";
+import { useEmailConfirmContext } from "../../contexts/email-confirm-context/hook";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();

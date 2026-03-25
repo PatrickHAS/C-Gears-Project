@@ -3,9 +3,9 @@ import { IoCloseOutline } from "react-icons/io5";
 import { StyledPasswordReset } from "./styles";
 import { useForm } from "react-hook-form";
 import { PasswordResetSchema } from "../../validators/schema";
-import { usePasswordResetContext } from "../../contexts/password-reset-context";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams } from "react-router-dom";
+import { usePasswordResetContext } from "../../contexts/password-reset-context/hook";
 
 export interface IPasswordReset {
   password: string;

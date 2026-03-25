@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import { HeaderProvider } from "./header-context";
-import { LoginProvier } from "./login-context";
-import { RegisterProvider } from "./register-context";
-import { EmailConfirmProvider } from "./email-confirm-context";
-import { PasswordResetProvider } from "./password-reset-context";
-import { DropdownSetupProvider } from "./drop-down-setup-context";
 import { UserSettingsProvider } from "./user-settings-context/provider";
 import { ConfirmCodeProvider } from "./confirm-code-contex/provider";
+import { RegisterProvider } from "./register-context/provider";
+import { PasswordResetProvider } from "./password-reset-context/provider";
+import { LoginProvier } from "./login-context/provider";
+import { HeaderProvider } from "./header-context/provider";
+import { EmailConfirmProvider } from "./email-confirm-context/provider";
+import { DropdownSetupProvider } from "./drop-down-setup-context/provider";
 
 interface IProvider {
   children: ReactNode;
