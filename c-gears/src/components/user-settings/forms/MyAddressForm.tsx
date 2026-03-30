@@ -74,10 +74,6 @@ export const MyAddressForm = () => {
                 )}
               />
             </div>
-            <div className="label-errors">
-              <label htmlFor="street"></label>
-              <p>{errors.street?.message}</p>
-            </div>
           </div>
           <div className="label-input--container">
             <label htmlFor="number">Number</label>
@@ -97,10 +93,6 @@ export const MyAddressForm = () => {
                   />
                 )}
               />
-            </div>
-            <div className="label-errors">
-              <label htmlFor="number"></label>
-              <p>{errors.number?.message}</p>
             </div>
           </div>
           <div className="label-input--container">
@@ -122,10 +114,6 @@ export const MyAddressForm = () => {
                 )}
               />
             </div>
-            <div className="label-errors">
-              <label htmlFor="apt_unit"></label>
-              <p>{errors.apt_unit?.message}</p>
-            </div>
           </div>
           <div className="label-input--container">
             <label htmlFor="neighborhoods">Neighborhoods *Optional</label>
@@ -145,10 +133,6 @@ export const MyAddressForm = () => {
                   />
                 )}
               />
-            </div>
-            <div className="label-errors">
-              <label htmlFor="neighborhoods"></label>
-              <p>{errors.neighborhoods?.message}</p>
             </div>
           </div>
           <div className="label-input--container">
@@ -170,10 +154,6 @@ export const MyAddressForm = () => {
                 )}
               />
             </div>
-            <div className="label-errors">
-              <label htmlFor="city"></label>
-              <p>{errors.city?.message}</p>
-            </div>
           </div>
           <div className="label-input--container">
             <label htmlFor="state">State</label>
@@ -194,10 +174,6 @@ export const MyAddressForm = () => {
                 )}
               />
             </div>
-            <div className="label-errors">
-              <label htmlFor="state"></label>
-              <p>{errors.state?.message}</p>
-            </div>
           </div>
           <div className="label-input--container">
             <label htmlFor="zipcode">Zipcode</label>
@@ -217,10 +193,6 @@ export const MyAddressForm = () => {
                   />
                 )}
               />
-            </div>
-            <div className="label-errors">
-              <label htmlFor="zipcode"></label>
-              <p>{errors.zipcode?.message}</p>
             </div>
           </div>
         </div>

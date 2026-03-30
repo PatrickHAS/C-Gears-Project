@@ -67,10 +67,6 @@ export const MyDataForm = () => {
               )}
             />
           </div>
-          <div className="label-errors">
-            <label htmlFor="name"></label>
-            <p>{errors.name?.message}</p>
-          </div>
         </div>
         <div className="label-input--container">
           <label htmlFor="surname">Surname</label>
@@ -91,10 +87,6 @@ export const MyDataForm = () => {
               )}
             />
           </div>
-          <div className="label-errors">
-            <label htmlFor="surname"></label>
-            <p>{errors.surname?.message}</p>
-          </div>
         </div>
         <div className="label-input--container">
           <label htmlFor="username">Username</label>
@@ -114,10 +106,6 @@ export const MyDataForm = () => {
                 />
               )}
             />
-          </div>
-          <div className="label-errors">
-            <label htmlFor="username"></label>
-            <p>{errors.username?.message}</p>
           </div>
         </div>
         <div className="label-input--container">
@@ -154,10 +142,6 @@ export const MyDataForm = () => {
               />
             )}
           />
-          <div className="label-errors">
-            <label htmlFor="cellphone-setting"></label>
-            <p>{errors.cellphone?.message}</p>
-          </div>
         </div>
         <div className="label-input--container">
           <label htmlFor="birthday-setting">Birthday</label>
@@ -176,10 +160,6 @@ export const MyDataForm = () => {
                 />
               )}
             />
-          </div>
-          <div className="label-errors">
-            <label htmlFor="birthday-setting"></label>
-            <p>{errors.birthday?.message}</p>
           </div>
         </div>
         <button className="btn--save-change" type="submit">

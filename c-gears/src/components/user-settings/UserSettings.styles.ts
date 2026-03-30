@@ -348,6 +348,10 @@ export const StyledUserSettings = styled.section`
         border-radius: 5px;
         margin-top: 10px;
 
+        @media (min-height: 760px) {
+          gap: 15px;
+        }
+
         .input-link-btn-desable--container {
           display: flex;
           flex-direction: column;
@@ -365,10 +369,18 @@ export const StyledUserSettings = styled.section`
             align-items: center;
 
             width: 100%;
-            height: 30px;
+            height: 20px;
 
             border: 1px solid var(--Gray-4);
-            border-radius: 5px;
+            border-radius: 3px;
+
+            @media (min-width: 1024px) and (min-height: 430px) {
+              height: 30px;
+            }
+
+            @media (min-height: 760px) {
+              height: 30px;
+            }
 
             .icon-lg--container {
               display: flex;
@@ -376,27 +388,55 @@ export const StyledUserSettings = styled.section`
               align-items: center;
 
               width: 45px;
-              height: 30px;
+              height: 20px;
 
               background: var(--Gray-0);
-              border-radius: 5px 0 0 5px;
+              border-radius: 3px 0 0 3px;
+
+              @media (min-width: 1024px) and (min-height: 430px) {
+                height: 30px;
+              }
+
+              @media (min-height: 760px) {
+                height: 30px;
+              }
 
               .steam-lg,
               .xbox-lg,
               .psn-lg {
-                font-size: 20px;
+                font-size: 15px;
+
+                @media (min-width: 1024px) and (min-height: 430px) {
+                  font-size: 20px;
+                }
+
+                @media (min-height: 760px) {
+                  font-size: 20px;
+                }
               }
             }
 
             input {
               width: 100%;
-              height: 30px;
+              height: 20px;
 
               background: transparent;
               box-sizing: border-box;
               text-indent: 5px;
               outline: none;
               border-style: none;
+
+              font-size: 10px;
+
+              @media (min-width: 1024px) and (min-height: 430px) {
+                height: 30px;
+                font-size: 14px;
+              }
+
+              @media (min-height: 760px) {
+                height: 30px;
+                font-size: 14px;
+              }
             }
 
             .btn-link-account-steam,
@@ -407,11 +447,19 @@ export const StyledUserSettings = styled.section`
               align-items: center;
 
               width: 40px;
-              height: 30px;
+              height: 20px;
 
               border-style: none;
-              border-radius: 0 5px 5px 0;
+              border-radius: 0 3px 3px 0;
               background: var(--Gray-0);
+
+              @media (min-width: 1024px) and (min-height: 430px) {
+                height: 30px;
+              }
+
+              @media (min-height: 760px) {
+                height: 30px;
+              }
             }
 
             .btn-link-account-steam:hover,
@@ -432,7 +480,7 @@ export const StyledUserSettings = styled.section`
             align-items: center;
 
             width: 100px;
-            height: 20px;
+            height: 15px;
 
             font-family: "orbitron";
             font-size: 10px;
@@ -444,11 +492,17 @@ export const StyledUserSettings = styled.section`
             background: transparent;
             transition: 0.8s;
 
+            @media (min-width: 1024px) and (min-height: 430px) {
+              height: 20px;
+            }
+
+            @media (min-height: 760px) {
+              height: 20px;
+            }
+
             @media (min-width: 1000px) {
               width: 80px;
               height: 30px;
-
-              border-radius: 5px;
             }
           }
 
@@ -496,7 +550,7 @@ export const StyledUserSettings = styled.section`
 
             background: var(--Gray-1);
             border: 1px solid var(--Gray-4);
-            border-radius: 5px;
+            border-radius: 3px;
 
             @media (min-width: 471px) {
               width: 100%;
@@ -504,7 +558,7 @@ export const StyledUserSettings = styled.section`
 
             input {
               width: 100%;
-              height: 30px;
+              height: 20px;
 
               background: transparent;
               box-sizing: border-box;
@@ -515,6 +569,14 @@ export const StyledUserSettings = styled.section`
 
               @media (min-width: 471px) {
                 font-size: 12px;
+              }
+
+              @media (min-height: 740px) {
+                height: 30px;
+              }
+
+              @media (min-width: 1024px) and (min-height: 430px) {
+                height: 30px;
               }
             }
 
@@ -533,26 +595,6 @@ export const StyledUserSettings = styled.section`
             }
           }
 
-          .input--container .password-toggle-button {
-            display: flex;
-            align-items: center;
-            right: 10px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            color: var(--Black-0);
-          }
-
-          input.form-control {
-            height: 32px;
-            font-size: 8px;
-
-            @media (min-width: 471px) {
-              font-size: 12px;
-            }
-          }
-
           .label-errors {
             display: flex;
             justify-content: flex-start;
@@ -565,10 +607,40 @@ export const StyledUserSettings = styled.section`
               font-family: "Orbitron";
               font-style: normal;
               font-weight: 500;
-              font-size: 9px;
-              line-height: 17px;
+              font-size: 8px;
+              line-height: 12px;
 
-              color: var(--Gray-9);
+              @media (min-width: 800px) {
+                font-size: 10px;
+              }
+            }
+          }
+
+          .input--container .password-toggle-button {
+            display: flex;
+            align-items: center;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--Black-0);
+          }
+
+          input.form-control {
+            height: 22px;
+            font-size: 8px;
+
+            @media (min-width: 471px) {
+              font-size: 12px;
+            }
+
+            @media (min-height: 740px) {
+              height: 32px;
+            }
+
+            @media (min-width: 1024px) and (min-height: 600px) {
+              height: 32px;
             }
           }
         }
