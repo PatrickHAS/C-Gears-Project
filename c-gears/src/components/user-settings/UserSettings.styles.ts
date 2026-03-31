@@ -378,7 +378,7 @@ export const StyledUserSettings = styled.section`
               height: 30px;
             }
 
-            @media (min-height: 760px) {
+            @media (min-height: 740px) {
               height: 30px;
             }
 
@@ -397,7 +397,7 @@ export const StyledUserSettings = styled.section`
                 height: 30px;
               }
 
-              @media (min-height: 760px) {
+              @media (min-height: 740px) {
                 height: 30px;
               }
 
@@ -410,7 +410,7 @@ export const StyledUserSettings = styled.section`
                   font-size: 20px;
                 }
 
-                @media (min-height: 760px) {
+                @media (min-height: 740px) {
                   font-size: 20px;
                 }
               }
@@ -433,7 +433,7 @@ export const StyledUserSettings = styled.section`
                 font-size: 14px;
               }
 
-              @media (min-height: 760px) {
+              @media (min-height: 740px) {
                 height: 30px;
                 font-size: 14px;
               }
@@ -457,7 +457,7 @@ export const StyledUserSettings = styled.section`
                 height: 30px;
               }
 
-              @media (min-height: 760px) {
+              @media (min-height: 740px) {
                 height: 30px;
               }
             }
@@ -496,7 +496,7 @@ export const StyledUserSettings = styled.section`
               height: 20px;
             }
 
-            @media (min-height: 760px) {
+            @media (min-height: 740px) {
               height: 20px;
             }
 
