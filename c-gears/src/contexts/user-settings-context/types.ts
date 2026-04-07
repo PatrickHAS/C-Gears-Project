@@ -65,6 +65,14 @@ export interface IUserSettingsContext {
     STEAM_LINK_ERROR: string;
     STEAM_ALREADY_LINKED: string;
     STEAM_LINKED_OTHER: string;
+    XBOX_LINK_SUCCESS: string;
+    XBOX_LINK_ERROR: string;
+    XBOX_ALREADY_LINKED: string;
+    XBOX_LINKED_OTHER: string;
+    PSN_LINK_SUCCESS: string;
+    PSN_LINK_ERROR: string;
+    PSN_ALREADY_LINKED: string;
+    PSN_LINKED_OTHER: string;
     LOADING_LINKED_ACCOUNTS_ERROR: string;
     UNLINK_ACCOUNT_SUCCESS: string;
   };

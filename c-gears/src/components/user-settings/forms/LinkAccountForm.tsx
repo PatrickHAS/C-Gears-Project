@@ -46,10 +46,12 @@ export const LinkAccountForm = () => {
             <input
               name="xbox"
               className="input-link-account-xbox"
-              type="text"
+              value={getGamertag("xbox")}
+              readOnly
             />
             <button
               className="btn-link-account-xbox"
+              onClick={() => linkAccount("xbox")}
               type="button"
               title="Link Account"
             >

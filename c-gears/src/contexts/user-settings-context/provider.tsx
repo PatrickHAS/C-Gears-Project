@@ -69,6 +69,14 @@ export const UserSettingsProvider = ({
     STEAM_ALREADY_LINKED:
       "This Steam account is already linked to your profile!",
     STEAM_LINKED_OTHER: "This Steam account is already linked to another user!",
+    XBOX_LINK_SUCCESS: "Xbox account successfully linked!",
+    XBOX_LINK_ERROR: "Error linking Xbox account!",
+    XBOX_ALREADY_LINKED: "This Xbox account is already linked to your profile!",
+    XBOX_LINKED_OTHER: "This Xbox account is already linked to another user!",
+    PSN_LINK_SUCCESS: "PSN account successfully linked!",
+    PSN_LINK_ERROR: "Error linking PSN account!",
+    PSN_ALREADY_LINKED: "This PSN account is already linked to your profile!",
+    PSN_LINKED_OTHER: "This PSN account is already linked to another user!",
     LOADING_LINKED_ACCOUNTS_ERROR: "loading linked accounts error!",
     UNLINK_ACCOUNT_SUCCESS: "Account successfully unlinked!",
   };
@@ -175,25 +183,49 @@ export const UserSettingsProvider = ({
 
       const urlParams = new URLSearchParams(window.location.search);
       const linkStatus = urlParams.get("linkStatus");
+      const provider = urlParams.get("provider") as "steam" | "xbox" | "psn";
 
-      if (linkStatus) {
+      if (linkStatus && provider) {
         processedUrl.current = true;
 
+        const messages = {
+          success: {
+            steam: TOAST_MESSAGES.STEAM_LINK_SUCCESS,
+            xbox: TOAST_MESSAGES.XBOX_LINK_SUCCESS,
+            psn: TOAST_MESSAGES.PSN_LINK_SUCCESS,
+          },
+          already_linked: {
+            steam: TOAST_MESSAGES.STEAM_ALREADY_LINKED,
+            xbox: TOAST_MESSAGES.XBOX_ALREADY_LINKED,
+            psn: TOAST_MESSAGES.PSN_ALREADY_LINKED,
+          },
+          linked_to_another: {
+            steam: TOAST_MESSAGES.STEAM_LINKED_OTHER,
+            xbox: TOAST_MESSAGES.XBOX_LINKED_OTHER,
+            psn: TOAST_MESSAGES.PSN_LINKED_OTHER,
+          },
+          error: {
+            steam: TOAST_MESSAGES.STEAM_LINK_ERROR,
+            xbox: TOAST_MESSAGES.XBOX_LINK_ERROR,
+            psn: TOAST_MESSAGES.PSN_LINK_ERROR,
+          },
+        };
+
         setTimeout(() => {
-          switch (linkStatus) {
-            case "success":
-              showToast("success", TOAST_MESSAGES.STEAM_LINK_SUCCESS);
-              refreshAccounts();
-              break;
-            case "already_linked":
-              showToast("info", TOAST_MESSAGES.STEAM_ALREADY_LINKED);
-              break;
-            case "linked_to_another":
-              showToast("error", TOAST_MESSAGES.STEAM_LINKED_OTHER);
-              break;
-            default:
-              showToast("error", TOAST_MESSAGES.STEAM_LINK_ERROR);
-          }
+          const type =
+            linkStatus === "success"
+              ? "success"
+              : linkStatus === "already_linked"
+                ? "info"
+                : "error";
+
+          const message =
+            messages[linkStatus as keyof typeof messages]?.[provider] ||
+            messages["error"][provider];
+
+          showToast(type, message);
+
+          if (linkStatus === "success") refreshAccounts();
 
           window.history.replaceState(
             {},
@@ -205,7 +237,7 @@ export const UserSettingsProvider = ({
     };
 
     handleUrlParams();
-  }, []);
+  }, [refreshAccounts, showToast]);
 
   useEffect(() => {
     if (user) {
@@ -217,12 +249,19 @@ export const UserSettingsProvider = ({
 
   const linkAccount = (provider: "steam" | "xbox" | "psn") => {
     const userId = localStorage.getItem("@UserId");
+    const token = localStorage.getItem("@Token");
 
     if (!userId) return;
 
     const state = btoa(JSON.stringify({ userId }));
 
-    window.location.href = `http://localhost:5000/linked-accounts/auth/${provider}?state=${state}`;
+    if (provider === "steam") {
+      return (window.location.href = `http://localhost:5000/linked-accounts/auth/${provider}?state=${state}`);
+    }
+
+    if (provider === "xbox") {
+      return (window.location.href = `http://localhost:5000/linked-accounts/auth/${provider}?state=${state}&token=${token}`);
+    }
   };
 
   const unlinkAccount = async (provider: string) => {

@@ -16,14 +16,15 @@ const ensureAuthMiddleware = (
   next: NextFunction,
 ) => {
   const authHeader = req.headers.authorization;
+  const queryToken = req.query.token as string;
 
-  if (!authHeader) {
+  if (!authHeader && !queryToken) {
     return res.status(401).json({
       message: "Missing authorization token",
     });
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader ? authHeader.split(" ")[1] : queryToken;
 
   try {
     const decoded = jwt.verify(

@@ -42,7 +42,9 @@ export const steamLinkController = async (req: Request, res: Response) => {
       gamertag: player.personaname,
     });
 
-    return res.redirect("http://localhost:5173/?linkStatus=success");
+    return res.redirect(
+      "http://localhost:5173/?linkStatus=success&provider=steam",
+    );
   } catch (error: any) {
     console.error(error);
 
@@ -54,6 +56,8 @@ export const steamLinkController = async (req: Request, res: Response) => {
     if (message.includes("already linked to another user"))
       statusParam = "linked_to_another";
 
-    return res.redirect(`http://localhost:5173?linkStatus=${statusParam}`);
+    return res.redirect(
+      `http://localhost:5173?linkStatus=${statusParam}&provider=steam`,
+    );
   }
 };
