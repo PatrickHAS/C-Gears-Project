@@ -3,6 +3,8 @@ declare module "*.mp4" {
   export default src;
 }
 
+declare module "*.css";
+
 declare module "react-icons/io5" {
   export const IoCloseOutline: React.ComponentType<
     React.SVGProps<SVGSVGElement>

@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 		--Gray-6:#868e96;
 		--Gray-8:#343a40;
 		--Gray-9:#212529;
+		--Green-7: #37b24d;
 		--Red-6:#fa5252;
 		--Red-9:#c92a2a;
 		--Indigo-9: #364fc7;

@@ -58,7 +58,12 @@ export const LinkAccountForm = () => {
               <GoLink className="go-link--icon" />
             </button>
           </div>
-          <button className="btn-unlink-xbox">Xbox Unlink</button>
+          <button
+            className="btn-unlink-xbox"
+            onClick={() => unlinkAccount("xbox")}
+          >
+            Xbox Unlink
+          </button>
         </div>
 
         <div className="input-link-btn-desable--container">

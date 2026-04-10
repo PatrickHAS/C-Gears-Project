@@ -8,11 +8,13 @@ import { GrMoney } from "react-icons/gr";
 import { useUserSettingsContext } from "../../contexts/user-settings-context/hook";
 import { useLoginContext } from "../../contexts/login-context/hook";
 import { useDropdownSetupContext } from "../../contexts/drop-down-setup-context/hook";
+import { useSignatureContext } from "../../contexts/signature-context/hook";
 
 const DropdownSetup = () => {
   const { logout } = useLoginContext();
   const { isDropdownSetup, setIsDropdownSetup } = useDropdownSetupContext();
   const { isUserSettings, setIsUserSettings } = useUserSettingsContext();
+  const { IsSignature, setIsSignature } = useSignatureContext();
 
   const saldo = 0;
 
@@ -31,7 +33,14 @@ const DropdownSetup = () => {
         </div>
         <p className="title-settings">Profile Settings</p>
       </div>
-      <div className="dropdown--signatures" tabIndex={0}>
+      <div
+        className="dropdown--signatures"
+        tabIndex={0}
+        onClick={() => (
+          setIsSignature(!IsSignature),
+          setIsDropdownSetup(!isDropdownSetup)
+        )}
+      >
         <div className="container--icon-star">
           <FaStar className="icon-star" />
         </div>
