@@ -18,7 +18,7 @@ const Signature = () => {
       <div className="logo-gc-premium--container">
         <img
           className="logo-gc-premium"
-          src="gearsclub-premium.png"
+          src="gc-premium.png"
           alt="Logo GC Premium"
         />
       </div>

@@ -81,6 +81,10 @@ export const StyledSignature = styled.section`
         width: 300px;
         height: 110%;
       }
+
+      @media (min-width: 1000px) {
+        height: 120%;
+      }
     }
   }
 
