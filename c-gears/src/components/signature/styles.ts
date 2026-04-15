@@ -44,6 +44,10 @@ export const StyledSignature = styled.section`
       @media (min-width: 600px) {
         font-size: 30px;
       }
+
+      @media (min-width: 1000px) {
+        font-size: 40px;
+      }
     }
   }
 

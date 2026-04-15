@@ -16,6 +16,8 @@ import { useHeaderContext } from "../../contexts/header-context/hook";
 import { useEmailConfirmContext } from "../../contexts/email-confirm-context/hook";
 import { useSignatureContext } from "../../contexts/signature-context/hook";
 import Signature from "../../components/signature";
+import { useSubscriptionPaymentContext } from "../../contexts/subscription-payment-context/hook";
+import SubscriptionPayment from "../../components/subscription-payment";
 
 const Home = () => {
   const { isLogin } = useHeaderContext();
@@ -23,6 +25,7 @@ const Home = () => {
   const { isEmailConfirm } = useEmailConfirmContext();
   const { isUserSettings } = useUserSettingsContext();
   const { IsSignature } = useSignatureContext();
+  const { IsSubscriptionPayment } = useSubscriptionPaymentContext();
   const [isVideoPlayable, setIsVideoPlayable] = useState(
     () => window.innerWidth > 1024,
   );
@@ -75,6 +78,7 @@ const Home = () => {
       {isUserSettings && <UserSettings />}
       {showCodeModal && <ConfirmCodeModal />}
       {IsSignature && <Signature />}
+      {IsSubscriptionPayment && <SubscriptionPayment />}
       <LogoHomeCenter />
       <SocialMedia />
     </StyledHome>

@@ -6,5 +6,7 @@ export interface IModalSetupProvider {
 
 export interface IDropdownSetupContext {
   setIsDropdownSetup: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDropdownCountry: React.Dispatch<React.SetStateAction<boolean>>;
   isDropdownSetup: boolean;
+  isDropdownCountry: boolean;
 }

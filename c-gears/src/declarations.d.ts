@@ -27,6 +27,9 @@ declare module "react-icons/bs" {
   export const BsOption: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export const BsYoutube: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export const BsTwitch: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  export const BsBoxArrowUpRight: React.ComponentType<
+    React.SVGProps<SVGSVGElement>
+  >;
 }
 
 declare module "react-icons/fa" {
@@ -95,4 +98,10 @@ declare module "react-icons/md" {
   export const MdOutlineMailLock: React.ComponentType<
     React.SVGProps<SVGSVGElement>
   >;
+
+  export const MdCheckBoxOutlineBlank: React.ComponentType<
+    React.SVGProps<SVGSVGElement>
+  >;
+
+  export const MdCheckBox: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }

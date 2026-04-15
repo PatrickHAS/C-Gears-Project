@@ -14,7 +14,7 @@ export const MyDataForm = () => {
     handleSubmit,
     control,
     reset,
-    formState: { errors, dirtyFields },
+    formState: { dirtyFields },
   } = useForm({
     resolver: yupResolver(UserSettingsSchema),
     defaultValues: {

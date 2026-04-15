@@ -24,6 +24,7 @@
     "axios": "^1.4.0",
     "cpf-cnpj-validator": "^1.0.3",
     "framer-motion": "^12.35.2",
+    "i18n-iso-countries": "^7.14.0",
     "libphonenumber-js": "^1.12.41",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
