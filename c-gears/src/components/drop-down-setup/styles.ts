@@ -56,7 +56,9 @@ export const StyledDropdownSetup = styled.div`
     height: 30px;
 
     background: transparent;
-    transition: background 0.9s, border-radius 0.9s;
+    transition:
+      background 0.9s,
+      border-radius 0.9s;
 
     cursor: pointer;
   }
@@ -105,7 +107,9 @@ export const StyledDropdownSetup = styled.div`
     height: 30px;
 
     background: transparent;
-    transition: background 0.9s, border-radius 0.9s;
+    transition:
+      background 0.9s,
+      border-radius 0.9s;
 
     cursor: pointer;
 

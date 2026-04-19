@@ -4,15 +4,12 @@ import { DropdownSetupContext } from "./context";
 
 export const DropdownSetupProvider = ({ children }: IModalSetupProvider) => {
   const [isDropdownSetup, setIsDropdownSetup] = useState(false);
-  const [isDropdownCountry, setIsDropdownCountry] = useState(false);
 
   return (
     <DropdownSetupContext.Provider
       value={{
         isDropdownSetup,
         setIsDropdownSetup,
-        isDropdownCountry,
-        setIsDropdownCountry,
       }}
     >
       {children}

@@ -127,6 +127,11 @@ export const StyledSignature = styled.section`
       font-size: 30px;
       line-height: 40px;
     }
+
+    @media (min-width: 1000px) {
+      font-size: 40px;
+      line-height: 60px;
+    }
   }
 
   span {

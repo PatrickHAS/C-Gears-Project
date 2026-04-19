@@ -60,7 +60,6 @@ export const StyledSubscriptionPayment = styled.section`
     }
 
     &::-webkit-scrollbar-thumb {
-      background: var(--Indigo-9);
       border-radius: 10px;
     }
 
@@ -325,6 +324,11 @@ export const StyledSubscriptionPayment = styled.section`
         gap: 5px;
       }
 
+      .label-input-country-zipcode--container {
+        position: relative;
+        z-index: 10;
+      }
+
       .label-name,
       .label-surname,
       .label-country,
@@ -377,8 +381,10 @@ export const StyledSubscriptionPayment = styled.section`
       .countries-icon-down {
         color: var(--Gray-0);
         margin-right: 5px;
-        transition: transform 0.2s ease;
+        transition: transform 0.5s ease;
         transform: rotate(0deg);
+
+        cursor: pointer;
       }
 
       .countries-icon-down.rotate {

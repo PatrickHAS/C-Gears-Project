@@ -1,5 +1,19 @@
 import * as yup from "yup";
 
+export const PaymentSchema = yup.object({
+  cardNumber: yup
+    .string()
+    .required()
+    .test("len", "Cartão inválido", (val) => {
+      const digits = val?.replace(/\s/g, "") || "";
+      return digits.length >= 13 && digits.length <= 19;
+    }),
+
+  expiry: yup.string().matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Data inválida"),
+
+  cvc: yup.string().matches(/^\d{3,4}$/, "CVC inválido"),
+});
+
 export const PasswordResetSchema = yup.object().shape({
   password: yup
     .string()

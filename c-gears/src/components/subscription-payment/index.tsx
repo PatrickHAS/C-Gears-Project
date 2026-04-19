@@ -2,14 +2,18 @@ import { IoCloseOutline } from "react-icons/io5";
 import { StyledSubscriptionPayment } from "./styles";
 import { useSubscriptionPaymentContext } from "../../contexts/subscription-payment-context/hook";
 import { MethodCreditDebitForm } from "./forms/MethodCreditDebitForm";
+import { useDropDownCountriesContext } from "../../contexts/drop-down-countries-context/hook";
 
 const SubscriptionPayment = () => {
   const {
     IsSubscriptionPayment,
     setIsSubscriptionPayment,
     activePayment,
+    setFormData,
     setActivePayment,
+    setIsCheckboxDisclaimers,
   } = useSubscriptionPaymentContext();
+  const { setCountry, setIsDropdownCountry } = useDropDownCountriesContext();
 
   return (
     <StyledSubscriptionPayment>
@@ -18,7 +22,21 @@ const SubscriptionPayment = () => {
           <h5 className="subscription-payment--title">Subscription Payment</h5>
           <IoCloseOutline
             className="subscription-payment--icon-close"
-            onClick={() => setIsSubscriptionPayment(!IsSubscriptionPayment)}
+            onClick={() => (
+              setIsSubscriptionPayment(!IsSubscriptionPayment),
+              setFormData({
+                name: "",
+                surname: "",
+                country: "",
+                zipcode: "",
+                numberCard: "",
+                expiration: "",
+                cvc: "",
+              }),
+              setCountry(""),
+              setIsDropdownCountry(false),
+              setIsCheckboxDisclaimers(false)
+            )}
           />
         </div>
         <div className="subscription-payment-text--container">

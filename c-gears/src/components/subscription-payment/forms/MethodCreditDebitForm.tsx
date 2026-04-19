@@ -1,23 +1,21 @@
 import { FaCaretUp } from "react-icons/fa";
 import { useSubscriptionPaymentContext } from "../../../contexts/subscription-payment-context/hook";
-import { useDropdownSetupContext } from "../../../contexts/drop-down-setup-context/hook";
 import { CiCreditCard2, CiLock } from "react-icons/ci";
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 import { BsBoxArrowUpRight } from "react-icons/bs";
+import { useDropDownCountriesContext } from "../../../contexts/drop-down-countries-context/hook";
+import DropDownCountries from "../../drop-down-countries";
 
 export const MethodCreditDebitForm = () => {
   const {
-    country,
-    setCountry,
-    countryOptions,
     isCheckboxDisclaimers,
     setIsCheckboxDisclaimers,
     formData,
-    setFormData,
     handleChange,
     isButtonDisabled,
   } = useSubscriptionPaymentContext();
-  const { isDropdownCountry, setIsDropdownCountry } = useDropdownSetupContext();
+  const { isDropdownCountry, setIsDropdownCountry, country } =
+    useDropDownCountriesContext();
 
   return (
     <>
@@ -69,7 +67,7 @@ export const MethodCreditDebitForm = () => {
                 className="input-country"
                 id="country"
                 type="text"
-                value={formData.country}
+                value={country}
                 onChange={handleChange}
                 placeholder="Select your country"
                 autoComplete="country-name"
@@ -78,6 +76,7 @@ export const MethodCreditDebitForm = () => {
                 className={`countries-icon-down ${isDropdownCountry ? "rotate" : ""}`}
                 onClick={() => setIsDropdownCountry(!isDropdownCountry)}
               />
+              {isDropdownCountry && <DropDownCountries />}
             </div>
           </div>
           <div className="label-input--container">
@@ -106,6 +105,7 @@ export const MethodCreditDebitForm = () => {
                 className="input-numberCard"
                 id="numberCard"
                 type="text"
+                inputMode="numeric"
                 value={formData.numberCard}
                 onChange={handleChange}
                 placeholder="1234 1234 1234 1234"

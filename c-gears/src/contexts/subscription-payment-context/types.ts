@@ -11,12 +11,6 @@ export interface ISubscriptionPaymentContext {
   setActivePayment: React.Dispatch<
     React.SetStateAction<"creditDebit" | "paypal" | "moreMethods">
   >;
-  countryOptions: {
-    value: string;
-    label: string;
-  }[];
-  country: string;
-  setCountry: React.Dispatch<React.SetStateAction<string>>;
   isCheckboxDisclaimers: boolean;
   setIsCheckboxDisclaimers: React.Dispatch<React.SetStateAction<boolean>>;
   formData: {
@@ -42,4 +36,7 @@ export interface ISubscriptionPaymentContext {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   areFieldsFilled: boolean;
   isButtonDisabled: boolean;
+  isValidCard: boolean;
+  isValidExpiry: boolean;
+  isValidCvc: boolean;
 }

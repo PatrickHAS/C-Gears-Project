@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { ISubscriptionPaymentProvider } from "./types";
 import { SubscriptionPaymentContext } from "./context";
-import { getCountryOptions } from "../../utils/countries";
-import { ChangeEvent } from "react";
+import {
+  formatCardNumber,
+  formatCVC,
+  formatExpiry,
+} from "../../utils/formatters";
 
 interface IFormDataProps {
   name: string;
@@ -22,7 +25,7 @@ export const SubscriptionPaymentProvider = ({
   const [activePayment, setActivePayment] = useState<
     "creditDebit" | "paypal" | "moreMethods"
   >("creditDebit");
-  const [country, setCountry] = useState("");
+
   const [isCheckboxDisclaimers, setIsCheckboxDisclaimers] = useState(false);
   const [formData, setFormData] = useState<IFormDataProps>({
     name: "",
@@ -34,11 +37,21 @@ export const SubscriptionPaymentProvider = ({
     cvc: "",
   });
 
-  const countryOptions = getCountryOptions();
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id as keyof IFormDataProps;
-    const value = e.target.value;
+    let value = e.target.value;
+
+    if (id === "numberCard") {
+      value = formatCardNumber(value);
+    }
+
+    if (id === "expiration") {
+      value = formatExpiry(value);
+    }
+
+    if (id === "cvc") {
+      value = formatCVC(value);
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -47,10 +60,19 @@ export const SubscriptionPaymentProvider = ({
   };
 
   const areFieldsFilled = Object.values(formData).every(
-    (value) => value.trim() !== "",
+    (value) => typeof value === "string" && value.trim() !== "",
   );
 
-  const isButtonDisabled = !isCheckboxDisclaimers || !areFieldsFilled;
+  const isValidCard = formData.numberCard.replace(/\s/g, "").length >= 13;
+  const isValidExpiry = /^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiration);
+  const isValidCvc = /^\d{3,4}$/.test(formData.cvc);
+
+  const isButtonDisabled =
+    !isCheckboxDisclaimers ||
+    !areFieldsFilled ||
+    !isValidCard ||
+    !isValidExpiry ||
+    !isValidCvc;
 
   return (
     <SubscriptionPaymentContext.Provider
@@ -59,9 +81,6 @@ export const SubscriptionPaymentProvider = ({
         setIsSubscriptionPayment,
         activePayment,
         setActivePayment,
-        countryOptions,
-        country,
-        setCountry,
         isCheckboxDisclaimers,
         setIsCheckboxDisclaimers,
         formData,
@@ -69,6 +88,9 @@ export const SubscriptionPaymentProvider = ({
         handleChange,
         areFieldsFilled,
         isButtonDisabled,
+        isValidCard,
+        isValidCvc,
+        isValidExpiry,
       }}
     >
       {children}
