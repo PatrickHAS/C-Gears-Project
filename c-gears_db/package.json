@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@stripe/react-stripe-js": "^6.2.0",
+    "@stripe/stripe-js": "^9.2.0",
     "@types/cors": "^2.8.17",
     "@types/nodemailer": "^7.0.11",
     "bcrypt": "^6.0.0",
@@ -18,6 +20,7 @@
     "reflect-metadata": "^0.2.2",
     "sib-api-v3-sdk": "^8.5.0",
     "ssn-validator": "^2.0.1",
+    "stripe": "^22.0.2",
     "ts-node": "^10.9.2",
     "typeorm": "^0.3.20",
     "uuid": "^13.0.0",

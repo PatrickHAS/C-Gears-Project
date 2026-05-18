@@ -15,17 +15,21 @@ program
   .option(
     "--cellphone <cellphone>",
     "Cellphone of the admin user",
-    "1234567890"
+    "1234567890",
   )
   .option("--birthday <birthday>", "Birthday of the admin user", "2000-01-01")
-  .option("--password <password>", "Password for the admin user", "admin1234")
+  .option(
+    "--password <password>",
+    "Password for the admin user",
+    "admin1234gC@",
+  )
   .option("--street <street>", "Street for the admin user", "123 Admin St")
   .option("--number <number>", "House number for the admin user", "100")
   .option("--apt_unit <apt_unit>", "Apartment unit for the admin user", "")
   .option(
     "--neighborhoods <neighborhoods>",
     "Neighborhoods for the admin user",
-    "AdminVille"
+    "AdminVille",
   )
   .option("--state <state>", "State for the admin user", "RS")
   .option("--city <city>", "City for the admin user", "AdminCity")

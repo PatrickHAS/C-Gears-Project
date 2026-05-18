@@ -3,6 +3,10 @@ import { StyledSubscriptionPayment } from "./styles";
 import { useSubscriptionPaymentContext } from "../../contexts/subscription-payment-context/hook";
 import { MethodCreditDebitForm } from "./forms/MethodCreditDebitForm";
 import { useDropDownCountriesContext } from "../../contexts/drop-down-countries-context/hook";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const SubscriptionPayment = () => {
   const {
@@ -68,7 +72,9 @@ const SubscriptionPayment = () => {
             More Methods
           </button>
         </div>
-        {activePayment === "creditDebit" && <MethodCreditDebitForm />}
+        <Elements stripe={stripePromise}>
+          {activePayment === "creditDebit" && <MethodCreditDebitForm />}
+        </Elements>
         {activePayment === "paypal" && (
           <div className="subscription-payment-paypal--container"></div>
         )}

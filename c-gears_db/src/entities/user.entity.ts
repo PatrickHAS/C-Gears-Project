@@ -12,6 +12,13 @@ import {
   OneToMany,
 } from "typeorm";
 import { LinkedAccount } from "./user-linked-account.entity";
+import { Payment } from "./user-payment";
+
+export enum UserPlan {
+  FREE = "free",
+  PREMIUM = "premium",
+  ELITE = "elite",
+}
 
 @Entity("users")
 export class Users {
@@ -46,8 +53,20 @@ export class Users {
   @Column({ type: "boolean", default: true })
   isActive: boolean;
 
-  @Column({ type: "boolean", default: false })
+  @Column({ type: "boolean", default: true })
   availability: boolean;
+
+  @Column({
+    type: "varchar",
+    default: UserPlan.FREE,
+  })
+  planType: string;
+
+  @Column({ type: "varchar", nullable: true, unique: true })
+  stripeCustomerId: string | null;
+
+  @Column({ type: "varchar", nullable: true, unique: true })
+  xsollaExternalId: string | null;
 
   @Column({ type: "varchar", nullable: true })
   updateCode: string | null;
@@ -83,4 +102,7 @@ export class Users {
     cascade: true,
   })
   linkedAccounts: LinkedAccount[];
+
+  @OneToMany(() => Payment, (payment) => payment.user)
+  payments: Payment[];
 }

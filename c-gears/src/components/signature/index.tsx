@@ -31,7 +31,7 @@ const Signature = () => {
         </h1>
       </div>
       <div className="signature-price-text--container">
-        <h2 className="signature-price-text">$ 5.99/month</h2>
+        <h2 className="signature-price-text">$ 6.00/month</h2>
         <span>
           Billed monthly, excluding taxes.
           <br /> • Cancel anytime.

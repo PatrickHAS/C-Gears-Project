@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { ISubscriptionPaymentProvider } from "./types";
 import { SubscriptionPaymentContext } from "./context";
-import {
-  formatCardNumber,
-  formatCVC,
-  formatExpiry,
-} from "../../utils/formatters";
+import { CardNumberElement } from "@stripe/react-stripe-js";
 
 interface IFormDataProps {
   name: string;
@@ -37,21 +33,17 @@ export const SubscriptionPaymentProvider = ({
     cvc: "",
   });
 
+  const [stripeComplete, setStripeComplete] = useState({
+    number: false,
+    expiry: false,
+    cvc: false,
+  });
+
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id as keyof IFormDataProps;
     let value = e.target.value;
-
-    if (id === "numberCard") {
-      value = formatCardNumber(value);
-    }
-
-    if (id === "expiration") {
-      value = formatExpiry(value);
-    }
-
-    if (id === "cvc") {
-      value = formatCVC(value);
-    }
 
     setFormData((prev) => ({
       ...prev,
@@ -63,16 +55,57 @@ export const SubscriptionPaymentProvider = ({
     (value) => typeof value === "string" && value.trim() !== "",
   );
 
-  const isValidCard = formData.numberCard.replace(/\s/g, "").length >= 13;
-  const isValidExpiry = /^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiration);
-  const isValidCvc = /^\d{3,4}$/.test(formData.cvc);
-
   const isButtonDisabled =
     !isCheckboxDisclaimers ||
-    !areFieldsFilled ||
-    !isValidCard ||
-    !isValidExpiry ||
-    !isValidCvc;
+    formData.name.trim() === "" ||
+    formData.surname.trim() === "" ||
+    !stripeComplete.number ||
+    !stripeComplete.expiry ||
+    !stripeComplete.cvc;
+
+  const handlePayment = async (stripe: any, elements: any) => {
+    if (!stripe || !elements || isProcessing) return;
+
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/payments/webhook/create-intent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("@Token")}`,
+          },
+        },
+      );
+
+      if (!response.ok) throw new Error("Error creating payment intent.");
+
+      const { clientSecret } = await response.json();
+
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details: {
+            name: `${formData.name} ${formData.surname}`,
+          },
+        },
+      });
+
+      if (result.error) {
+        return { success: false, error: result.error.message };
+      }
+
+      if (result.paymentIntent.status === "succeeded") {
+        return { success: true };
+      }
+    } catch (error: any) {
+      return { success: false, error: error.message };
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <SubscriptionPaymentContext.Provider
@@ -88,9 +121,11 @@ export const SubscriptionPaymentProvider = ({
         handleChange,
         areFieldsFilled,
         isButtonDisabled,
-        isValidCard,
-        isValidCvc,
-        isValidExpiry,
+        handlePayment,
+        stripeComplete,
+        setStripeComplete,
+        isProcessing,
+        setIsProcessing,
       }}
     >
       {children}

@@ -359,7 +359,12 @@ export const StyledSubscriptionPayment = styled.section`
 
       .input-icon-down--container,
       .input-iconCard-numberCard--container,
-      .input-cvc-iconLock--container {
+      .input-cvc-iconLock--container,
+      .input-numberCard-stripe,
+      .input-expiration-stripe,
+      .input-cvc-stripe,
+      .StripeElement,
+      .__PrivateStripeElement {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -376,6 +381,14 @@ export const StyledSubscriptionPayment = styled.section`
         @media (min-width: 462px) {
           height: 33px;
         }
+      }
+
+      .StripeElement {
+        margin-left: 5px;
+      }
+
+      .__PrivateStripeElement {
+        height: 14px;
       }
 
       .countries-icon-down {

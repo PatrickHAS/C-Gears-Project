@@ -5,6 +5,14 @@ import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { useDropDownCountriesContext } from "../../../contexts/drop-down-countries-context/hook";
 import DropDownCountries from "../../drop-down-countries";
+import {
+  useElements,
+  useStripe,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+} from "@stripe/react-stripe-js";
+import { useUserSettingsContext } from "../../../contexts/user-settings-context/hook";
 
 export const MethodCreditDebitForm = () => {
   const {
@@ -13,9 +21,45 @@ export const MethodCreditDebitForm = () => {
     formData,
     handleChange,
     isButtonDisabled,
+    handlePayment,
+    setStripeComplete,
+    isProcessing,
   } = useSubscriptionPaymentContext();
   const { isDropdownCountry, setIsDropdownCountry, country } =
     useDropDownCountriesContext();
+
+  const { showToast } = useUserSettingsContext();
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const onPayNowClick = async () => {
+    const result = await handlePayment(stripe, elements);
+
+    if (result?.success) {
+      showToast("success", "Gears Club Premium activated.");
+    } else {
+      showToast("error", result?.error || "Error processing payment.");
+    }
+  };
+
+  const stripeElementOptions = {
+    style: {
+      base: {
+        fontSize: "11px",
+        color: "#ced4da",
+        fontFamily: "Orbitron, sans-serif",
+        fontWeight: "500",
+        letterSpacing: "1px",
+        "::placeholder": {
+          color: "#868e96",
+        },
+      },
+      invalid: {
+        color: "#fa755a",
+      },
+    },
+  };
 
   return (
     <>
@@ -29,7 +73,7 @@ export const MethodCreditDebitForm = () => {
       <form className="subscription-payment-credit-debit--form">
         <div className="label-input-name-surname--container">
           <div className="label-input--container">
-            <label className="label-name" htmlFor="name">
+            <label className="label-name" id="name">
               First name
             </label>
             <input
@@ -43,7 +87,7 @@ export const MethodCreditDebitForm = () => {
             />
           </div>
           <div className="label-input--container">
-            <label className="label-surname" htmlFor="surname">
+            <label className="label-surname" id="surname">
               Last name
             </label>
             <input
@@ -59,7 +103,7 @@ export const MethodCreditDebitForm = () => {
         </div>
         <div className="label-input-country-zipcode--container">
           <div className="label-input--container">
-            <label className="label-country" htmlFor="country">
+            <label className="label-country" id="country">
               Country
             </label>
             <div className="input-icon-down--container">
@@ -80,7 +124,7 @@ export const MethodCreditDebitForm = () => {
             </div>
           </div>
           <div className="label-input--container">
-            <label className="label-zipcode" htmlFor="zipcode">
+            <label className="label-zipcode" id="zipcode">
               Postal code/CEP
             </label>
             <input
@@ -96,54 +140,56 @@ export const MethodCreditDebitForm = () => {
         </div>
         <div className="label-input-numberCard-expiration-cvc--container">
           <div className="label-input--container">
-            <label className="label-numberCard" htmlFor="numberCard">
+            <label className="label-numberCard" id="numberCard">
               Card number
             </label>
             <div className="input-iconCard-numberCard--container">
               <CiCreditCard2 className="icon-creditCard" />
-              <input
-                className="input-numberCard"
-                id="numberCard"
-                type="text"
-                inputMode="numeric"
-                value={formData.numberCard}
-                onChange={handleChange}
-                placeholder="1234 1234 1234 1234"
-                autoComplete="cc-number"
-              />
+              <div className="input-numberCard-stripe">
+                <CardNumberElement
+                  id="numberCard"
+                  options={stripeElementOptions}
+                  onChange={(e) =>
+                    setStripeComplete((prev) => ({
+                      ...prev,
+                      number: e.complete,
+                    }))
+                  }
+                />
+              </div>
               <CiLock className="icon-lock" />
             </div>
           </div>
         </div>
         <div className="label-input-numberCard-expiration-cvc--container">
           <div className="label-input--container">
-            <label className="label-expiration" htmlFor="expiration">
+            <label className="label-expiration" id="expiration">
               Expiration date
             </label>
-            <input
-              className="input-expiration"
-              id="expiration"
-              type="text"
-              value={formData.expiration}
-              onChange={handleChange}
-              placeholder="MM/YY"
-              autoComplete="cc-exp"
-            />
+            <div className="input-expiration-stripe">
+              <CardExpiryElement
+                id="expiration"
+                options={stripeElementOptions}
+                onChange={(e) =>
+                  setStripeComplete((prev) => ({ ...prev, expiry: e.complete }))
+                }
+              />
+            </div>
           </div>
           <div className="label-input--container">
-            <label className="label-cvc" htmlFor="cvc">
+            <label className="label-cvc" id="cvc">
               CVV/CVC
             </label>
             <div className="input-cvc-iconLock--container">
-              <input
-                className="input-cvc"
-                id="cvc"
-                type="text"
-                value={formData.cvc}
-                onChange={handleChange}
-                placeholder="CVC"
-                autoComplete="cc-csc"
-              />
+              <div className="input-cvc-stripe">
+                <CardCvcElement
+                  id="cvc"
+                  options={stripeElementOptions}
+                  onChange={(e) =>
+                    setStripeComplete((prev) => ({ ...prev, cvc: e.complete }))
+                  }
+                />
+              </div>
               <CiLock className="icon-lock" />
             </div>
           </div>
@@ -152,14 +198,14 @@ export const MethodCreditDebitForm = () => {
           <span className="disclaimers-text">
             By clicking "PAY NOW", you acknowledge that you have read,
             understood and agreed to be bound by the{" "}
-            <a target="_blank" href="https://stripe.com/br/privacy">
+            <a target="_blank" href="https://stripe.com/legal/consumer">
               Terms of Service{" "}
               <i>
                 <BsBoxArrowUpRight className="icon-blank" />
               </i>
             </a>
             ,{" "}
-            <a target="_blank" href="https://stripe.com/br/privacy">
+            <a target="_blank" href="https://stripe.com/privacy">
               Privacy Policy{" "}
               <i>
                 <BsBoxArrowUpRight className="icon-blank" />
@@ -189,20 +235,21 @@ export const MethodCreditDebitForm = () => {
           </div>
         </div>
         <div className="price-total--container">
-          <span className="price-text">Price: $ 5.99</span>
-          <span className="total-text">Total: $ 5.99</span>
+          <span className="price-text">Price: $ 6.00</span>
+          <span className="total-text">Total: $ 6.00</span>
         </div>
 
         <button
           className="pay-now-btn"
           type="button"
-          disabled={isButtonDisabled}
+          disabled={isButtonDisabled || isProcessing}
           style={{
             opacity: isButtonDisabled ? 0.5 : 1,
             cursor: isButtonDisabled ? "not-allowed" : "pointer",
           }}
+          onClick={onPayNowClick}
         >
-          PAY NOW
+          {isProcessing ? "PROCESSING..." : "PAY NOW"}
         </button>
       </form>
     </>

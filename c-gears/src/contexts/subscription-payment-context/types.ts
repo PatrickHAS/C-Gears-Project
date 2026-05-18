@@ -36,7 +36,36 @@ export interface ISubscriptionPaymentContext {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   areFieldsFilled: boolean;
   isButtonDisabled: boolean;
-  isValidCard: boolean;
-  isValidExpiry: boolean;
-  isValidCvc: boolean;
+
+  handlePayment: (
+    stripe: any,
+    elements: any,
+  ) => Promise<
+    | {
+        success: boolean;
+        error: any;
+      }
+    | {
+        success: boolean;
+        error?: undefined;
+      }
+    | undefined
+  >;
+
+  stripeComplete: {
+    number: boolean;
+    expiry: boolean;
+    cvc: boolean;
+  };
+
+  setStripeComplete: React.Dispatch<
+    React.SetStateAction<{
+      number: boolean;
+      expiry: boolean;
+      cvc: boolean;
+    }>
+  >;
+
+  isProcessing: boolean;
+  setIsProcessing: React.Dispatch<React.SetStateAction<boolean>>;
 }

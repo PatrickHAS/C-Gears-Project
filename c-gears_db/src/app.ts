@@ -7,10 +7,17 @@ import sessionRoutes from "./routes/session";
 import { linkedAccountRoutes } from "./routes/linked-account";
 import passport from "./config/passport-steam";
 import cookieParser from "cookie-parser";
+import { stripeRoutes } from "./routes/payments/stripe.route";
 
 const app = express();
 
 app.use(cors());
+
+app.use(
+  "/payments/webhook",
+  express.raw({ type: "application/json" }),
+  stripeRoutes,
+);
 
 app.use(express.json());
 app.use(cookieParser());
